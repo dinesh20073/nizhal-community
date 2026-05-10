@@ -34,11 +34,11 @@ function Home() {
             <motion.div className="hero-subtitle" variants={fadeIn}>
               ni.zhal | noun
             </motion.div>
-            <motion.h1 className="hero-title" variants={fadeIn} style={{ fontSize: '5rem', lineHeight: '1.1', marginBottom: '1.5rem' }}>
+            <motion.h1 className="hero-title" variants={fadeIn}>
               A quiet space <br />
               <span style={{ color: 'var(--color-soft-taupe)', fontStyle: 'italic' }}>beside you.</span>
             </motion.h1>
-            <motion.p className="hero-description" variants={fadeIn} style={{ fontSize: '1.2rem', marginBottom: '2.5rem' }}>
+            <motion.p className="hero-description" variants={fadeIn}>
               Where people gather, stories are shared, and everyone is welcome to simply exist. Just a small community built on conversations and presence.
             </motion.p>
             <motion.div className="button-group" variants={fadeIn}>
@@ -51,13 +51,13 @@ function Home() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="hero-image-container"
-            initial={{ opacity: 0, y: -100, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.3 }}
-            style={{ position: 'relative', height: '600px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(105, 85, 70, 0.15)' }}
-          >
+            <motion.div
+              className="hero-image-container"
+              initial={{ opacity: 0, y: -100, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.3 }}
+              style={{ position: 'relative', width: '100%', aspectRatio: '4/5', maxHeight: '600px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(105, 85, 70, 0.15)' }}
+            >
             <img src="./hero-image.png" alt="Circle of warmth" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(105,85,70,0.3), transparent)' }}></div>
           </motion.div>

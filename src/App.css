@@ -140,9 +140,10 @@
 }
 
 .hero-title {
-  font-size: 4.5rem;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   color: var(--color-charcoal);
   margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
@@ -596,7 +597,7 @@ footer {
   }
 
   .hero-title {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
   }
 
   .hero-description {
