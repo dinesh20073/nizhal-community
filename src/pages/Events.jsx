@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion';
 
 function Events() {
-  const highlights = [
-    "Nizhal-05🫶", "Nizhal - 04🫶", "Nizhal-03🫶",
-    "Nizhal-02🫶", "Nizhal-01🫶", "Our core🫶", "About us🫶"
-  ];
 
   const instagramLinks = [
     "https://www.instagram.com/p/DVl32cQgIUO/",
@@ -36,25 +32,6 @@ function Events() {
         <div className="container">
 
           <div className="section-header">
-            <h2>Highlights</h2>
-            <p style={{ color: 'var(--color-mocha)', marginTop: '1rem' }}>Glimpses into our journey together.</p>
-          </div>
-
-          <motion.div
-            className="highlights-container"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            {highlights.map((highlight, index) => (
-              <motion.div key={index} className="highlight-item" variants={itemFade}>
-                <div className="highlight-circle"></div>
-                <span>{highlight}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <div className="section-header" style={{ marginTop: '6rem' }}>
             <h2>Community Events</h2>
             <p style={{ color: 'var(--color-mocha)', marginTop: '1rem' }}>Latest posts and reels from Nizhal.</p>
           </div>
