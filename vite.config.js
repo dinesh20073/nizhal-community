@@ -3,9 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Nizhal/',
+  root: 'src',
+  base: './',
   build: {
-    outDir: 'docs'
+    outDir: '../',
+    emptyOutDir: false
   },
   plugins: [react()],
 })
