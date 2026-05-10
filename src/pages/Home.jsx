@@ -20,8 +20,10 @@ function Home() {
 
   return (
     <div className="page">
-      <section className="hero-split" style={{ paddingTop: '5rem', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+      <section className="hero-split" style={{ paddingTop: '5rem', minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
+        <div className="hero-background"></div>
+        <div className="hero-blob"></div>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
 
           <motion.div
             className="hero-text-content"

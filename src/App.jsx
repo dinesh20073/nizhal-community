@@ -7,6 +7,7 @@ import About from './pages/About';
 import Community from './pages/Community';
 import Events from './pages/Events';
 import './App.css';
+import './modal.css';
 
 function ScrollToTop() {
   const { pathname } = window.location;
