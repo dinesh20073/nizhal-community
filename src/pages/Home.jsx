@@ -56,7 +56,7 @@ function Home() {
             transition={{ duration: 1, delay: 0.3 }}
             style={{ position: 'relative', height: '600px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(105, 85, 70, 0.15)' }}
           >
-            <img src="/hero-image.png" alt="Circle of warmth" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="./hero-image.png" alt="Circle of warmth" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(105,85,70,0.3), transparent)' }}></div>
           </motion.div>
 

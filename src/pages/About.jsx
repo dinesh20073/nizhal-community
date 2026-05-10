@@ -12,7 +12,7 @@ function About() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <img src="/about-image.png" alt="People gathering in a warm space" />
+              <img src="./about-image.png" alt="People gathering in a warm space" />
               <div className="about-overlay"></div>
             </motion.div>
             
