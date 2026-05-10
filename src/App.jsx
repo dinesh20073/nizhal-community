@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Community from './pages/Community';
-import Stories from './pages/Stories';
+import Events from './pages/Events';
 import './App.css';
 
 function ScrollToTop() {
@@ -40,7 +40,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/community" element={<Community />} />
-            <Route path="/stories" element={<Stories />} />
+            <Route path="/events" element={<Events />} />
           </Routes>
         </main>
         <Footer />

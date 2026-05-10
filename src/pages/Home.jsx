@@ -43,17 +43,17 @@ function Home() {
               <Link to="/community" className="btn btn-primary">
                 Join the Community <ArrowRight size={18} />
               </Link>
-              <Link to="/stories" className="btn btn-outline">
-                Explore Stories
+              <Link to="/events" className="btn btn-outline">
+                Explore Events
               </Link>
             </motion.div>
           </motion.div>
 
           <motion.div
             className="hero-image-container"
-            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1, delay: 0.3 }}
+            initial={{ opacity: 0, y: -100, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.3 }}
             style={{ position: 'relative', height: '600px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(105, 85, 70, 0.15)' }}
           >
             <img src="./hero-image.png" alt="Circle of warmth" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

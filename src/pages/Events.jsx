@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-function Stories() {
+function Events() {
   const highlights = [
     "Nizhal-05🫶", "Nizhal - 04🫶", "Nizhal-03🫶",
     "Nizhal-02🫶", "Nizhal-01🫶", "Our core🫶", "About us🫶"
@@ -55,7 +55,7 @@ function Stories() {
           </motion.div>
 
           <div className="section-header" style={{ marginTop: '6rem' }}>
-            <h2>Community Stories</h2>
+            <h2>Community Events</h2>
             <p style={{ color: 'var(--color-mocha)', marginTop: '1rem' }}>Latest posts and reels from Nizhal.</p>
           </div>
 
@@ -110,4 +110,4 @@ function Stories() {
   );
 }
 
-export default Stories;
+export default Events;
