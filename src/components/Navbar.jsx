@@ -32,6 +32,11 @@ function Navbar() {
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
             >
+              <div className="side-menu-header" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
+                <button className="menu-toggle" onClick={() => setIsOpen(false)}>
+                  <X size={32} color="var(--color-charcoal)" />
+                </button>
+              </div>
               <div className="side-menu-links">
                 <Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={() => setIsOpen(false)}>Home</Link>
                 <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={() => setIsOpen(false)}>About</Link>
