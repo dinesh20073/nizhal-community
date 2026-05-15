@@ -13,7 +13,7 @@ const Navbar = () => {
       <nav className="fixed z-50 px-6 md:px-10 pt-6 top-0 left-0 right-0 flex items-center justify-between gap-4 pointer-events-auto">
         {/* Left pill */}
         <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 bg-black/20 backdrop-blur-2xl saturate-150 border border-white/10 shadow-lg shadow-black/20 rounded-full pl-3 pr-6 py-2 relative z-50 transition-all duration-300 hover:bg-black/30">
-          <img src="/logo.jpg" alt="Nizhal Logo" className="h-7 w-7 rounded-[25%] object-cover" />
+          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Nizhal Logo" className="h-7 w-7 rounded-[25%] object-cover" />
           <span className="text-white text-sm font-medium tracking-wide lowercase">nizhal community</span>
         </Link>
 
