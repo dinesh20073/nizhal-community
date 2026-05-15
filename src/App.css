@@ -223,9 +223,10 @@
 }
 
 .about-text h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   margin-bottom: 2rem;
   color: var(--color-charcoal);
+  line-height: 1.2;
 }
 
 .about-text p {
@@ -237,7 +238,7 @@
 
 .about-image-wrapper {
   position: relative;
-  height: 500px;
+  height: min(500px, 100vw - 4rem);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -265,13 +266,13 @@
 }
 
 .section-header h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   color: var(--color-charcoal);
 }
 
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 }
 
@@ -321,8 +322,8 @@
 
 .join-blob {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: min(400px, 80vw);
+  height: min(400px, 80vw);
   background: var(--color-soft-taupe);
   filter: blur(80px);
   border-radius: 50%;
@@ -340,7 +341,7 @@
 }
 
 .join h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   margin-bottom: 1rem;
   color: var(--color-cream);
 }

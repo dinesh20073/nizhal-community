@@ -17,6 +17,9 @@
   /* Typography */
   --font-primary: 'Outfit', sans-serif;
   --font-serif: 'Playfair Display', serif;
+
+  /* Global Scaling - scales all REM units automatically */
+  font-size: clamp(12px, 2vw + 6px, 16px);
 }
 
 * {
@@ -30,6 +33,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   overflow-x: hidden;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
 }
 
