@@ -117,18 +117,18 @@ const JoinModal = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-white/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
           <motion.div 
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-xl bg-neutral-100 border border-black/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto"
+            className="relative w-full max-w-xl bg-neutral-900 border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto"
           >
             {/* Close button */}
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 text-black/50 hover:text-black transition-colors z-10"
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-10"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12"/>
@@ -137,8 +137,8 @@ const JoinModal = () => {
 
             {!isSubmitted ? (
               <>
-                <h2 className="text-3xl font-medium text-black mb-3 lowercase tracking-tight">become a member</h2>
-                <p className="text-black/60 lowercase leading-relaxed mb-6 text-sm">
+                <h2 className="text-3xl font-medium text-white mb-3 lowercase tracking-tight">become a member</h2>
+                <p className="text-white/60 lowercase leading-relaxed mb-6 text-sm">
                   join our growing community. get access to exclusive events, private spaces, and meaningful connections.
                 </p>
 
@@ -157,7 +157,7 @@ const JoinModal = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="your name" 
-                      className="bg-white/50 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-black/40 transition-colors lowercase placeholder:text-black/30 text-black w-full text-sm"
+                      className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
                     />
                     
                     <div className="relative">
@@ -166,14 +166,14 @@ const JoinModal = () => {
                         value={formData.gender}
                         onChange={handleInputChange}
                         required
-                        className={`bg-white/50 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-black/40 transition-colors lowercase w-full text-sm appearance-none ${formData.gender ? 'text-black' : 'text-black/30'}`}
+                        className={`bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase w-full text-sm appearance-none ${formData.gender ? 'text-white' : 'text-white/30'}`}
                       >
-                        <option value="" disabled className="bg-neutral-100 text-black/50">gender</option>
-                        <option value="male" className="bg-neutral-100 text-black">male</option>
-                        <option value="female" className="bg-neutral-100 text-black">female</option>
-                        <option value="other" className="bg-neutral-100 text-black">other</option>
+                        <option value="" disabled className="bg-neutral-900 text-white/50">gender</option>
+                        <option value="male" className="bg-neutral-900 text-white">male</option>
+                        <option value="female" className="bg-neutral-900 text-white">female</option>
+                        <option value="other" className="bg-neutral-900 text-white">other</option>
                       </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/50">
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -188,10 +188,10 @@ const JoinModal = () => {
                         required
                         value={dob}
                         onChange={handleDobChange}
-                        className="bg-white/50 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-black/40 transition-colors lowercase text-black/30 focus:text-black w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white/30 focus:text-white w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                       />
                       {age !== null && (
-                        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-black/50 text-xs lowercase bg-neutral-100 px-2 py-1 rounded">
+                        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-white/50 text-xs lowercase bg-neutral-900 px-2 py-1 rounded">
                           {age} yrs
                         </span>
                       )}
@@ -204,7 +204,7 @@ const JoinModal = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="phone number" 
-                      className="bg-white/50 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-black/40 transition-colors lowercase placeholder:text-black/30 text-black w-full text-sm"
+                      className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
                     />
                   </div>
 
@@ -215,17 +215,17 @@ const JoinModal = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="your email" 
-                    className="bg-white/50 border border-black/10 rounded-xl px-5 py-4 outline-none focus:border-black/40 transition-colors lowercase placeholder:text-black/30 text-black w-full text-sm"
+                    className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
                   />
 
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-4 w-full bg-black text-white font-medium rounded-xl px-8 py-4 hover:bg-neutral-200 transition-colors lowercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="mt-4 w-full bg-white text-black font-medium rounded-xl px-8 py-4 hover:bg-neutral-200 transition-colors lowercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <svg className="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         submitting...
                       </>
                     ) : (
@@ -235,9 +235,9 @@ const JoinModal = () => {
                 </form>
 
                 {/* Socials / Direct Join Area */}
-                <div className="mt-8 pt-8 border-t border-black/5 flex flex-col items-center text-center">
-                  <p className="text-black/60 text-sm mb-1 lowercase">or connect with us directly</p>
-                  <p className="text-black/30 text-xs mb-5 lowercase italic tracking-wide">your presence is a gift. step into our world whenever you're ready.</p>
+                <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center text-center">
+                  <p className="text-white/60 text-sm mb-1 lowercase">or connect with us directly</p>
+                  <p className="text-white/30 text-xs mb-5 lowercase italic tracking-wide">your presence is a gift. step into our world whenever you're ready.</p>
                   <SocialCard />
                 </div>
               </>
@@ -247,13 +247,13 @@ const JoinModal = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center text-center py-10"
               >
-                <div className="h-20 w-20 bg-black/5 rounded-full flex items-center justify-center mb-6 border border-black/10">
-                  <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7"></path></svg>
+                <div className="h-20 w-20 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7"></path></svg>
                 </div>
-                <h3 className="text-3xl font-medium tracking-tight mb-4 lowercase text-black">
+                <h3 className="text-3xl font-medium tracking-tight mb-4 lowercase text-white">
                   application received.
                 </h3>
-                <p className="text-black/60 text-sm leading-relaxed lowercase mb-8">
+                <p className="text-white/60 text-sm leading-relaxed lowercase mb-8">
                   thank you for taking the first step. we're excited to learn more about you. while you wait, join our community directly below:
                 </p>
                 <SocialCard />

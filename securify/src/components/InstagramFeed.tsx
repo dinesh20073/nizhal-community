@@ -1,101 +1,65 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Premium high-quality placeholder imagery for the mock feed
-const MOCK_POSTS = [
-  { id: '1', type: 'IMAGE', url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80', caption: 'community gathering ✨', link: '' },
-  { id: '2', type: 'VIDEO', url: 'https://images.unsplash.com/photo-1511632765486-a01c80cf59af?w=800&q=80', caption: 'quiet moments.', link: '' },
-  { id: '3', type: 'IMAGE', url: 'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?w=800&q=80', caption: 'connections.', link: '' },
-  { id: '4', type: 'IMAGE', url: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80', caption: 'safe spaces.', link: '' },
+const INSTAGRAM_LINKS = [
+  'https://www.instagram.com/p/DVl32cQgIUO/',
+  'https://www.instagram.com/reel/DWwIdBPACQC/',
+  'https://www.instagram.com/p/DVl-pExEzr7/',
+  'https://www.instagram.com/reel/DXrp4wBAKt7/',
+  'https://www.instagram.com/reel/DXo0AIezkxv/',
+  'https://www.instagram.com/reel/DXmbIQmANMO/',
+  'https://www.instagram.com/reel/DXXFrAdgPvE/',
+  'https://www.instagram.com/reel/DXHevLgki0u/',
 ];
 
 const InstagramFeed = () => {
-  const [posts, setPosts] = useState(MOCK_POSTS);
-  
-  // NOTE: To connect the real Instagram API, uncomment this block and add your access token!
-  /*
-  useEffect(() => {
-    const fetchInstagram = async () => {
-      // Provide your Instagram Access Token here
-      const TOKEN = "YOUR_INSTAGRAM_ACCESS_TOKEN";
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${TOKEN}`;
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        if (data.data) {
-          setPosts(data.data.slice(0, 4).map((p: any) => ({
-            id: p.id,
-            type: p.media_type,
-            url: p.media_type === 'VIDEO' ? p.thumbnail_url : p.media_url,
-            caption: p.caption,
-            link: p.permalink
-          })));
-        }
-      } catch (err) {
-        console.error("Failed to load Instagram feed");
-      }
-    };
-    fetchInstagram();
-  }, []);
-  */
-
   return (
-    <section className="py-32 px-6 md:px-10 max-w-7xl mx-auto border-t border-black/5">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div>
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight lowercase mb-4">
-            on the gram.
-          </h2>
-          <p className="text-lg text-black/50 lowercase max-w-md">
-            glimpses into our community, safe spaces, and shared moments.
-          </p>
-        </div>
+    <section className="pb-32 px-6 md:px-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {INSTAGRAM_LINKS.map((link, i) => {
+          // ensure the url formats correctly for embedding
+          const embedUrl = link.endsWith('/') ? `${link}embed` : `${link}/embed`;
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative w-full overflow-hidden rounded-3xl bg-neutral-900 border border-white/10"
+              style={{ aspectRatio: '4/5' }}
+            >
+              <div className="absolute w-full h-full pointer-events-none z-10 rounded-3xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]" />
+              <iframe 
+                src={embedUrl} 
+                width="100%" 
+                height="100%" 
+                frameBorder="0" 
+                scrolling="no" 
+                allowTransparency={true} 
+                allow="encrypted-media"
+                className="absolute"
+                style={{ 
+                  top: '-54px', 
+                  left: '-2px', 
+                  width: 'calc(100% + 4px)', 
+                  height: 'calc(100% + 56px)',
+                  pointerEvents: 'auto'
+                }}
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+      
+      <div className="mt-16 flex justify-center">
         <a 
           href="https://www.instagram.com/nizhal.community/" 
           target="_blank" 
           rel="noreferrer"
-          className="flex items-center gap-2 text-sm lowercase border border-black/10 rounded-full px-6 py-3 hover:bg-black hover:text-white transition-colors"
+          className="bg-white text-black font-medium px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors lowercase"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-          follow us
+          view more on instagram
         </a>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {posts.map((post, i) => (
-          <motion.a
-            key={post.id}
-            href={post.link || "https://www.instagram.com/nizhal.community/"}
-            target="_blank"
-            rel="noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-100 border border-black/5"
-          >
-            <img 
-              src={post.url} 
-              alt={post.caption || "Instagram post"} 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 saturate-0 group-hover:saturate-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <p className="text-black text-sm line-clamp-2 lowercase leading-snug">
-                {post.caption}
-              </p>
-            </div>
-            {post.type === 'VIDEO' && (
-              <div className="absolute top-4 right-4 bg-white/40 backdrop-blur-md p-2 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </div>
-            )}
-          </motion.a>
-        ))}
       </div>
     </section>
   );
