@@ -26,14 +26,14 @@ const Events = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-black pt-32 px-6 md:px-10 text-white pb-20">
+    <section className="relative min-h-screen w-full bg-white pt-32 px-6 md:px-10 text-black pb-20">
       <div className="max-w-7xl mx-auto mt-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h1 className="hero-title font-medium text-6xl md:text-8xl mb-4 lowercase">
               events
             </h1>
-            <p className="text-xl text-white/50 lowercase max-w-md leading-relaxed">
+            <p className="text-xl text-black/50 lowercase max-w-md leading-relaxed">
               latest posts and reels from nizhal community.
             </p>
           </div>
@@ -41,7 +41,7 @@ const Events = () => {
             href="https://www.instagram.com/nizhal.community/" 
             target="_blank" 
             rel="noreferrer"
-            className="flex items-center gap-2 text-sm lowercase border border-white/10 rounded-full px-6 py-3 hover:bg-white hover:text-black transition-colors"
+            className="flex items-center gap-2 text-sm lowercase border border-black/10 rounded-full px-6 py-3 hover:bg-black hover:text-white transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -67,7 +67,7 @@ const Events = () => {
               <motion.div 
                 key={index} 
                 variants={itemFade} 
-                className="w-full bg-neutral-900 border border-white/10 rounded-3xl overflow-hidden hover:border-white/20 transition-colors shadow-2xl shadow-black/50"
+                className="w-full bg-neutral-100 border border-black/10 rounded-3xl overflow-hidden hover:border-black/20 transition-colors shadow-2xl shadow-white/50"
               >
                 <iframe
                   src={embedUrl}
@@ -77,7 +77,7 @@ const Events = () => {
                   scrolling="no"
                   allowTransparency={true}
                   allow="encrypted-media"
-                  className="bg-black object-cover w-full scale-[1.01]"
+                  className="bg-white object-cover w-full scale-[1.01]"
                 ></iframe>
               </motion.div>
             );
