@@ -184,11 +184,14 @@ const JoinModal = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative min-w-0 w-full">
                       <input 
-                        type="date" 
+                        type={dob ? "date" : "text"} 
                         required
                         value={dob}
+                        onFocus={(e) => e.target.type = 'date'}
+                        onBlur={(e) => { if (!e.target.value) e.target.type = 'text' }}
+                        placeholder="date of birth"
                         onChange={handleDobChange}
-                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white/30 focus:text-white w-full max-w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white w-full max-w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer placeholder:text-white/30"
                       />
                       {age !== null && (
                         <span className="absolute right-12 top-1/2 -translate-y-1/2 text-white/50 text-xs lowercase bg-neutral-900 px-2 py-1 rounded">
