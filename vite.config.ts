@@ -8,5 +8,5 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  base: '/nizhal-community/'
+  base: process.env.NODE_ENV === 'production' ? '/nizhal-community/' : '/'
 })
