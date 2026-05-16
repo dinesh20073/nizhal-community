@@ -14,7 +14,8 @@ const JoinModal = () => {
   const [dob, setDob] = useState('');
   const [age, setAge] = useState<number | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     gender: '',
     phone: '',
     email: ''
@@ -28,7 +29,7 @@ const JoinModal = () => {
       setErrorMsg('');
       setDob('');
       setAge(null);
-      setFormData({ name: '', gender: '', phone: '', email: '' });
+      setFormData({ firstName: '', lastName: '', gender: '', phone: '', email: '' });
     };
     window.addEventListener('openJoinModal', handleOpen);
     return () => window.removeEventListener('openJoinModal', handleOpen);
@@ -56,7 +57,7 @@ const JoinModal = () => {
 
     try {
       const form = new FormData();
-      form.append('name', formData.name);
+      form.append('name', `${formData.firstName} ${formData.lastName}`);
       form.append('gender', formData.gender);
       form.append('dob', dob);
       form.append('phone', formData.phone);
@@ -149,17 +150,28 @@ const JoinModal = () => {
                 )}
 
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4 w-full min-w-0">
                     <input 
                       type="text" 
-                      name="name"
-                      value={formData.name}
+                      name="firstName"
+                      value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      placeholder="your name" 
-                      className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
+                      placeholder="first name" 
+                      className="bg-black/50 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm min-w-0"
                     />
-                    
+                    <input 
+                      type="text" 
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="last name" 
+                      className="bg-black/50 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm min-w-0"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
                       <select 
                         name="gender"
@@ -184,12 +196,9 @@ const JoinModal = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0">
                     <div className="relative min-w-0 w-full flex-1 overflow-hidden">
                       <input 
-                        type={dob ? "date" : "text"} 
+                        type="date"
                         required
                         value={dob}
-                        onFocus={(e) => e.target.type = 'date'}
-                        onBlur={(e) => { if (!e.target.value) e.target.type = 'text' }}
-                        placeholder="date of birth"
                         onChange={handleDobChange}
                         className="bg-black/50 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer placeholder:text-white/30"
                         style={{ minWidth: 0, width: '100%', boxSizing: 'border-box' }}
@@ -207,6 +216,9 @@ const JoinModal = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
+                      title="please enter a valid 10-digit phone number"
                       placeholder="phone number" 
                       className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
                     />
@@ -218,7 +230,9 @@ const JoinModal = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    placeholder="your email" 
+                    pattern=".+@gmail\.com$"
+                    title="must be a @gmail.com address"
+                    placeholder="your email (@gmail.com)" 
                     className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase placeholder:text-white/30 text-white w-full text-sm"
                   />
 
