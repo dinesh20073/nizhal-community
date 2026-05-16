@@ -28,7 +28,7 @@ const AnimatedRoutes = () => {
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename="/nizhal-community">
       <div className="flex flex-col min-h-screen bg-black w-full overflow-x-hidden">
         <Navbar />
         <AnimatedRoutes />
