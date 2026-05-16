@@ -182,13 +182,13 @@ const JoinModal = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="relative">
+                    <div className="relative min-w-0 w-full">
                       <input 
                         type="date" 
                         required
                         value={dob}
                         onChange={handleDobChange}
-                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white/30 focus:text-white w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white/30 focus:text-white w-full max-w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                       />
                       {age !== null && (
                         <span className="absolute right-12 top-1/2 -translate-y-1/2 text-white/50 text-xs lowercase bg-neutral-900 px-2 py-1 rounded">
