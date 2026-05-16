@@ -25,7 +25,7 @@ const InstagramFeed = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative w-full overflow-hidden rounded-3xl bg-neutral-900 border border-white/10"
+              className="group relative w-full overflow-hidden rounded-3xl bg-[#ebe3d9] border border-[#2b2622]/10"
               style={{ aspectRatio: '4/5' }}
             >
               <div className="absolute w-full h-full pointer-events-none z-10 rounded-3xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]" />
@@ -56,7 +56,7 @@ const InstagramFeed = () => {
           href="https://www.instagram.com/nizhal.community/" 
           target="_blank" 
           rel="noreferrer"
-          className="bg-white text-black font-medium px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors lowercase"
+          className="bg-[#ff5a1f] text-white font-medium px-8 py-4 rounded-full hover:bg-[#e04a16] transition-colors lowercase"
         >
           view more on instagram
         </a>

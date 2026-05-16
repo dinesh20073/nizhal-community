@@ -29,7 +29,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen bg-black w-full overflow-x-hidden">
+      <div className="flex flex-col min-h-screen bg-[#fcfaf8] w-full overflow-x-hidden">
         <Navbar />
         <AnimatedRoutes />
         <Footer />

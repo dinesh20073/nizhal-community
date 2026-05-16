@@ -32,8 +32,8 @@ html, body, #root {
 
 body {
   font-family: var(--font-sans);
-  background-color: #000;
-  color: #fff;
+  background-color: #fcfaf8;
+  color: #2b2622;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
