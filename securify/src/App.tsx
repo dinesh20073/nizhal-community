@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -28,14 +28,14 @@ const AnimatedRoutes = () => {
 
 function App() {
   return (
-    <BrowserRouter basename="/nizhal-community">
+    <HashRouter>
       <div className="flex flex-col min-h-screen bg-black w-full overflow-x-hidden">
         <Navbar />
         <AnimatedRoutes />
         <Footer />
         <JoinModal />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
