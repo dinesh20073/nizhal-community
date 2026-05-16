@@ -203,7 +203,7 @@ const JoinModal = () => {
                         required
                         value={dob}
                         onChange={handleDobChange}
-                        className="bg-black/50 border border-white/10 rounded-xl pl-[110px] pr-4 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        className={`bg-black/50 border border-white/10 rounded-xl pl-[110px] pr-4 py-4 outline-none focus:border-white/40 transition-colors lowercase w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer ${!dob ? 'text-white/30' : 'text-white'}`}
                         style={{ minWidth: 0, width: '100%', boxSizing: 'border-box' }}
                       />
                       {age !== null && (
