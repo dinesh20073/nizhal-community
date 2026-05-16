@@ -71,6 +71,3 @@ export default defineConfig([
   },
 ])
 ```
-# Nizhal
-# nizhal-community
-# nizhal-community

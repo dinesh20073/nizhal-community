@@ -14,7 +14,8 @@ const JoinModal = () => {
   const [dob, setDob] = useState('');
   const [age, setAge] = useState<number | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     gender: '',
     phone: '',
     email: ''
@@ -28,7 +29,7 @@ const JoinModal = () => {
       setErrorMsg('');
       setDob('');
       setAge(null);
-      setFormData({ name: '', gender: '', phone: '', email: '' });
+      setFormData({ firstName: '', lastName: '', gender: '', phone: '', email: '' });
     };
     window.addEventListener('openJoinModal', handleOpen);
     return () => window.removeEventListener('openJoinModal', handleOpen);
@@ -56,7 +57,7 @@ const JoinModal = () => {
 
     try {
       const form = new FormData();
-      form.append('name', formData.name);
+      form.append('name', `${formData.firstName} ${formData.lastName}`);
       form.append('gender', formData.gender);
       form.append('dob', dob);
       form.append('phone', formData.phone);
@@ -119,12 +120,12 @@ const JoinModal = () => {
             onClick={onClose}
             className="fixed inset-0 bg-[#fcfaf8]/60 backdrop-blur-sm"
           />
-          <motion.div 
-            initial={{ scale: 0.95, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-xl bg-[#ebe3d9] border border-[#2b2622]/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto"
-          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative w-full max-w-xl bg-[#ebe3d9] border border-[#2b2622]/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto overflow-hidden"
+            >
             {/* Close button */}
             <button 
               onClick={onClose}
@@ -149,17 +150,28 @@ const JoinModal = () => {
                 )}
 
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4 w-full min-w-0">
                     <input 
                       type="text" 
-                      name="name"
-                      value={formData.name}
+                      name="firstName"
+                      value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      placeholder="your name" 
-                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
+                      placeholder="first name" 
+                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
                     />
-                    
+                    <input 
+                      type="text" 
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="last name" 
+                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
                       <select 
                         name="gender"
@@ -181,17 +193,21 @@ const JoinModal = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="relative">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0">
+                    <div className="relative min-w-0 w-full flex-1 overflow-hidden">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-sm pointer-events-none z-10 lowercase bg-[#fcfaf8]/20 px-1 rounded">
+                        {!dob ? "date of birth" : "dob:"}
+                      </span>
                       <input 
                         type="date" 
                         required
                         value={dob}
                         onChange={handleDobChange}
-                        className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase text-[#2b2622]/30 focus:text-[#2b2622] w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        className={`bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl pl-[110px] pr-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer ${!dob ? 'text-[#2b2622]/30' : 'text-[#2b2622]'}`}
+                        style={{ minWidth: 0, width: '100%', boxSizing: 'border-box' }}
                       />
                       {age !== null && (
-                        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-xs lowercase bg-[#ebe3d9] px-2 py-1 rounded">
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-xs lowercase bg-[#ebe3d9] px-2 py-1 rounded whitespace-nowrap">
                           {age} yrs
                         </span>
                       )}
@@ -203,6 +219,9 @@ const JoinModal = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
+                      title="please enter a valid 10-digit phone number"
                       placeholder="phone number" 
                       className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
                     />
@@ -214,7 +233,9 @@ const JoinModal = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    placeholder="your email" 
+                    pattern=".+@gmail\.com$"
+                    title="must be a @gmail.com address"
+                    placeholder="your email (@gmail.com)" 
                     className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
                   />
 
