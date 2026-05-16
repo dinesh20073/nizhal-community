@@ -119,12 +119,12 @@ const JoinModal = () => {
             onClick={onClose}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
-          <motion.div 
-            initial={{ scale: 0.95, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-xl bg-neutral-900 border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto"
-          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative w-full max-w-xl bg-neutral-900 border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl my-auto overflow-hidden"
+            >
             {/* Close button */}
             <button 
               onClick={onClose}
@@ -181,8 +181,8 @@ const JoinModal = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="relative min-w-0 w-full">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0">
+                    <div className="relative min-w-0 w-full flex-1 overflow-hidden">
                       <input 
                         type={dob ? "date" : "text"} 
                         required
@@ -191,10 +191,11 @@ const JoinModal = () => {
                         onBlur={(e) => { if (!e.target.value) e.target.type = 'text' }}
                         placeholder="date of birth"
                         onChange={handleDobChange}
-                        className="bg-black/50 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white w-full max-w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer placeholder:text-white/30"
+                        className="bg-black/50 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-white/40 transition-colors lowercase text-white w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer placeholder:text-white/30"
+                        style={{ minWidth: 0, width: '100%', boxSizing: 'border-box' }}
                       />
                       {age !== null && (
-                        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-white/50 text-xs lowercase bg-neutral-900 px-2 py-1 rounded">
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-xs lowercase bg-neutral-900 px-2 py-1 rounded whitespace-nowrap">
                           {age} yrs
                         </span>
                       )}
