@@ -1,63 +1,32 @@
 import ImageGallery from './components/ImageGallery';
+import heroBg from './assets/hero-bg.png';
 
 const Hero = () => {
   return (
-    <div className="w-full bg-[#fcfaf8] text-[#2b2622] selection:bg-[#2b2622]/30">
-      {/* 1. Hero Section (Original) */}
-      <section className="relative h-screen w-full overflow-hidden bg-[#fcfaf8]">
-        {/* Foreground content wrapper */}
-        <div className="relative h-full w-full pointer-events-none">
-          {/* Headlines */}
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] left-4 md:left-10 top-[18%] lowercase">
+    <div className="w-full bg-[#fcfaf8] text-[#2b2622]">
+      {/* 1. Hero Section (Full-screen with centered image) */}
+      <section className="relative h-screen h-[100dvh] min-h-[580px] w-full overflow-hidden bg-[#fcfaf8] flex items-center justify-center">
+        {/* Centered Image - Adjusted to full sides */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <img 
+            src={heroBg} 
+            alt="Nizhal Community" 
+            className="w-full h-full object-cover object-center" 
+          />
+        </div>
+
+        {/* Foreground content wrapper - Safe bounds */}
+        <div className="relative h-full w-full pointer-events-none z-10 max-w-[100vw] overflow-hidden">
+          {/* Headlines: Crisp White text-white */}
+          <h1 className="hero-title absolute text-white font-medium text-[12.5vw] sm:text-6xl md:text-[8vw] lg:text-[7vw] left-3 sm:left-6 md:left-8 lg:left-12 top-[15%] sm:top-[16%] md:top-[18%] lowercase tracking-tight leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] select-none">
             listen
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] right-4 md:right-10 top-[38%] lowercase">
+          <h1 className="hero-title absolute text-white font-medium text-[12.5vw] sm:text-6xl md:text-[8vw] lg:text-[7vw] right-3 sm:right-6 md:right-8 lg:right-12 top-[15%] sm:top-[16%] md:top-[18%] lowercase tracking-tight text-right leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] select-none">
             connect
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] left-[18%] md:left-[28%] top-[58%] lowercase">
+          <h1 className="hero-title absolute text-white font-medium text-[15.5vw] sm:text-7xl md:text-[8.5vw] lg:text-[7.5vw] left-1/2 -translate-x-1/2 bottom-20 sm:bottom-24 md:bottom-3 lg:bottom-4 lowercase text-center whitespace-nowrap tracking-tight leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] select-none">
             belong
           </h1>
-
-          {/* Description */}
-          <p className="absolute left-6 md:left-10 top-[46%] max-w-[240px] text-[15px] leading-snug text-[#2b2622]/90 lowercase pointer-events-auto">
-            where people gather, stories are shared, and everyone is welcome to simply exist.
-          </p>
-
-          {/* Stat block - top-right */}
-          <div className="absolute right-6 md:right-24 top-[12%] md:top-[14%]">
-            <div className="flex items-center gap-3 justify-end">
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[20deg]" />
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+10k</span>
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 text-right lowercase">
-              conversations
-            </div>
-          </div>
-
-          {/* Stat block - bottom-left */}
-          <div className="absolute left-6 md:left-20 bottom-32 md:bottom-24">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+500</span>
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[-20deg]" />
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 lowercase">
-              members joined
-            </div>
-          </div>
-
-          {/* Stat block - bottom-right */}
-          <div className="absolute right-6 md:right-20 bottom-12 md:bottom-20">
-            <div className="flex items-center gap-3 justify-end">
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[-20deg]" />
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+50</span>
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 text-right lowercase">
-              community events
-            </div>
-          </div>
-
-          {/* Bottom gradient */}
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#fcfaf8]" />
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import logoUrl from '../assets/logo.jpg';
+import logoUrl from '../assets/logo.png';
 
 const Navbar = () => {
   const location = useLocation();
@@ -13,8 +13,8 @@ const Navbar = () => {
     <>
       <nav className="fixed z-50 px-6 md:px-10 pt-6 top-0 left-0 right-0 flex items-center justify-between gap-4 pointer-events-auto">
         {/* Left pill */}
-        <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 bg-[#fcfaf8]/20 backdrop-blur-2xl saturate-150 border border-[#2b2622]/10 shadow-lg shadow-[#403a35]/10 rounded-full pl-3 pr-6 py-2 relative z-50 transition-all duration-300 hover:bg-[#fcfaf8]/30">
-          <img src={logoUrl} alt="Nizhal Logo" className="h-7 w-7 rounded-[25%] object-cover" />
+        <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 bg-[#fcfaf8]/20 backdrop-blur-2xl saturate-150 border border-[#2b2622]/10 shadow-lg shadow-[#403a35]/10 rounded-full pl-2.5 pr-6 py-2 relative z-50 transition-all duration-300 hover:bg-[#fcfaf8]/30">
+          <img src={logoUrl} alt="Nizhal Logo" className="h-8 w-8 rounded-full object-contain" />
           <span className="text-[#2b2622] text-sm font-medium tracking-wide lowercase">nizhal community</span>
         </Link>
 
