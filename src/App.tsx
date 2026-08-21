@@ -25,7 +25,7 @@ const HashCleaner = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
     <div className="flex-1 flex flex-col min-h-screen">
       <AnimatePresence mode="wait">
