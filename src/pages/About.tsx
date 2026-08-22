@@ -1,7 +1,18 @@
+import bodyBgUrl from '../assets/body.png';
+
 const About = () => {
   return (
-    <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 px-6 md:px-10 text-[#2b2622] flex flex-col">
-      <div className="max-w-4xl mx-auto mt-20 text-center">
+    <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
+      {/* Decorative Background Artwork */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+        <img 
+          src={bodyBgUrl} 
+          alt="Nizhal About Background" 
+          className="w-full h-full object-cover object-center opacity-90"
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto my-auto text-center relative z-10">
         <h1 className="hero-title font-medium text-6xl md:text-8xl mb-12 lowercase">
           about us
         </h1>
