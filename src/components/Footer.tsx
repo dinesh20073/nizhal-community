@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full relative overflow-hidden mt-auto border-t border-[#2b2622]/8 text-[#2b2622] bg-[#fbf8f5]">
-      {/* Exact Specified Background Image (Rendered without Distortion/Stretching) */}
+      {/* Background Banner with exact natural aspect ratio scaling */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <img 
           src={footerBannerImg} 
@@ -17,48 +17,37 @@ const Footer = () => {
         />
       </div>
 
-      {/* Main Overlay Content */}
-      <div className="max-w-7xl mx-auto pt-10 sm:pt-12 pb-5 px-6 md:px-12 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
+      {/* Main Content Layout - Perfectly Spaced Across the Canvas */}
+      <div className="max-w-7xl mx-auto pt-8 sm:pt-10 pb-6 px-6 md:px-12 lg:px-16 relative z-10 min-h-[220px] flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           
-          {/* Left Column: Tagline & Subtitle */}
-          <div className="md:col-span-5 flex flex-col items-start text-left">
-            <h2 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-2 tracking-tight">
+          {/* Left Column: Tagline & Subtitle - Shifted to avoid overlapping hands */}
+          <div className="md:col-span-5 flex flex-col items-start text-left pl-0 md:pl-28 lg:pl-32">
+            <h2 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight mb-1.5 tracking-tight">
               For the community,<br />
               by the community. <span className="inline-block text-2xl lg:text-3xl font-normal">♡</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-sm mb-2">
+            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-xs">
               together we create a circle of warmth, kindness, and belonging.
             </p>
           </div>
 
-          {/* Center Column: Nizhal Logo Seal */}
-          <div className="md:col-span-2 flex flex-col items-center justify-center py-2 md:py-0">
+          {/* Center Column: Nizhal Logo Seal - Elevated above the dotted heart loop */}
+          <div className="md:col-span-2 flex flex-col items-center justify-center -mt-4">
             <Link to="/" className="group flex flex-col items-center cursor-pointer">
               {/* Circular Logo Frame */}
-              <div className="w-22 h-22 sm:w-26 sm:h-26 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/90 p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/5 transition-transform duration-300 group-hover:scale-105 overflow-hidden backdrop-blur-sm">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/95 p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/10 transition-transform duration-300 group-hover:scale-105 overflow-hidden backdrop-blur-sm">
                 <img 
                   src={logoUrl} 
                   alt="Nizhal Community Logo" 
                   className="w-full h-full rounded-full object-cover select-none" 
                 />
               </div>
-
-              {/* Decorative Ribbon Loop & Label */}
-              <div className="flex flex-col items-center -mt-1">
-                <svg width="32" height="14" viewBox="0 0 36 16" fill="none">
-                  <path d="M10 0 Q18 14 26 0 Q22 18 14 16 Q10 12 10 0" fill="#cda2a2" opacity="0.85" />
-                  <path d="M14 2 Q18 16 22 2" stroke="#7a3535" strokeWidth="1.2" fill="none" />
-                </svg>
-                <span className="font-['Caveat'] text-[#7a3535] text-sm sm:text-base font-semibold tracking-wide lowercase group-hover:text-[#522D21] transition-colors -mt-0.5">
-                  circle of warmth
-                </span>
-              </div>
             </Link>
           </div>
 
-          {/* Right Column: Stay Connected & Social Action Buttons */}
-          <div className="md:col-span-5 flex flex-col items-start md:items-end text-left md:text-right">
+          {/* Right Column: Stay Connected - Positioned clearly in open space */}
+          <div className="md:col-span-5 flex flex-col items-start md:items-end text-left md:text-right pr-0 md:pr-16 lg:pr-24">
             <h3 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2 tracking-tight">
               Stay Connected <span className="inline-block font-normal">♡</span>
             </h3>
@@ -105,22 +94,22 @@ const Footer = () => {
               </a>
             </div>
 
-            <p className="text-xs text-[#2b2622]/75 lowercase leading-relaxed max-w-xs mb-1">
+            <p className="text-xs text-[#2b2622]/75 lowercase leading-relaxed max-w-xs">
               follow our journey and be a part of the circle of warmth!
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Sub-footer Copyright Bar */}
-      <div className="max-w-7xl mx-auto pt-2 pb-2 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#2b2622]/50 lowercase relative z-10">
-        <span>
-          © {currentYear} nizhal – circle of warmth. all rights reserved.
-        </span>
-        <div className="flex items-center gap-1.5 text-[#2b2622]/60">
-          <span>made with</span>
-          <span className="text-[#8c3a3a] text-sm">♥</span>
-          <span>by our community</span>
+        {/* Bottom Sub-footer Copyright Bar */}
+        <div className="w-full pt-3 pb-1 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#2b2622]/50 lowercase relative z-10 mt-6">
+          <span>
+            © {currentYear} nizhal – circle of warmth. all rights reserved.
+          </span>
+          <div className="flex items-center gap-1.5 text-[#2b2622]/60">
+            <span>made with</span>
+            <span className="text-[#8c3a3a] text-sm">♥</span>
+            <span>by our community</span>
+          </div>
         </div>
       </div>
     </footer>
