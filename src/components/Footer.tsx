@@ -18,11 +18,11 @@ const Footer = () => {
       </div>
 
       {/* Main Content Layout - Perfectly Spaced Across the Canvas */}
-      <div className="max-w-7xl mx-auto pt-5 sm:pt-8 md:pt-10 pb-3 sm:pb-6 px-3 sm:px-6 md:px-12 lg:px-16 relative z-10 min-h-[160px] sm:min-h-[220px] flex flex-col justify-between">
+      <div className="max-w-7xl mx-auto pt-6 sm:pt-8 md:pt-10 pb-6 sm:pb-8 md:pb-10 px-3 sm:px-6 md:px-12 lg:px-16 relative z-10 flex flex-col justify-between">
         <div className="grid grid-cols-12 gap-1 sm:gap-4 items-center">
           
           {/* Left Column: Tagline */}
-          <div className="col-span-5 flex flex-col items-start text-left pl-0 sm:pl-16 md:pl-28 lg:pl-32 md:-translate-y-4 lg:-translate-y-6">
+          <div className="col-span-5 flex flex-col items-start text-left pl-0 sm:pl-16 md:pl-28 lg:pl-32">
             <h2 className="font-['Caveat'] text-[#8c3a3a] text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold leading-tight mb-1 tracking-tight">
               For the community,<br />
               by the community. <span className="inline-block text-sm sm:text-2xl lg:text-3xl font-normal">♡</span>
@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
 
           {/* Center Column: Nizhal Logo Seal */}
-          <div className="col-span-2 flex flex-col items-center justify-center -mt-2 sm:-mt-4">
+          <div className="col-span-2 flex flex-col items-center justify-center relative">
             <Link to="/" className="group flex flex-col items-center cursor-pointer">
               {/* Circular Logo Frame */}
               <div className="w-11 h-11 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 sm:border-4 border-[#cda2a2] bg-[#f5e6e6]/95 p-0.5 sm:p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/10 transition-transform duration-300 group-hover:scale-105 overflow-hidden backdrop-blur-sm">
@@ -41,13 +41,13 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-24 lg:mt-32 whitespace-nowrap">
+            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-2 md:absolute md:-bottom-8 lg:-bottom-10 whitespace-nowrap">
               © {currentYear} nizhal
             </span>
           </div>
 
           {/* Right Column: Stay Connected */}
-          <div className="col-span-5 flex flex-col items-end text-right pr-0 sm:pr-8 md:pr-16 lg:pr-24 md:-translate-y-4 lg:-translate-y-6">
+          <div className="col-span-5 flex flex-col items-end text-right pr-0 sm:pr-8 md:pr-16 lg:pr-24">
             <h3 className="font-['Caveat'] text-[#8c3a3a] text-lg sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 tracking-tight">
               Stay Connected <span className="inline-block font-normal text-sm sm:text-xl">♡</span>
             </h3>
