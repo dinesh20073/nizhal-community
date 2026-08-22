@@ -37,12 +37,12 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* 2. Frame-by-Frame Media Marquee Section (Photos & Full Mute Videos in B&W) */}
-      <MediaMarquee />
-
-      {/* 3. Pillars / Features Section - Edge-to-Edge Sharp Grid */}
+      {/* 2. Core Pillars & Embedded Frame Reel */}
       <section className="w-full border-b border-[#2b2622]/10 bg-[#fcfaf8]">
-        <div className="px-6 md:px-14 pt-24 pb-16 max-w-4xl">
+        {/* Seamless Embedded Media Marquee */}
+        <MediaMarquee />
+
+        <div className="px-6 md:px-14 pt-14 pb-14 max-w-4xl">
           <span className="text-xs uppercase tracking-widest text-[#2b2622]/40 font-medium block mb-4">
             our core pillars
           </span>

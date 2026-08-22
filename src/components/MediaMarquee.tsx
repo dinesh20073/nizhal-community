@@ -80,13 +80,13 @@ const MediaMarquee = () => {
   const displayItems = [...mediaFrames, ...mediaFrames];
 
   return (
-    <section className="relative z-20 mt-0 -mb-12 sm:-mb-16 md:-mb-24 bg-[#f4efe8] border-t border-[#2b2622]/10 overflow-hidden select-none pointer-events-auto">
-      {/* Soft gradient edge fade overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
+    <div className="w-full bg-[#fcfaf8] overflow-hidden select-none py-4 sm:py-6 relative border-b border-[#2b2622]/5">
+      {/* Soft gradient edge fade overlays matching page background */}
+      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
 
       {/* Infinite Overlapping Marquee Reel */}
-      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] pt-4 pb-8 md:pb-12">
+      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
         <div className="flex -space-x-12 sm:-space-x-16 md:-space-x-24 items-center shrink-0 pr-14 md:pr-24">
           {displayItems.map((item, index) => {
             const zIndex = 10 + (index % mediaFrames.length);
@@ -95,7 +95,7 @@ const MediaMarquee = () => {
               <div
                 key={`${item.id}-${index}`}
                 style={{ zIndex }}
-                className={`relative w-52 sm:w-64 md:w-72 h-72 sm:h-88 md:h-96 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[5px] border-[#f4efe8] shadow-xl md:shadow-2xl shadow-[#2b2622]/20 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-110 hover:-translate-y-4 hover:rotate-0 cursor-pointer ${
+                className={`relative w-52 sm:w-64 md:w-72 h-72 sm:h-88 md:h-96 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[5px] border-[#fcfaf8] shadow-xl md:shadow-2xl shadow-[#2b2622]/15 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-110 hover:-translate-y-4 hover:rotate-0 cursor-pointer ${
                   item.tilt || 'rotate-0'
                 }`}
               >
@@ -127,7 +127,7 @@ const MediaMarquee = () => {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
