@@ -119,7 +119,7 @@ const Hero = () => {
         </p>
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-          className="bg-[#522D21] text-white text-lg font-medium rounded-full px-10 py-5 hover:scale-105 hover:bg-[#3f2218] transition-all lowercase shadow-lg shadow-[#522D21]/20 cursor-pointer"
+          className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-lg shadow-[#522D21]/10 cursor-pointer"
         >
           become a member
         </button>

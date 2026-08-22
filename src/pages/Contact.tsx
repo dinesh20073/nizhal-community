@@ -181,7 +181,7 @@ const Contact = () => {
                           onClick={() => setSelectedTopic(topic)}
                           className={`w-full py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all duration-200 lowercase cursor-pointer truncate ${
                             selectedTopic === topic
-                              ? 'bg-[#2b2622] text-[#fcfaf8] font-medium shadow-sm'
+                              ? 'bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold shadow-sm'
                               : 'bg-[#ebe3d9]/60 text-[#2b2622]/70 hover:bg-[#ebe3d9] border border-[#2b2622]/5'
                           }`}
                         >
@@ -270,7 +270,7 @@ const Contact = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     type="submit"
-                    className="bg-[#522D21] text-white text-sm sm:text-base font-medium rounded-full px-10 py-3.5 hover:bg-[#3f2218] transition-all lowercase self-center mx-auto mt-2 shadow-lg shadow-[#522D21]/20 cursor-pointer"
+                    className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-sm sm:text-base font-semibold rounded-full px-10 py-3.5 hover:bg-[#f6dbe0] transition-all lowercase self-center mx-auto mt-2 shadow-lg shadow-[#522D21]/10 cursor-pointer"
                   >
                     send message
                   </motion.button>
