@@ -83,7 +83,7 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className={`w-full h-full object-cover object-bottom transition-all duration-700 ${
+                className={`w-full h-full object-cover transition-all duration-700 ${
                   isPillar1Active 
                     ? 'grayscale-0 scale-105 brightness-100' 
                     : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
