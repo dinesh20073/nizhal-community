@@ -23,6 +23,33 @@ const HashCleaner = () => {
   return null;
 };
 
+// Manages browser page title per route
+const PageTitleManager = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname.replace(/\/$/, '') || '/';
+    switch (path) {
+      case '/':
+        document.title = 'nizhal : circle of warmth';
+        break;
+      case '/about':
+        document.title = 'about nizhal';
+        break;
+      case '/contact':
+        document.title = 'contact nizhal';
+        break;
+      case '/events':
+        document.title = 'nizhal events';
+        break;
+      default:
+        document.title = 'nizhal : circle of warmth';
+    }
+  }, [location]);
+
+  return null;
+};
+
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -45,6 +72,7 @@ function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <HashCleaner />
+      <PageTitleManager />
       <div className="flex flex-col min-h-screen bg-[#fcfaf8] w-full overflow-x-hidden">
         <Navbar />
         <AnimatedRoutes />
