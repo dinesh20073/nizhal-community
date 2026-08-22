@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import bodyBgUrl from '../assets/body.png';
+import bodyMobileBgUrl from '../assets/body-mobile-2.png';
 import contactVideoUrl from '../assets/contact-bg.mp4';
 
 const topics = [
@@ -101,8 +103,19 @@ const Contact = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Background Video: Full Mute, Looping, Slow 0.5x, Ultra Whitest Luminous Aesthetic */}
+      {/* Layered Overlapping Background: Artwork Image + Video + Luminous Scrim */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+        {/* Layer 1: Previous Background Artwork Image */}
+        <picture className="absolute inset-0 w-full h-full">
+          <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
+          <img 
+            src={bodyBgUrl} 
+            alt="Nizhal Contact Artwork" 
+            className="w-full h-full object-cover md:object-fill opacity-85"
+          />
+        </picture>
+
+        {/* Layer 2: Overlapping Video Background */}
         <video
           ref={videoRef}
           src={contactVideoUrl}
@@ -114,10 +127,11 @@ const Contact = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="w-full h-full object-cover opacity-35 brightness-110 contrast-95"
+          className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-multiply"
         />
-        {/* Ultra-whitish soft scrim overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/95 via-[#fcfaf8]/75 to-[#fcfaf8]/95 pointer-events-none" />
+
+        {/* Layer 3: Luminous Soft Whitish Scrim Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/55 to-[#fcfaf8]/85 pointer-events-none" />
       </div>
 
       <div className="max-w-5xl mx-auto my-auto w-full relative z-10">
