@@ -171,7 +171,7 @@ const JoinModal = () => {
                     />
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="w-full">
                     <div className="relative">
                       <select 
                         name="gender"
@@ -183,7 +183,7 @@ const JoinModal = () => {
                         <option value="" disabled className="bg-[#ebe3d9] text-[#2b2622]/50">gender</option>
                         <option value="male" className="bg-[#ebe3d9] text-[#2b2622]">male</option>
                         <option value="female" className="bg-[#ebe3d9] text-[#2b2622]">female</option>
-                        <option value="other" className="bg-[#ebe3d9] text-[#2b2622]">other</option>
+                        <option value="other" className="bg-[#ebe3d9] text-[#2b2622]">other (we love you for who you are ♡)</option>
                       </select>
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#2b2622]/50">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
