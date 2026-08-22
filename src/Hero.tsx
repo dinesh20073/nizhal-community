@@ -62,8 +62,8 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Normal Size Media Marquee Scroll Below Text - Floating & Overlapping OVER section below */}
-        <div className="-mb-16 sm:-mb-24 md:-mb-28 relative z-20 pointer-events-auto">
+        {/* Normal Size Media Marquee Scroll Below Text - Subtle 3% Overlap over top edge of pillars */}
+        <div className="-mb-3 sm:-mb-4 md:-mb-5 relative z-20 pointer-events-auto">
           <MediaMarquee />
         </div>
 
