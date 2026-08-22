@@ -22,10 +22,10 @@ const About = () => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-40"
         />
-        {/* Original clean serene whitish scrim overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/60 to-[#fcfaf8]/90 pointer-events-none" />
+        {/* Bright, clean white aesthetic scrim overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/95 via-[#fcfaf8]/80 to-[#fcfaf8]/95 pointer-events-none" />
       </div>
 
       <div className="max-w-4xl mx-auto my-auto w-full text-center relative z-10 py-10 md:py-14">
