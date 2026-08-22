@@ -8,6 +8,8 @@ const About = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.5;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
     }
   }, []);
 
@@ -22,6 +24,10 @@ const About = () => {
           loop
           muted
           playsInline
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="auto"
           className="w-full h-full object-cover opacity-55 brightness-105"
         />
         {/* Soft, light and airy scrim overlay */}

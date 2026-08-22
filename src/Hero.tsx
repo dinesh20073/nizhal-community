@@ -32,15 +32,16 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    if (sharedPresenceRef.current) {
-      sharedPresenceRef.current.playbackRate = 0.55;
-    }
-    if (safeSpacesRef.current) {
-      safeSpacesRef.current.playbackRate = 0.6;
-    }
-    if (activeListeningRef.current) {
-      activeListeningRef.current.playbackRate = 0.7;
-    }
+    const playSafe = (vid: HTMLVideoElement | null, rate: number) => {
+      if (!vid) return;
+      vid.playbackRate = rate;
+      vid.muted = true;
+      vid.play().catch(() => {});
+    };
+
+    playSafe(sharedPresenceRef.current, 0.55);
+    playSafe(safeSpacesRef.current, 0.6);
+    playSafe(activeListeningRef.current, 0.7);
   }, []);
 
   return (
@@ -111,6 +112,10 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
+                controls={false}
+                disablePictureInPicture
+                disableRemotePlayback
+                preload="auto"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar1InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
@@ -146,6 +151,10 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
+                controls={false}
+                disablePictureInPicture
+                disableRemotePlayback
+                preload="auto"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar2InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
@@ -181,6 +190,10 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
+                controls={false}
+                disablePictureInPicture
+                disableRemotePlayback
+                preload="auto"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar3InView 
                     ? 'grayscale-0 scale-105 brightness-100' 

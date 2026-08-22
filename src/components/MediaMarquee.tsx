@@ -131,13 +131,15 @@ const MediaMarquee = () => {
   );
 };
 
-// Video Frame Helper Component (Ensures full mute, autoPlay, loop, slow motion, hover reveal)
+// Video Frame Helper Component (Ensures full mute, autoPlay, loop, slow motion, hover reveal, no controls/play buttons)
 const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.6;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
     }
   }, []);
 
@@ -149,6 +151,10 @@ const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
       loop
       muted
       playsInline
+      controls={false}
+      disablePictureInPicture
+      disableRemotePlayback
+      preload="auto"
       aria-label={alt || 'Nizhal Video Frame'}
       className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
     />
