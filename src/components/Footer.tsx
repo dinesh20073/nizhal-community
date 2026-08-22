@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Heart, Users, Calendar, Image as ImageIcon, Mail } from 'lucide-react';
+import logoUrl from '../assets/logo.jpg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -117,29 +118,29 @@ const Footer = () => {
           </Link>
         </div>
 
-        {/* Middle Column 2: Round Nizhal Circle of Warmth Emblem */}
+        {/* Middle Column 2: Nizhal Community Logo Image */}
         <div className="md:col-span-2 flex flex-col items-center justify-center">
-          <div className="relative group cursor-default">
-            {/* Circular Seal */}
-            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/60 p-2 flex flex-col items-center justify-center text-center shadow-inner relative transition-transform duration-300 group-hover:scale-105">
-              <div className="w-full h-full rounded-full border border-dashed border-[#b87d7d] flex flex-col items-center justify-center p-2">
-                <span className="font-['Caveat'] text-[#7a3535] text-2xl sm:text-3xl font-bold tracking-tight -mb-1">
-                  Nizhal
-                </span>
-                <span className="font-['Caveat'] text-[#9e5d5d] text-xs sm:text-sm lowercase font-medium tracking-wide">
-                  circle of warmth
-                </span>
-              </div>
+          <Link to="/" className="group flex flex-col items-center cursor-pointer">
+            {/* Circular Logo Frame */}
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/60 p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/5 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+              <img 
+                src={logoUrl} 
+                alt="Nizhal Community Logo" 
+                className="w-full h-full rounded-full object-cover select-none" 
+              />
             </div>
 
-            {/* Decorative Ribbon Loop Underneath */}
-            <div className="w-full flex justify-center -mt-2">
-              <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-                <path d="M12 2 Q20 18 28 2 Q24 24 16 22 Q12 18 12 2" fill="#cda2a2" opacity="0.8" />
-                <path d="M16 4 Q20 20 24 4" stroke="#7a3535" strokeWidth="1.5" fill="none" />
+            {/* Decorative Ribbon Loop Underneath with Warmth Text */}
+            <div className="flex flex-col items-center -mt-1">
+              <svg width="36" height="16" viewBox="0 0 36 16" fill="none">
+                <path d="M10 0 Q18 14 26 0 Q22 18 14 16 Q10 12 10 0" fill="#cda2a2" opacity="0.8" />
+                <path d="M14 2 Q18 16 22 2" stroke="#7a3535" strokeWidth="1.2" fill="none" />
               </svg>
+              <span className="font-['Caveat'] text-[#7a3535] text-sm sm:text-base font-semibold tracking-wide lowercase group-hover:text-[#522D21] transition-colors -mt-1">
+                circle of warmth
+              </span>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Right Column: Stay Connected & Social Links */}
