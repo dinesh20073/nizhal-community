@@ -53,7 +53,11 @@ const SocialCard = () => {
 
       {/* Email */}
       <motion.a 
-        href="mailto:nizhal.community@gmail.com" 
+        href="mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community" 
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
+        }}
         initial={{ scale: 0.9, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         animate={{ 
@@ -66,7 +70,7 @@ const SocialCard = () => {
         whileHover={{ y: -3, scale: 1.12 }}
         whileTap={{ scale: 0.9 }}
         className="w-8 h-8 bg-[#2b2622] flex items-center justify-center overflow-hidden transition-colors duration-300 rounded-full hover:bg-[#ff5a1f] active:bg-[#ff5a1f] shadow-sm group cursor-pointer"
-        aria-label="Email"
+        aria-label="Email nizhal.community@gmail.com"
       >
         <svg className="w-3.5 h-3.5 group-hover:animate-slide-in-top group-active:animate-slide-in-top text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <rect width="20" height="16" x="2" y="4" rx="2" />

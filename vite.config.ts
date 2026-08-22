@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
     react(),
   ],
-  base: process.env.NODE_ENV === 'production' ? '/nizhal-community/' : '/'
-})
+  base: process.env.BASE_PATH || (command === 'build' ? '/nizhal-community/' : '/'),
+}))
+

@@ -120,8 +120,12 @@ const Contact = () => {
 
             {/* Email Card */}
             <a 
-              href="mailto:nizhal.community@gmail.com" 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#ff5a1f]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group"
+              href="mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
+              }}
+              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#ff5a1f]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group cursor-pointer"
             >
               <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#ff5a1f] transition-colors duration-300 shadow-sm shrink-0">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
