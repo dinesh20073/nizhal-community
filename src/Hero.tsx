@@ -50,10 +50,7 @@ const Hero = () => {
 
       {/* 2. Core Pillars & Embedded Frame Reel */}
       <section className="w-full border-b border-[#2b2622]/10 bg-[#fcfaf8]">
-        {/* Seamless Embedded Media Marquee */}
-        <MediaMarquee />
-
-        <div className="px-6 md:px-14 pt-14 pb-14 max-w-4xl">
+        <div className="px-6 md:px-14 pt-20 pb-10 max-w-4xl">
           <span className="text-xs uppercase tracking-widest text-[#2b2622]/40 font-medium block mb-4">
             our core pillars
           </span>
@@ -63,6 +60,11 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-[#2b2622]/60 lowercase leading-relaxed">
             we strip away the noise of modern social platforms. here, you won't find algorithms or endless scrolls—just genuine spaces designed for human connection.
           </p>
+        </div>
+
+        {/* Normal Size Media Marquee Scroll Below Text */}
+        <div className="pb-12">
+          <MediaMarquee />
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10">
