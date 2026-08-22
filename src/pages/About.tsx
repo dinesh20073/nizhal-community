@@ -3,12 +3,12 @@ import bodyBgUrl from '../assets/body.png';
 const About = () => {
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Decorative Background Artwork */}
+      {/* Decorative Background Artwork - Complete Full Design Uncropped */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <img 
           src={bodyBgUrl} 
           alt="Nizhal About Background" 
-          className="w-full h-full object-cover object-center opacity-90"
+          className="w-full h-full object-fill opacity-95"
         />
       </div>
 

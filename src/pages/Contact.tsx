@@ -58,7 +58,7 @@ const Contact = () => {
         <img 
           src={bodyBgUrl} 
           alt="Nizhal Contact Background" 
-          className="w-full h-full object-cover object-center opacity-90"
+          className="w-full h-full object-fill opacity-95"
         />
       </div>
 

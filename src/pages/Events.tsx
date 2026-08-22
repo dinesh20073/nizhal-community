@@ -9,7 +9,7 @@ const Events = () => {
         <img 
           src={bodyBgUrl} 
           alt="Nizhal Events Background" 
-          className="w-full h-full object-cover object-top opacity-80"
+          className="w-full h-full object-fill opacity-95"
         />
       </div>
 
