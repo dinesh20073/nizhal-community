@@ -62,12 +62,12 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Normal Size Media Marquee Scroll Below Text */}
-        <div className="pb-12">
+        {/* Normal Size Media Marquee Scroll Below Text - Overlapping with section below */}
+        <div className="-mb-14 sm:-mb-20 md:-mb-24 relative z-0 pointer-events-auto">
           <MediaMarquee />
         </div>
 
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10 relative z-10">
           {/* Pillar 1: Active Listening (Left - B&W by default, Color ONLY when cursor is over it) */}
           <div className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
             {/* Full-Box Background Video */}

@@ -80,7 +80,7 @@ const MediaMarquee = () => {
   const displayItems = [...mediaFrames, ...mediaFrames];
 
   return (
-    <div className="w-full bg-[#fcfaf8] overflow-hidden select-none py-2 relative">
+    <div className="w-full bg-[#fcfaf8] overflow-hidden select-none py-0 relative">
       {/* Soft gradient edge fade overlays matching page background */}
       <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
