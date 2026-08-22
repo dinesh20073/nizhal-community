@@ -103,19 +103,19 @@ const Contact = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Layered Overlapping Background: Artwork Image + Video + Ultra Whiter Scrim */}
+      {/* Layered Overlapping Background: Artwork Image + Video + Balanced Whitish Scrim */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
-        {/* Layer 1: Previous Background Artwork Image (Lighter/Whiter) */}
+        {/* Layer 1: Previous Background Artwork Image (Balanced Opacity) */}
         <picture className="absolute inset-0 w-full h-full">
           <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
           <img 
             src={bodyBgUrl} 
             alt="Nizhal Contact Artwork" 
-            className="w-full h-full object-cover md:object-fill opacity-45 brightness-115"
+            className="w-full h-full object-cover md:object-fill opacity-65 brightness-105"
           />
         </picture>
 
-        {/* Layer 2: Overlapping Video Background (High Brightness Whitish Ambient) */}
+        {/* Layer 2: Overlapping Video Background (Balanced Brightness & Opacity) */}
         <video
           ref={videoRef}
           src={contactVideoUrl}
@@ -127,11 +127,11 @@ const Contact = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-35 brightness-130 contrast-90"
+          className="absolute inset-0 w-full h-full object-cover opacity-42 brightness-118 contrast-95"
         />
 
-        {/* Layer 3: Ultra-Whiter Luminous Soft Scrim Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/95 via-[#fcfaf8]/80 to-[#fcfaf8]/95 pointer-events-none" />
+        {/* Layer 3: Balanced Soft Whitish Scrim Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/90 via-[#fcfaf8]/68 to-[#fcfaf8]/90 pointer-events-none" />
       </div>
 
       <div className="max-w-5xl mx-auto my-auto w-full relative z-10">
