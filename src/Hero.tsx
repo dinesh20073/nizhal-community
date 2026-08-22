@@ -69,10 +69,10 @@ const Hero = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10">
-          {/* Pillar 1: Active Listening (Full Box Video - B&W by default, Color on Hover/Select) */}
+          {/* Pillar 1: Active Listening (Left - Full Box Video - B&W by default, Color on Hover/Select) */}
           <div 
             onClick={() => setIsPillar1Active(!isPillar1Active)}
-            className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-between group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
+            className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
           >
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -90,36 +90,22 @@ const Hero = () => {
                 }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/30 group-hover:to-black/50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
             </div>
 
             {/* Foreground Content */}
-            <div className="relative z-10 flex flex-col justify-between h-full text-white">
-              <div>
-                <div className="flex items-center justify-between mb-8 md:mb-12">
-                  <div className="h-12 w-12 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center rounded-xl group-hover:border-white/50 transition-colors">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/15 backdrop-blur-sm">
-                      {isPillar1Active ? '● color active' : 'hover / tap'}
-                    </span>
-                    <span className="text-xs font-mono text-white/50">01</span>
-                  </div>
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-medium mb-4 lowercase text-white tracking-tight">
-                  active listening
-                </h3>
-                <p className="text-white/80 lowercase leading-relaxed text-sm md:text-base max-w-sm">
-                  speak without fear of judgment. our community is built on the foundation of hearing each other out, deeply and respectfully.
-                </p>
-              </div>
+            <div className="relative z-10 text-white">
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
+                active listening
+              </h3>
+              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
+                speak without fear of judgment. our community is built on the foundation of hearing each other out, deeply and respectfully.
+              </p>
             </div>
           </div>
 
           {/* Pillar 2: Safe Spaces */}
-          <div className="p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 hover:bg-[#ebe3d9]/30 transition-colors flex flex-col justify-between group">
+          <div className="p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 hover:bg-[#ebe3d9]/30 transition-colors flex flex-col justify-between group min-h-[380px] md:min-h-[440px]">
             <div>
               <div className="flex items-center justify-between mb-10">
                 <div className="h-12 w-12 border border-[#2b2622]/15 bg-[#2b2622]/5 flex items-center justify-center group-hover:border-[#522D21] transition-colors">
@@ -134,10 +120,10 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence (Full Box Video - B&W by default, Color on Hover/Select) */}
+          {/* Pillar 3: Shared Presence (Right - Full Box Video - B&W by default, Color on Hover/Select) */}
           <div 
             onClick={() => setIsPillar3Active(!isPillar3Active)}
-            className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-between group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
+            className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
           >
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
@@ -155,31 +141,17 @@ const Hero = () => {
                 }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/30 group-hover:to-black/50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
             </div>
 
             {/* Foreground Content */}
-            <div className="relative z-10 flex flex-col justify-between h-full text-white">
-              <div>
-                <div className="flex items-center justify-between mb-8 md:mb-12">
-                  <div className="h-12 w-12 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center rounded-xl group-hover:border-white/50 transition-colors">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/15 backdrop-blur-sm">
-                      {isPillar3Active ? '● color active' : 'hover / tap'}
-                    </span>
-                    <span className="text-xs font-mono text-white/50">03</span>
-                  </div>
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-medium mb-4 lowercase text-white tracking-tight">
-                  shared presence
-                </h3>
-                <p className="text-white/80 lowercase leading-relaxed text-sm md:text-base max-w-sm">
-                  join silent reading rooms, ambient study sessions, or open mic nights. sometimes simply being together is enough.
-                </p>
-              </div>
+            <div className="relative z-10 text-white">
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
+                shared presence
+              </h3>
+              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
+                join silent reading rooms, ambient study sessions, or open mic nights. sometimes simply being together is enough.
+              </p>
             </div>
           </div>
         </div>
