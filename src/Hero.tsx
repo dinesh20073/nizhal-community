@@ -50,21 +50,26 @@ const Hero = () => {
 
       {/* 2. Core Pillars & Embedded Frame Reel */}
       <section className="w-full border-b border-[#2b2622]/10 bg-[#fcfaf8]">
-        <div className="px-6 md:px-14 pt-20 pb-10 max-w-4xl">
+        {/* Title Heading */}
+        <div className="px-6 md:px-14 pt-20 pb-6 max-w-4xl">
           <span className="text-xs uppercase tracking-widest text-[#2b2622]/40 font-medium block mb-4">
             our core pillars
           </span>
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight lowercase mb-6">
+          <h2 className="text-4xl md:text-6xl font-medium tracking-tight lowercase">
             a different kind of network.
           </h2>
+        </div>
+
+        {/* Media Marquee Scroll - Fully visible cards with zero clipping */}
+        <div className="w-full relative z-20 overflow-visible">
+          <MediaMarquee />
+        </div>
+
+        {/* Subtitle / Paragraph description placed below the carousel */}
+        <div className="px-6 md:px-14 pt-6 pb-16 max-w-4xl">
           <p className="text-lg md:text-xl text-[#2b2622]/60 lowercase leading-relaxed">
             we strip away the noise of modern social platforms. here, you won't find algorithms or endless scrolls—just genuine spaces designed for human connection.
           </p>
-        </div>
-
-        {/* Normal Size Media Marquee Scroll Below Text - Subtle 3% Overlap over top edge of pillars */}
-        <div className="-mb-3 sm:-mb-4 md:-mb-5 relative z-20 pointer-events-auto">
-          <MediaMarquee />
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10 relative z-10">
