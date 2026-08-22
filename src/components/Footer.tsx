@@ -41,7 +41,7 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-6 lg:mt-8 whitespace-nowrap">
+            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-14 lg:mt-20 whitespace-nowrap">
               © {currentYear} nizhal
             </span>
           </div>
