@@ -1,125 +1,39 @@
 import { Link } from 'react-router-dom';
-import { Heart, Users, Calendar, Image as ImageIcon, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import logoUrl from '../assets/logo.jpg';
+import communityHandsUrl from '../assets/community-hands.png';
+import communityFriendsUrl from '../assets/community-friends.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-[#fcfaf8] border-t border-[#2b2622]/8 text-[#2b2622] relative overflow-hidden mt-auto pt-16 pb-10 px-6 md:px-12 lg:px-20">
-      {/* Upper Main Footer Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+    <footer className="w-full bg-[#fcfaf8] border-t border-[#2b2622]/8 text-[#2b2622] relative overflow-hidden mt-auto pt-16 pb-8 px-6 md:px-12 lg:px-16">
+      {/* Main Content Grid */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-8 items-center relative z-10">
         
-        {/* Left Column: Community Message & Hand Illustration */}
-        <div className="md:col-span-4 flex flex-col items-start text-left">
+        {/* Left Column: Community Message & Hands Image */}
+        <div className="md:col-span-5 flex flex-col items-start text-left">
           <h2 className="font-['Caveat'] text-[#8c3a3a] text-4xl sm:text-5xl font-bold leading-none mb-3 tracking-tight">
             For the community,<br />
             by the community. <span className="inline-block text-3xl font-normal">♡</span>
           </h2>
-          <p className="text-sm text-[#2b2622]/70 lowercase leading-relaxed max-w-sm mb-6">
+          <p className="text-sm text-[#2b2622]/70 lowercase leading-relaxed max-w-sm mb-4">
             together we create a circle of warmth, kindness, and belonging.
           </p>
 
-          {/* Diverse Hands Reaching Up Illustration */}
-          <div className="w-full max-w-[280px] h-20 relative flex items-end">
-            <svg viewBox="0 0 300 120" className="w-full h-full overflow-visible" fill="none">
-              {/* Little floating hearts and botanical accents */}
-              <circle cx="35" cy="40" r="3" fill="#e29b9b" />
-              <path d="M75 25 C75 20, 85 20, 85 28 C85 36, 75 42, 75 42 C75 42, 65 36, 65 28 C65 20, 75 20, 75 25 Z" fill="#d97a7a" transform="scale(0.5) translate(60, 10)" />
-              <path d="M190 20 C190 15, 200 15, 200 23 C200 31, 190 37, 190 37 C190 37, 180 31, 180 23 C180 15, 190 15, 190 20 Z" fill="#d97a7a" transform="scale(0.5) translate(220, 5)" />
-              <circle cx="260" cy="50" r="3.5" fill="#e29b9b" />
-              <circle cx="280" cy="35" r="2.5" fill="#c47c7c" />
-
-              {/* Hand 1 (Warm tan) */}
-              <g transform="translate(30, 45)">
-                <path d="M10 70 L10 25 C10 20 18 20 18 25 L18 15 C18 10 26 10 26 15 L26 20 C26 15 34 15 34 20 L34 25 C34 20 42 20 42 25 L42 70 Z" fill="#c49a75" />
-                <path d="M8 40 C4 35 2 30 0 35 C-2 40 5 50 10 55" stroke="#c49a75" strokeWidth="6" strokeLinecap="round" />
-                {/* Heart on palm */}
-                <path d="M26 42 C26 38, 31 38, 31 43 C31 47, 26 51, 26 51 C26 51, 21 47, 21 43 C21 38, 26 38, 26 42 Z" fill="#8c3a3a" />
-              </g>
-
-              {/* Hand 2 (Deep brown) */}
-              <g transform="translate(75, 25)">
-                <path d="M10 90 L10 25 C10 20 18 20 18 25 L18 15 C18 10 26 10 26 15 L26 20 C26 15 34 15 34 20 L34 25 C34 20 42 20 42 25 L42 90 Z" fill="#6e4f3a" />
-                <path d="M8 45 C4 40 2 35 0 40 C-2 45 5 55 10 60" stroke="#6e4f3a" strokeWidth="6" strokeLinecap="round" />
-                <path d="M26 45 C26 41, 31 41, 31 46 C31 50, 26 54, 26 54 C26 54, 21 50, 21 46 C21 41, 26 41, 26 45 Z" fill="#d97a7a" />
-              </g>
-
-              {/* Hand 3 (Fair/Peach) */}
-              <g transform="translate(125, 48)">
-                <path d="M10 65 L10 22 C10 18 17 18 17 22 L17 12 C17 8 24 8 24 12 L24 17 C24 13 31 13 31 17 L31 22 C31 18 38 18 38 22 L38 65 Z" fill="#dfbe9f" />
-                <path d="M8 35 C4 30 2 25 0 30 C-2 35 5 45 10 50" stroke="#dfbe9f" strokeWidth="5" strokeLinecap="round" />
-                <path d="M24 38 C24 35, 28 35, 28 39 C28 43, 24 46, 24 46 C24 46, 20 43, 20 39 C20 35, 24 35, 24 38 Z" fill="#8c3a3a" />
-              </g>
-
-              {/* Hand 4 (Warm almond) */}
-              <g transform="translate(165, 30)">
-                <path d="M10 85 L10 25 C10 20 18 20 18 25 L18 15 C18 10 26 10 26 15 L26 20 C26 15 34 15 34 20 L34 25 C34 20 42 20 42 25 L42 85 Z" fill="#a87957" />
-                <path d="M8 45 C4 40 2 35 0 40 C-2 45 5 55 10 60" stroke="#a87957" strokeWidth="6" strokeLinecap="round" />
-                <path d="M26 45 C26 41, 31 41, 31 46 C31 50, 26 54, 26 54 C26 54, 21 50, 21 46 C21 41, 26 41, 26 45 Z" fill="#d97a7a" />
-              </g>
-
-              {/* Hand 5 (Soft terracotta) */}
-              <g transform="translate(210, 42)">
-                <path d="M10 75 L10 25 C10 20 18 20 18 25 L18 15 C18 10 26 10 26 15 L26 20 C26 15 34 15 34 20 L34 25 C34 20 42 20 42 25 L42 75 Z" fill="#cfa584" />
-                <path d="M8 40 C4 35 2 30 0 35 C-2 40 5 50 10 55" stroke="#cfa584" strokeWidth="5.5" strokeLinecap="round" />
-                <path d="M26 40 C26 36, 31 36, 31 41 C31 45, 26 49, 26 49 C26 49, 21 45, 21 41 C21 36, 26 36, 26 40 Z" fill="#8c3a3a" />
-              </g>
-
-              {/* Botanical leaves accent */}
-              <path d="M260 105 Q275 80 270 65 Q285 85 285 105" fill="#a4b39b" opacity="0.8" />
-              <path d="M15 105 Q5 85 15 70 Q20 90 25 105" fill="#a4b39b" opacity="0.8" />
-            </svg>
+          {/* User's Uploaded Community Hands Illustration */}
+          <div className="w-full max-w-[280px] sm:max-w-[320px] pt-1">
+            <img 
+              src={communityHandsUrl} 
+              alt="Community Hands with Hearts" 
+              className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-sm" 
+            />
           </div>
         </div>
 
-        {/* Middle Column 1: Navigation Links with Icons */}
-        <div className="md:col-span-3 md:border-l md:border-[#2b2622]/10 md:pl-8 lg:pl-10 flex flex-col justify-center space-y-4 text-left">
-          <Link 
-            to="/about" 
-            className="flex items-center gap-3.5 text-sm text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-          >
-            <Heart className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-            <span>about us</span>
-          </Link>
-
-          <Link 
-            to="/about" 
-            className="flex items-center gap-3.5 text-sm text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-          >
-            <Users className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-            <span>our mission</span>
-          </Link>
-
-          <Link 
-            to="/events" 
-            className="flex items-center gap-3.5 text-sm text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-          >
-            <Calendar className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-            <span>events</span>
-          </Link>
-
-          <a 
-            href="https://www.instagram.com/nizhal.community/"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3.5 text-sm text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-          >
-            <ImageIcon className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-            <span>gallery</span>
-          </a>
-
-          <Link 
-            to="/contact" 
-            className="flex items-center gap-3.5 text-sm text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-          >
-            <Mail className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-            <span>contact us</span>
-          </Link>
-        </div>
-
-        {/* Middle Column 2: Nizhal Community Logo Image */}
-        <div className="md:col-span-2 flex flex-col items-center justify-center">
+        {/* Center Column: Nizhal Community Logo Seal */}
+        <div className="md:col-span-2 flex flex-col items-center justify-center py-4 md:py-0">
           <Link to="/" className="group flex flex-col items-center cursor-pointer">
             {/* Circular Logo Frame */}
             <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/60 p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/5 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
@@ -143,14 +57,14 @@ const Footer = () => {
           </Link>
         </div>
 
-        {/* Right Column: Stay Connected & Social Links */}
-        <div className="md:col-span-3 md:border-l md:border-[#2b2622]/10 md:pl-8 lg:pl-10 flex flex-col items-start text-left">
-          <h3 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
+        {/* Right Column: Stay Connected, Social Links & Friends Image */}
+        <div className="md:col-span-5 flex flex-col items-start md:items-end text-left md:text-right">
+          <h3 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-3 tracking-tight">
             Stay Connected <span className="inline-block font-normal">♡</span>
           </h3>
 
           {/* Social Icon Pills */}
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-3">
             {/* Instagram */}
             <a 
               href="https://www.instagram.com/nizhal.community/" 
@@ -191,19 +105,27 @@ const Footer = () => {
             </a>
           </div>
 
-          <p className="text-xs sm:text-sm text-[#2b2622]/70 lowercase leading-relaxed max-w-xs">
+          <p className="text-xs sm:text-sm text-[#2b2622]/70 lowercase leading-relaxed max-w-xs mb-3">
             follow our journey and be a part of the circle of warmth!
           </p>
+
+          {/* User's Uploaded Community Friends Illustration */}
+          <div className="w-full max-w-[240px] sm:max-w-[280px] pt-1">
+            <img 
+              src={communityFriendsUrl} 
+              alt="Community Friends Hugging" 
+              className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-sm ml-auto" 
+            />
+          </div>
         </div>
       </div>
 
-      {/* Dotted Connecting Thread with Floating Loop & Community Illustration */}
-      <div className="w-full relative my-8 min-h-[70px] flex items-center">
-        {/* Continuous Dotted Connecting Path */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full pointer-events-none overflow-hidden h-16 flex items-center">
-          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" className="w-full h-full">
+      {/* Dotted Connecting Thread with Floating Loop */}
+      <div className="w-full relative my-6 min-h-[30px] flex items-center">
+        <div className="w-full pointer-events-none overflow-hidden h-10 flex items-center">
+          <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-full">
             <path 
-              d="M 0 30 Q 300 20 570 30 C 585 20, 595 10, 600 20 C 605 10, 615 20, 630 30 Q 900 40 1200 25" 
+              d="M 0 20 Q 300 10 570 20 C 585 10, 595 2, 600 12 C 605 2, 615 10, 630 20 Q 900 30 1200 18" 
               fill="none" 
               stroke="#d8a4a4" 
               strokeWidth="1.5" 
@@ -211,7 +133,7 @@ const Footer = () => {
             />
             {/* Heart loop in center */}
             <path 
-              d="M600 28 C600 22, 608 18, 614 24 C620 30, 600 40, 600 40 C600 40, 580 30, 586 24 C592 18, 600 22, 600 28 Z" 
+              d="M600 20 C600 14, 608 10, 614 16 C620 22, 600 30, 600 30 C600 30, 580 22, 586 16 C592 10, 600 14, 600 20 Z" 
               fill="none" 
               stroke="#d8a4a4" 
               strokeWidth="1.5" 
@@ -219,36 +141,10 @@ const Footer = () => {
             />
           </svg>
         </div>
-
-        {/* Right-aligned Community Friends Illustration */}
-        <div className="ml-auto relative z-10 pr-4 sm:pr-8 pointer-events-none">
-          <svg viewBox="0 0 160 80" className="w-32 sm:w-40 h-auto overflow-visible" fill="none">
-            {/* Floating heart above heads */}
-            <path d="M80 12 C80 6, 88 6, 88 13 C88 20, 80 25, 80 25 C80 25, 72 20, 72 13 C72 6, 80 6, 80 12 Z" fill="#d97a7a" />
-
-            {/* Friend 1 (Left - Woman with dark hair & rose top) */}
-            <circle cx="50" cy="38" r="10" fill="#dfbe9f" />
-            <path d="M40 38 Q50 24 60 38 Q56 46 40 44 Z" fill="#362923" />
-            <path d="M38 75 C38 52 62 52 62 75 Z" fill="#cf8d8d" />
-
-            {/* Friend 2 (Center - Sage green top) */}
-            <circle cx="80" cy="36" r="9" fill="#cfa584" />
-            <path d="M72 35 Q80 24 88 35 Q86 44 72 42 Z" fill="#4a3b32" />
-            <path d="M68 75 C68 50 92 50 92 75 Z" fill="#8f9f87" />
-
-            {/* Friend 3 (Right - Warm sand top) */}
-            <circle cx="110" cy="34" r="10" fill="#c49a75" />
-            <path d="M100 32 Q110 20 120 32 Q118 42 100 40 Z" fill="#2b2622" />
-            <path d="M98 75 C98 48 122 48 122 75 Z" fill="#cfad8d" />
-
-            {/* Intertwined arms / warmth */}
-            <path d="M50 56 Q80 60 110 56" stroke="#c49a75" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
-          </svg>
-        </div>
       </div>
 
       {/* Bottom Sub-footer Copyright Bar */}
-      <div className="max-w-7xl mx-auto pt-6 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#2b2622]/50 lowercase">
+      <div className="max-w-7xl mx-auto pt-4 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#2b2622]/50 lowercase">
         <span>
           © {currentYear} nizhal – circle of warmth. all rights reserved.
         </span>
