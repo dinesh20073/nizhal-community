@@ -9,6 +9,7 @@ import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isCtaColorful, setIsCtaColorful] = useState(false);
 
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
   const safeSpacesRef = useRef<HTMLVideoElement>(null);
@@ -217,13 +218,17 @@ const Hero = () => {
       </section>
 
       {/* 4. Final CTA */}
-      <section className="relative py-36 md:py-44 px-6 md:px-10 text-center flex flex-col items-center justify-center border-t border-[#2b2622]/5 overflow-hidden bg-[#fcfaf8]">
-        {/* Background Image: Black & White Translucent (High Visibility) */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+      <section className="relative py-36 md:py-44 px-6 md:px-10 text-center flex flex-col items-center justify-center border-t border-[#2b2622]/5 overflow-hidden bg-[#fcfaf8] group/cta">
+        {/* Background Image: Black & White by default, becomes fully colorful on click / hover */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
           <img 
             src={ctaBgUrl} 
             alt="Nizhal Community Gathering" 
-            className="w-full h-full object-cover grayscale contrast-125 brightness-95 opacity-65"
+            className={`w-full h-full object-cover transition-all duration-700 ${
+              isCtaColorful 
+                ? 'grayscale-0 contrast-100 brightness-100 opacity-90 scale-105' 
+                : 'grayscale contrast-125 brightness-95 opacity-65 group-hover/cta:grayscale-0 group-hover/cta:contrast-100 group-hover/cta:brightness-100 group-hover/cta:opacity-90 group-hover/cta:scale-105'
+            }`}
           />
           {/* Subtle soft scrim overlay to keep text effortlessly readable */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/75 via-[#fcfaf8]/40 to-[#fcfaf8]/80 pointer-events-none" />
@@ -237,7 +242,10 @@ const Hero = () => {
             step into a world where connection is intentional and every voice is valued.
           </p>
           <button
-            onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
+            onClick={() => {
+              setIsCtaColorful(true);
+              window.dispatchEvent(new CustomEvent('openJoinModal'));
+            }}
             className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-xl shadow-[#522D21]/15 cursor-pointer mt-2"
           >
             become a member
