@@ -41,6 +41,9 @@ const Footer = () => {
                 />
               </div>
             </Link>
+            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 whitespace-nowrap">
+              © {currentYear} nizhal
+            </span>
           </div>
 
           {/* Right Column: Stay Connected */}
@@ -94,18 +97,6 @@ const Footer = () => {
             <p className="text-[9px] sm:text-xs text-[#2b2622]/75 lowercase leading-tight max-w-[130px] sm:max-w-xs">
               follow our journey and be a part of the circle of warmth!
             </p>
-          </div>
-        </div>
-
-        {/* Bottom Sub-footer Copyright Bar (No top border line) */}
-        <div className="w-full pt-1 pb-1 flex flex-row items-center justify-between gap-2 text-[9px] sm:text-xs text-[#2b2622]/50 lowercase relative z-10 mt-8 sm:mt-12 md:mt-16">
-          <span>
-            © {currentYear} nizhal – circle of warmth. all rights reserved.
-          </span>
-          <div className="flex items-center gap-1 sm:gap-1.5 text-[#2b2622]/60">
-            <span>made with</span>
-            <span className="text-[#8c3a3a] text-xs sm:text-sm">♥</span>
-            <span>by our community</span>
           </div>
         </div>
       </div>
