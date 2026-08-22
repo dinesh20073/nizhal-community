@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import bodyBgUrl from '../assets/body.png';
-import bodyMobileBgUrl from '../assets/body-mobile-2.png';
+import contactVideoUrl from '../assets/contact-bg.mp4';
 
 const topics = [
   "general inquiry",
@@ -10,6 +9,16 @@ const topics = [
 ];
 
 const Contact = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   const [selectedTopic, setSelectedTopic] = useState(topics[0]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -92,16 +101,23 @@ const Contact = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Decorative Background Artwork - Responsive for Desktop & Mobile */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
-        <picture>
-          <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
-          <img 
-            src={bodyBgUrl} 
-            alt="Nizhal Contact Background" 
-            className="w-full h-full object-fill opacity-95"
-          />
-        </picture>
+      {/* Background Video: Full Mute, Looping, Slow 0.5x, Whitest Aesthetic matching About Page */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          src={contactVideoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="auto"
+          className="w-full h-full object-cover opacity-55 brightness-105"
+        />
+        {/* Soft, light and airy scrim overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/55 to-[#fcfaf8]/85 pointer-events-none" />
       </div>
 
       <div className="max-w-5xl mx-auto my-auto w-full relative z-10">
