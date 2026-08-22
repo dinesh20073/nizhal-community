@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bodyBgUrl from '../assets/body.png';
+import bodyMobileBgUrl from '../assets/body-mobile.png';
 
 const topics = [
   "general inquiry",
@@ -53,13 +54,16 @@ const Contact = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-28 pb-16 px-6 md:px-12 lg:px-16 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Decorative Background Artwork */}
+      {/* Decorative Background Artwork - Responsive for Desktop & Mobile */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
-        <img 
-          src={bodyBgUrl} 
-          alt="Nizhal Contact Background" 
-          className="w-full h-full object-fill opacity-95"
-        />
+        <picture>
+          <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
+          <img 
+            src={bodyBgUrl} 
+            alt="Nizhal Contact Background" 
+            className="w-full h-full object-fill opacity-95"
+          />
+        </picture>
       </div>
 
       {/* Background Soft Glow */}

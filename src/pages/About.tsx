@@ -1,15 +1,19 @@
 import bodyBgUrl from '../assets/body.png';
+import bodyMobileBgUrl from '../assets/body-mobile.png';
 
 const About = () => {
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Decorative Background Artwork - Complete Full Design Uncropped */}
+      {/* Decorative Background Artwork - Responsive for Desktop & Mobile */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
-        <img 
-          src={bodyBgUrl} 
-          alt="Nizhal About Background" 
-          className="w-full h-full object-fill opacity-95"
-        />
+        <picture>
+          <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
+          <img 
+            src={bodyBgUrl} 
+            alt="Nizhal About Background" 
+            className="w-full h-full object-fill opacity-95"
+          />
+        </picture>
       </div>
 
       <div className="max-w-4xl mx-auto my-auto text-center relative z-10">
