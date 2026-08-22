@@ -20,13 +20,13 @@ const Hero = () => {
 
         {/* Foreground 3 Words Alone in White */}
         <div className="relative h-full w-full pointer-events-none z-10">
-          <h1 className="hero-title absolute text-white font-medium text-[14vw] md:text-[11vw] left-4 md:left-12 top-[16%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+          <h1 className="hero-title absolute text-white font-medium text-[8vw] md:text-[5.5vw] left-6 md:left-14 top-[16%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             listen
           </h1>
-          <h1 className="hero-title absolute text-white font-medium text-[14vw] md:text-[11vw] right-4 md:right-12 top-[16%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+          <h1 className="hero-title absolute text-white font-medium text-[8vw] md:text-[5.5vw] right-6 md:right-14 top-[16%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             connect
           </h1>
-          <h1 className="hero-title absolute text-white font-medium text-[14vw] md:text-[11vw] left-1/2 -translate-x-1/2 bottom-[10%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] text-center whitespace-nowrap">
+          <h1 className="hero-title absolute text-white font-medium text-[8vw] md:text-[5.5vw] left-1/2 -translate-x-1/2 bottom-[12%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] text-center whitespace-nowrap">
             belong
           </h1>
         </div>
