@@ -27,9 +27,6 @@ const Footer = () => {
               For the community,<br />
               by the community. <span className="inline-block text-2xl lg:text-3xl font-normal">♡</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-xs">
-              together we create a circle of warmth, kindness, and belonging.
-            </p>
           </div>
 
           {/* Center Column: Nizhal Logo Seal - Elevated above the dotted heart loop */}
