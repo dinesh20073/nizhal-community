@@ -35,7 +35,6 @@ const InstagramFeed = () => {
                 height="100%" 
                 frameBorder="0" 
                 scrolling="no" 
-                allowTransparency={true} 
                 allow="encrypted-media"
                 className="absolute"
                 style={{ 
