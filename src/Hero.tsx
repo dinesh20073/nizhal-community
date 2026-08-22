@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'framer-motion';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
@@ -9,6 +9,8 @@ import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
   const safeSpacesRef = useRef<HTMLVideoElement>(null);
   const activeListeningRef = useRef<HTMLVideoElement>(null);
@@ -17,10 +19,17 @@ const Hero = () => {
   const pillar2ContainerRef = useRef<HTMLDivElement>(null);
   const pillar3ContainerRef = useRef<HTMLDivElement>(null);
 
-  // Mobile scroll detection: Automatically color the box when centered in viewport on mobile
+  // Mobile scroll detection: Only active on mobile devices (< 768px)
   const isPillar1InView = useInView(pillar1ContainerRef, { margin: "-25% 0px -25% 0px" });
   const isPillar2InView = useInView(pillar2ContainerRef, { margin: "-25% 0px -25% 0px" });
   const isPillar3InView = useInView(pillar3ContainerRef, { margin: "-25% 0px -25% 0px" });
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (sharedPresenceRef.current) {
@@ -88,7 +97,7 @@ const Hero = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10 relative z-10">
-          {/* Pillar 1: Active Listening (Left - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          {/* Pillar 1: Active Listening (Left - Mobile: Scroll to Color | PC: Hover to Color) */}
           <div 
             ref={pillar1ContainerRef}
             className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
@@ -103,9 +112,9 @@ const Hero = () => {
                 muted
                 playsInline
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar1InView 
+                  isMobile && isPillar1InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
-                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                    : 'grayscale contrast-125 brightness-75 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-105'
                 }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
@@ -123,7 +132,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 2: Safe Spaces (Middle - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          {/* Pillar 2: Safe Spaces (Middle - Mobile: Scroll to Color | PC: Hover to Color) */}
           <div 
             ref={pillar2ContainerRef}
             className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
@@ -138,9 +147,9 @@ const Hero = () => {
                 muted
                 playsInline
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar2InView 
+                  isMobile && isPillar2InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
-                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                    : 'grayscale contrast-125 brightness-75 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-105'
                 }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
@@ -158,7 +167,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence (Right - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          {/* Pillar 3: Shared Presence (Right - Mobile: Scroll to Color | PC: Hover to Color) */}
           <div 
             ref={pillar3ContainerRef}
             className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
@@ -173,9 +182,9 @@ const Hero = () => {
                 muted
                 playsInline
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar3InView 
+                  isMobile && isPillar3InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
-                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                    : 'grayscale contrast-125 brightness-75 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-105'
                 }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
