@@ -1,6 +1,7 @@
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import ImageGallery from './components/ImageGallery';
+import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
   return (
@@ -32,16 +33,8 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* 2. Marquee Section */}
-      <section className="py-20 bg-[#f4efe8] border-y border-[#2b2622]/5 overflow-hidden flex whitespace-nowrap">
-        <div className="animate-marquee flex gap-12 items-center">
-          {Array(4).fill(["✨ belong", "listen", "connect", "humans", "stories", "presence"]).flat().map((word, i) => (
-            <span key={i} className="text-3xl md:text-5xl font-medium text-[#2b2622]/40 lowercase inline-block">
-              {word} <span className="mx-8 text-[#2b2622]/10">•</span>
-            </span>
-          ))}
-        </div>
-      </section>
+      {/* 2. Frame-by-Frame Media Marquee Section (Photos & Full Mute Videos in B&W) */}
+      <MediaMarquee />
 
       {/* 3. Pillars / Features Section - Edge-to-Edge Sharp Grid */}
       <section className="w-full border-b border-[#2b2622]/10 bg-[#fcfaf8]">
