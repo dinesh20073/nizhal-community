@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Heart, Users, Calendar, Image as ImageIcon, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import logoUrl from '../assets/logo.jpg';
 import footerBgUrl from '../assets/footer-bg.png';
 import communityFriendsUrl from '../assets/community-friends.png';
@@ -19,66 +19,21 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto pt-14 pb-8 px-6 md:px-12 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="max-w-7xl mx-auto pt-14 pb-6 px-6 md:px-12 lg:px-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* 1. Left Column: Community Tagline & Description */}
-          <div className="md:col-span-4 flex flex-col items-start text-left">
+          <div className="md:col-span-5 flex flex-col items-start text-left">
             <h2 className="font-['Caveat'] text-[#8c3a3a] text-4xl sm:text-5xl font-bold leading-none mb-3 tracking-tight">
               For the community,<br />
               by the community. <span className="inline-block text-3xl font-normal">♡</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-xs mb-8">
+            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-sm mb-6">
               together we create a circle of warmth, kindness, and belonging.
             </p>
           </div>
 
-          {/* 2. Middle Column: Navigation Links with Soft Dividers */}
-          <div className="md:col-span-3 md:border-l md:border-[#2b2622]/10 md:pl-8 lg:pl-10 flex flex-col justify-center space-y-3 text-left">
-            <Link 
-              to="/about" 
-              className="flex items-center gap-3 text-sm font-medium text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-            >
-              <Heart className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-              <span>about us</span>
-            </Link>
-
-            <Link 
-              to="/about" 
-              className="flex items-center gap-3 text-sm font-medium text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-            >
-              <Users className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-              <span>our mission</span>
-            </Link>
-
-            <Link 
-              to="/events" 
-              className="flex items-center gap-3 text-sm font-medium text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-            >
-              <Calendar className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-              <span>events</span>
-            </Link>
-
-            <a 
-              href="https://www.instagram.com/nizhal.community/"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 text-sm font-medium text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-            >
-              <ImageIcon className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-              <span>gallery</span>
-            </a>
-
-            <Link 
-              to="/contact" 
-              className="flex items-center gap-3 text-sm font-medium text-[#2b2622]/80 hover:text-[#522D21] transition-colors group lowercase"
-            >
-              <Mail className="w-4 h-4 text-[#8c3a3a] group-hover:scale-110 transition-transform" />
-              <span>contact us</span>
-            </Link>
-          </div>
-
-          {/* 3. Center Emblem: Nizhal Circular Seal Logo */}
+          {/* 2. Center Column: Nizhal Circular Seal Logo */}
           <div className="md:col-span-2 flex flex-col items-center justify-center py-2 md:py-0">
             <Link to="/" className="group flex flex-col items-center cursor-pointer">
               {/* Circular Logo Frame */}
@@ -103,8 +58,8 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* 4. Right Column: Stay Connected, Social Links & Friends Illustration */}
-          <div className="md:col-span-3 md:border-l md:border-[#2b2622]/10 md:pl-8 lg:pl-10 flex flex-col items-start text-left relative">
+          {/* 3. Right Column: Stay Connected, Social Links & Friends Illustration */}
+          <div className="md:col-span-5 flex flex-col items-start md:items-end text-left md:text-right">
             <h3 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2.5 tracking-tight">
               Stay Connected <span className="inline-block font-normal">♡</span>
             </h3>
