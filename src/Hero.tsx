@@ -15,7 +15,6 @@ const Hero = () => {
           />
           {/* Subtle natural vignette to make white words pop */}
           <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#fcfaf8] to-transparent pointer-events-none" />
         </div>
 
         {/* Foreground 3 Words Alone in White */}
