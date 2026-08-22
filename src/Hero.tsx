@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { useInView } from 'framer-motion';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
@@ -11,6 +12,15 @@ const Hero = () => {
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
   const safeSpacesRef = useRef<HTMLVideoElement>(null);
   const activeListeningRef = useRef<HTMLVideoElement>(null);
+
+  const pillar1ContainerRef = useRef<HTMLDivElement>(null);
+  const pillar2ContainerRef = useRef<HTMLDivElement>(null);
+  const pillar3ContainerRef = useRef<HTMLDivElement>(null);
+
+  // Mobile scroll detection: Automatically color the box when centered in viewport on mobile
+  const isPillar1InView = useInView(pillar1ContainerRef, { margin: "-25% 0px -25% 0px" });
+  const isPillar2InView = useInView(pillar2ContainerRef, { margin: "-25% 0px -25% 0px" });
+  const isPillar3InView = useInView(pillar3ContainerRef, { margin: "-25% 0px -25% 0px" });
 
   useEffect(() => {
     if (sharedPresenceRef.current) {
@@ -78,8 +88,11 @@ const Hero = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10 relative z-10">
-          {/* Pillar 1: Active Listening (Left - B&W by default, Color ONLY when cursor is over it) */}
-          <div className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
+          {/* Pillar 1: Active Listening (Left - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          <div 
+            ref={pillar1ContainerRef}
+            className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
+          >
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
@@ -89,7 +102,11 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                  isPillar1InView 
+                    ? 'grayscale-0 scale-105 brightness-100' 
+                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
@@ -106,8 +123,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 2: Safe Spaces (Middle - B&W by default, Color ONLY when cursor is over it) */}
-          <div className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
+          {/* Pillar 2: Safe Spaces (Middle - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          <div 
+            ref={pillar2ContainerRef}
+            className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
+          >
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
@@ -117,7 +137,11 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                  isPillar2InView 
+                    ? 'grayscale-0 scale-105 brightness-100' 
+                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
@@ -134,8 +158,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence (Right - B&W by default, Color ONLY when cursor is over it) */}
-          <div className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
+          {/* Pillar 3: Shared Presence (Right - B&W by default, Color on Mobile Scroll & PC Hover) */}
+          <div 
+            ref={pillar3ContainerRef}
+            className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer"
+          >
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
@@ -145,7 +172,11 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                  isPillar3InView 
+                    ? 'grayscale-0 scale-105 brightness-100' 
+                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                }`}
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
