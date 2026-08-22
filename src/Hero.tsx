@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
-import { useInView } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
@@ -8,18 +7,8 @@ import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
-  const [isPillar1Active, setIsPillar1Active] = useState(false);
-  const [isPillar3Active, setIsPillar3Active] = useState(false);
-
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
   const activeListeningRef = useRef<HTMLVideoElement>(null);
-
-  const pillar1ContainerRef = useRef<HTMLDivElement>(null);
-  const pillar3ContainerRef = useRef<HTMLDivElement>(null);
-
-  // Scroll detection: Active when in the center viewport of mobile
-  const isPillar1InView = useInView(pillar1ContainerRef, { margin: "-25% 0px -25% 0px" });
-  const isPillar3InView = useInView(pillar3ContainerRef, { margin: "-25% 0px -25% 0px" });
 
   useEffect(() => {
     if (sharedPresenceRef.current) {
@@ -77,12 +66,8 @@ const Hero = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10">
-          {/* Pillar 1: Active Listening (Left - Full Box Video - B&W by default, Color on Scroll / Hover / Select) */}
-          <div 
-            ref={pillar1ContainerRef}
-            onClick={() => setIsPillar1Active(!isPillar1Active)}
-            className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
-          >
+          {/* Pillar 1: Active Listening (Left - B&W by default, Color ONLY when cursor is over it) */}
+          <div className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
@@ -92,11 +77,7 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar1Active || isPillar1InView
-                    ? 'grayscale-0 scale-105 brightness-100' 
-                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
-                }`}
+                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
@@ -129,12 +110,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence (Right - Full Box Video - B&W by default, Color on Scroll / Hover / Select) */}
-          <div 
-            ref={pillar3ContainerRef}
-            onClick={() => setIsPillar3Active(!isPillar3Active)}
-            className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
-          >
+          {/* Pillar 3: Shared Presence (Right - B&W by default, Color ONLY when cursor is over it) */}
+          <div className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
@@ -144,11 +121,7 @@ const Hero = () => {
                 loop
                 muted
                 playsInline
-                className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar3Active || isPillar3InView
-                    ? 'grayscale-0 scale-105 brightness-100' 
-                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
-                }`}
+                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
               />
               {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
