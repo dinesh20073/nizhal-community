@@ -80,14 +80,14 @@ const MediaMarquee = () => {
   const displayItems = [...mediaFrames, ...mediaFrames];
 
   return (
-    <section className="py-2 md:py-3 bg-[#f4efe8] border-y border-[#2b2622]/10 overflow-hidden relative select-none">
-      {/* Subtle edge fade overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
+    <section className="relative z-20 -my-14 sm:-my-20 md:-my-28 overflow-hidden select-none pointer-events-auto">
+      {/* Soft gradient edge fade overlays */}
+      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#fcfaf8]/90 via-[#fcfaf8]/40 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#fcfaf8]/90 via-[#fcfaf8]/40 to-transparent z-20 pointer-events-none" />
 
       {/* Infinite Overlapping Marquee Reel */}
-      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-2 md:py-3">
-        <div className="flex -space-x-10 sm:-space-x-14 md:-space-x-20 items-center shrink-0 pr-12 md:pr-20">
+      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-6">
+        <div className="flex -space-x-12 sm:-space-x-16 md:-space-x-24 items-center shrink-0 pr-14 md:pr-24">
           {displayItems.map((item, index) => {
             const zIndex = 10 + (index % mediaFrames.length);
 
