@@ -1,63 +1,34 @@
+import heroBgUrl from './assets/hero-bg.png';
 import ImageGallery from './components/ImageGallery';
 
 const Hero = () => {
   return (
     <div className="w-full bg-[#fcfaf8] text-[#2b2622] selection:bg-[#2b2622]/30">
-      {/* 1. Hero Section (Original) */}
-      <section className="relative h-screen w-full overflow-hidden bg-[#fcfaf8]">
-        {/* Foreground content wrapper */}
-        <div className="relative h-full w-full pointer-events-none">
-          {/* Headlines */}
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] left-4 md:left-10 top-[18%] lowercase">
+      {/* 1. Hero Section with Background Image and the 3 Words Alone */}
+      <section className="relative h-screen w-full overflow-hidden bg-[#fcfaf8] flex items-center justify-center">
+        {/* Background Image Container */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <img
+            src={heroBgUrl}
+            alt="Nizhal Community Circle of Warmth"
+            className="w-full h-full object-cover md:object-contain max-w-6xl max-h-[88vh] opacity-85 select-none"
+          />
+          {/* Ambient lighting overlays for smooth integration */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#fcfaf8] via-transparent to-[#fcfaf8]/50 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/40 via-transparent to-[#fcfaf8] pointer-events-none" />
+        </div>
+
+        {/* Foreground 3 Words Alone */}
+        <div className="relative h-full w-full pointer-events-none z-10">
+          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] left-4 md:left-12 top-[16%] lowercase select-none drop-shadow-sm">
             listen
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] right-4 md:right-10 top-[38%] lowercase">
+          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] right-4 md:right-12 top-[40%] lowercase select-none drop-shadow-sm">
             connect
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[14vw] md:text-[13vw] left-[18%] md:left-[28%] top-[58%] lowercase">
+          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] left-[12%] md:left-[22%] bottom-[10%] lowercase select-none drop-shadow-sm">
             belong
           </h1>
-
-          {/* Description */}
-          <p className="absolute left-6 md:left-10 top-[46%] max-w-[240px] text-[15px] leading-snug text-[#2b2622]/90 lowercase pointer-events-auto">
-            where people gather, stories are shared, and everyone is welcome to simply exist.
-          </p>
-
-          {/* Stat block - top-right */}
-          <div className="absolute right-6 md:right-24 top-[12%] md:top-[14%]">
-            <div className="flex items-center gap-3 justify-end">
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[20deg]" />
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+10k</span>
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 text-right lowercase">
-              conversations
-            </div>
-          </div>
-
-          {/* Stat block - bottom-left */}
-          <div className="absolute left-6 md:left-20 bottom-32 md:bottom-24">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+500</span>
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[-20deg]" />
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 lowercase">
-              members joined
-            </div>
-          </div>
-
-          {/* Stat block - bottom-right */}
-          <div className="absolute right-6 md:right-20 bottom-12 md:bottom-20">
-            <div className="flex items-center gap-3 justify-end">
-              <div className="hidden md:block h-px w-24 bg-[#2b2622]/40 rotate-[-20deg]" />
-              <span className="text-3xl md:text-5xl font-medium tracking-tight text-[#2b2622]">+50</span>
-            </div>
-            <div className="text-xs md:text-sm text-[#2b2622]/70 mt-1 text-right lowercase">
-              community events
-            </div>
-          </div>
-
-          {/* Bottom gradient */}
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#fcfaf8]" />
         </div>
       </section>
 
@@ -128,7 +99,7 @@ const Hero = () => {
         </p>
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-          className="bg-[#ff5a1f] text-white text-lg font-medium rounded-full px-10 py-5 hover:scale-105 transition-transform lowercase"
+          className="bg-[#ff5a1f] text-white text-lg font-medium rounded-full px-10 py-5 hover:scale-105 transition-transform lowercase shadow-lg shadow-[#2b2622]/10"
         >
           become a member
         </button>
