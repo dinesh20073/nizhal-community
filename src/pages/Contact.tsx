@@ -166,7 +166,7 @@ const Contact = () => {
               href="https://www.instagram.com/nizhal.community/" 
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#d62976]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ede4d8] border border-[#2b2622]/15 shadow-sm hover:border-[#d62976]/40 hover:bg-[#e5d9ca] hover:shadow-md transition-all duration-300 group"
             >
               <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#d62976] transition-colors duration-300 shadow-sm shrink-0">
                 <svg className="w-5 h-5" viewBox="0 0 16 16" fill="currentColor">
@@ -174,8 +174,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/50 lowercase">follow our journey</span>
-                <span className="text-base font-medium text-[#2b2622] lowercase group-hover:text-[#d62976] transition-colors">@nizhal.community</span>
+                <span className="text-xs text-[#2b2622]/60 lowercase">follow our journey</span>
+                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#d62976] transition-colors">@nizhal.community</span>
               </div>
             </a>
 
@@ -184,7 +184,7 @@ const Contact = () => {
               href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#25D366]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ede4d8] border border-[#2b2622]/15 shadow-sm hover:border-[#25D366]/40 hover:bg-[#e5d9ca] hover:shadow-md transition-all duration-300 group"
             >
               <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#25D366] transition-colors duration-300 shadow-sm shrink-0">
                 <svg className="w-5 h-5" viewBox="0 0 16 16" fill="currentColor">
@@ -192,8 +192,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/50 lowercase">whatsapp group</span>
-                <span className="text-base font-medium text-[#2b2622] lowercase group-hover:text-[#25D366] transition-colors">join nizhal circle</span>
+                <span className="text-xs text-[#2b2622]/60 lowercase">whatsapp group</span>
+                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#25D366] transition-colors">join nizhal circle</span>
               </div>
             </a>
 
@@ -204,7 +204,7 @@ const Contact = () => {
                 e.preventDefault();
                 window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
               }}
-              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#522D21]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group cursor-pointer"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ede4d8] border border-[#2b2622]/15 shadow-sm hover:border-[#522D21]/40 hover:bg-[#e5d9ca] hover:shadow-md transition-all duration-300 group cursor-pointer"
             >
               <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#522D21] transition-colors duration-300 shadow-sm shrink-0">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -213,17 +213,17 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/50 lowercase">email us directly</span>
-                <span className="text-base font-medium text-[#2b2622] lowercase group-hover:text-[#522D21] transition-colors">nizhal.community@gmail.com</span>
+                <span className="text-xs text-[#2b2622]/60 lowercase">email us directly</span>
+                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#522D21] transition-colors">nizhal.community@gmail.com</span>
               </div>
             </a>
 
             {/* Warm Community Note (Fills remaining height) */}
-            <div className="flex-1 flex flex-col justify-center p-6 sm:p-7 rounded-2xl bg-[#ebe3d9]/20 border border-[#2b2622]/8 text-left">
+            <div className="flex-1 flex flex-col justify-center p-6 sm:p-7 rounded-2xl bg-[#ede4d8] border border-[#2b2622]/15 shadow-sm text-left">
               <span className="font-['Caveat'] text-[#8c3a3a] text-2xl sm:text-3xl font-bold block mb-2">
                 a safe space to talk ♡
               </span>
-              <p className="text-xs sm:text-sm text-[#2b2622]/70 lowercase leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed">
                 every question shared with us is treated with genuine warmth, confidentiality, and deep care. we typically respond within 24 hours.
               </p>
             </div>
@@ -234,7 +234,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-[#ebe3d9]/25 border border-[#2b2622]/10 rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm relative overflow-hidden flex flex-col justify-center"
+            className="bg-[#ede4d8] border border-[#2b2622]/15 rounded-3xl p-6 sm:p-8 md:p-9 shadow-lg relative overflow-hidden flex flex-col justify-center"
           >
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
@@ -261,7 +261,7 @@ const Contact = () => {
                           className={`w-full py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all duration-200 lowercase cursor-pointer truncate ${
                             selectedTopic === topic
                               ? 'bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold shadow-sm'
-                              : 'bg-[#ebe3d9]/60 text-[#2b2622]/70 hover:bg-[#ebe3d9] border border-[#2b2622]/5'
+                              : 'bg-[#dfd3c3] text-[#2b2622]/80 hover:bg-[#d6c7b4] border border-[#2b2622]/15'
                           }`}
                         >
                           {topic}
