@@ -95,7 +95,7 @@ const MediaMarquee = () => {
               <div
                 key={`${item.id}-${index}`}
                 style={{ zIndex }}
-                className={`relative w-52 sm:w-64 md:w-72 h-68 sm:h-80 md:h-88 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[5px] border-[#fcfaf8] shadow-xl md:shadow-2xl shadow-[#2b2622]/15 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-105 hover:-translate-y-2 hover:rotate-0 cursor-pointer ${
+                className={`relative w-52 sm:w-64 md:w-72 h-68 sm:h-80 md:h-88 rounded-2xl md:rounded-3xl overflow-hidden border-4 md:border-[5px] border-[#fcfaf8] group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-105 hover:-translate-y-2 hover:rotate-0 cursor-pointer ${
                   item.tilt || 'rotate-0'
                 }`}
               >
@@ -111,13 +111,13 @@ const MediaMarquee = () => {
                   />
                 )}
 
-                {/* Minimal Translucent Grain & Gradient Scrim */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent group-hover:from-black/50 transition-colors duration-500 pointer-events-none" />
+                {/* Subtle soft edge scrim only */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent group-hover:from-transparent transition-colors duration-500 pointer-events-none" />
 
                 {/* Frame Label / Caption Badge */}
                 {item.label && (
                   <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/95 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-sm">
+                    <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/95 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-sm">
                       {item.label}
                     </span>
                   </div>
