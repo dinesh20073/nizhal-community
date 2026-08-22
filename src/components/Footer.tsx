@@ -98,7 +98,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Sub-footer Copyright Bar */}
-        <div className="w-full pt-3 pb-1 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#2b2622]/50 lowercase relative z-10 mt-6">
+        <div className="w-full pt-3 pb-2 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#2b2622]/50 lowercase relative z-10 mt-12 sm:mt-16">
           <span>
             © {currentYear} nizhal – circle of warmth. all rights reserved.
           </span>
