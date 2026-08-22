@@ -7,15 +7,15 @@ const Hero = () => {
       {/* 1. Hero Section with Background Image and the 3 Words Alone */}
       <section className="relative h-screen w-full overflow-hidden bg-[#fcfaf8] flex items-center justify-center">
         {/* Background Image Container */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
           <img
             src={heroBgUrl}
             alt="Nizhal Community Circle of Warmth"
-            className="w-full h-full object-cover md:object-contain max-w-6xl max-h-[88vh] opacity-85 select-none"
+            className="w-full h-full object-cover opacity-85 select-none"
           />
           {/* Ambient lighting overlays for smooth integration */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#fcfaf8] via-transparent to-[#fcfaf8]/50 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/40 via-transparent to-[#fcfaf8] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#fcfaf8] via-transparent to-[#fcfaf8]/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/30 via-transparent to-[#fcfaf8] pointer-events-none" />
         </div>
 
         {/* Foreground 3 Words Alone */}
