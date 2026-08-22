@@ -5,7 +5,6 @@ import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
 import safeSpacesVideoUrl from './assets/safe-spaces.mp4';
 import sharedPresenceVideoUrl from './assets/shared-presence.mp4';
-import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
@@ -216,8 +215,6 @@ const Hero = () => {
           </div>
         </div>
       </section>
-
-      <ImageGallery />
 
       {/* 4. Final CTA */}
       <section className="relative py-36 md:py-44 px-6 md:px-10 text-center flex flex-col items-center justify-center border-t border-[#2b2622]/5 overflow-hidden bg-[#fcfaf8]">
