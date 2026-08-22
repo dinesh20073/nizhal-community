@@ -1,85 +1,126 @@
 import { Link } from 'react-router-dom';
-import footerFixedImgUrl from '../assets/footer-fixed.png';
+import { Mail } from 'lucide-react';
+import logoUrl from '../assets/logo.jpg';
+import footerBannerImg from '../assets/ChatGPT Image Aug 22, 2026, 11_02_05 AM.png';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="w-full bg-[#fdf9f7] border-t border-[#2b2622]/8 relative overflow-hidden mt-auto py-4 sm:py-6 px-3 sm:px-6 flex justify-center">
-      {/* Fixed Image Container with Natural Proportions */}
-      <div className="relative w-full max-w-5xl select-none">
-        {/* The Exact Footer Artwork */}
+    <footer className="w-full relative overflow-hidden mt-auto border-t border-[#2b2622]/8 text-[#2b2622] bg-[#fbf8f5]">
+      {/* Exact Specified Background Image (Rendered without Distortion/Stretching) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <img 
-          src={footerFixedImgUrl} 
-          alt="Nizhal Community Footer" 
-          className="w-full h-auto object-contain block drop-shadow-sm rounded-xl"
+          src={footerBannerImg} 
+          alt="Nizhal Footer Banner" 
+          className="w-full h-full object-cover object-bottom"
         />
+      </div>
 
-        {/* Interactive Clickable Hotspots overlaying the exact artwork */}
-        <div className="absolute inset-0 w-full h-full pointer-events-auto">
-          {/* Navigation Links */}
-          <Link 
-            to="/about" 
-            className="absolute left-[34%] top-[17%] w-[12%] h-[9%] rounded hover:bg-[#522D21]/10 transition-colors cursor-pointer"
-            aria-label="About Us"
-          />
-          <Link 
-            to="/about" 
-            className="absolute left-[34%] top-[27%] w-[12%] h-[9%] rounded hover:bg-[#522D21]/10 transition-colors cursor-pointer"
-            aria-label="Our Mission"
-          />
-          <Link 
-            to="/events" 
-            className="absolute left-[34%] top-[37%] w-[12%] h-[9%] rounded hover:bg-[#522D21]/10 transition-colors cursor-pointer"
-            aria-label="Events"
-          />
-          <a 
-            href="https://www.instagram.com/nizhal.community/" 
-            target="_blank" 
-            rel="noreferrer"
-            className="absolute left-[34%] top-[47%] w-[12%] h-[9%] rounded hover:bg-[#522D21]/10 transition-colors cursor-pointer"
-            aria-label="Gallery"
-          />
-          <Link 
-            to="/contact" 
-            className="absolute left-[34%] top-[57%] w-[12%] h-[9%] rounded hover:bg-[#522D21]/10 transition-colors cursor-pointer"
-            aria-label="Contact Us"
-          />
+      {/* Main Overlay Content */}
+      <div className="max-w-7xl mx-auto pt-10 sm:pt-12 pb-5 px-6 md:px-12 lg:px-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column: Tagline & Subtitle */}
+          <div className="md:col-span-5 flex flex-col items-start text-left">
+            <h2 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-2 tracking-tight">
+              For the community,<br />
+              by the community. <span className="inline-block text-2xl lg:text-3xl font-normal">♡</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed max-w-sm mb-2">
+              together we create a circle of warmth, kindness, and belonging.
+            </p>
+          </div>
 
-          {/* Center Logo */}
-          <Link 
-            to="/" 
-            className="absolute left-[51%] top-[16%] w-[16%] h-[50%] rounded-full hover:scale-105 transition-transform cursor-pointer"
-            aria-label="Nizhal Home"
-          />
+          {/* Center Column: Nizhal Logo Seal */}
+          <div className="md:col-span-2 flex flex-col items-center justify-center py-2 md:py-0">
+            <Link to="/" className="group flex flex-col items-center cursor-pointer">
+              {/* Circular Logo Frame */}
+              <div className="w-22 h-22 sm:w-26 sm:h-26 rounded-full border-4 border-[#cda2a2] bg-[#f5e6e6]/90 p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/5 transition-transform duration-300 group-hover:scale-105 overflow-hidden backdrop-blur-sm">
+                <img 
+                  src={logoUrl} 
+                  alt="Nizhal Community Logo" 
+                  className="w-full h-full rounded-full object-cover select-none" 
+                />
+              </div>
 
-          {/* Social Links */}
-          {/* Instagram */}
-          <a 
-            href="https://www.instagram.com/nizhal.community/" 
-            target="_blank" 
-            rel="noreferrer"
-            className="absolute left-[75.2%] top-[31%] w-[3.5%] h-[9.5%] rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            aria-label="Instagram"
-          />
+              {/* Decorative Ribbon Loop & Label */}
+              <div className="flex flex-col items-center -mt-1">
+                <svg width="32" height="14" viewBox="0 0 36 16" fill="none">
+                  <path d="M10 0 Q18 14 26 0 Q22 18 14 16 Q10 12 10 0" fill="#cda2a2" opacity="0.85" />
+                  <path d="M14 2 Q18 16 22 2" stroke="#7a3535" strokeWidth="1.2" fill="none" />
+                </svg>
+                <span className="font-['Caveat'] text-[#7a3535] text-sm sm:text-base font-semibold tracking-wide lowercase group-hover:text-[#522D21] transition-colors -mt-0.5">
+                  circle of warmth
+                </span>
+              </div>
+            </Link>
+          </div>
 
-          {/* Email */}
-          <a 
-            href="mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community" 
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
-            }}
-            className="absolute left-[79.2%] top-[31%] w-[3.5%] h-[9.5%] rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            aria-label="Email"
-          />
+          {/* Right Column: Stay Connected & Social Action Buttons */}
+          <div className="md:col-span-5 flex flex-col items-start md:items-end text-left md:text-right">
+            <h3 className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2 tracking-tight">
+              Stay Connected <span className="inline-block font-normal">♡</span>
+            </h3>
 
-          {/* WhatsApp */}
-          <a 
-            href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
-            target="_blank" 
-            rel="noreferrer"
-            className="absolute left-[83.2%] top-[31%] w-[3.5%] h-[9.5%] rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            aria-label="WhatsApp"
-          />
+            {/* Social Icon Pills */}
+            <div className="flex items-center gap-2.5 mb-2">
+              {/* Instagram */}
+              <a 
+                href="https://www.instagram.com/nizhal.community/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                aria-label="Instagram"
+              >
+                <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                </svg>
+              </a>
+
+              {/* WhatsApp */}
+              <a 
+                href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                aria-label="WhatsApp"
+              >
+                <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                </svg>
+              </a>
+
+              {/* Email */}
+              <a 
+                href="mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
+                }}
+                className="w-7 h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                aria-label="Email"
+              >
+                <Mail className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <p className="text-xs text-[#2b2622]/75 lowercase leading-relaxed max-w-xs mb-1">
+              follow our journey and be a part of the circle of warmth!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Sub-footer Copyright Bar */}
+      <div className="max-w-7xl mx-auto pt-2 pb-2 border-t border-[#2b2622]/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#2b2622]/50 lowercase relative z-10">
+        <span>
+          © {currentYear} nizhal – circle of warmth. all rights reserved.
+        </span>
+        <div className="flex items-center gap-1.5 text-[#2b2622]/60">
+          <span>made with</span>
+          <span className="text-[#8c3a3a] text-sm">♥</span>
+          <span>by our community</span>
         </div>
       </div>
     </footer>
