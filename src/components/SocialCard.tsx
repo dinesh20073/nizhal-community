@@ -69,7 +69,7 @@ const SocialCard = () => {
         }}
         whileHover={{ y: -3, scale: 1.12 }}
         whileTap={{ scale: 0.9 }}
-        className="w-8 h-8 bg-[#2b2622] flex items-center justify-center overflow-hidden transition-colors duration-300 rounded-full hover:bg-[#ff5a1f] active:bg-[#ff5a1f] shadow-sm group cursor-pointer"
+        className="w-8 h-8 bg-[#2b2622] flex items-center justify-center overflow-hidden transition-colors duration-300 rounded-full hover:bg-[#522D21] active:bg-[#522D21] shadow-sm group cursor-pointer"
         aria-label="Email nizhal.community@gmail.com"
       >
         <svg className="w-3.5 h-3.5 group-hover:animate-slide-in-top group-active:animate-slide-in-top text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

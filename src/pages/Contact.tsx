@@ -125,9 +125,9 @@ const Contact = () => {
                 e.preventDefault();
                 window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
               }}
-              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#ff5a1f]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group cursor-pointer"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-[#ebe3d9]/30 border border-[#2b2622]/10 hover:border-[#522D21]/40 hover:bg-[#ebe3d9]/50 transition-all duration-300 group cursor-pointer"
             >
-              <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#ff5a1f] transition-colors duration-300 shadow-sm shrink-0">
+              <div className="w-11 h-11 rounded-full bg-[#2b2622] text-white flex items-center justify-center group-hover:bg-[#522D21] transition-colors duration-300 shadow-sm shrink-0">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -135,7 +135,7 @@ const Contact = () => {
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-xs text-[#2b2622]/50 lowercase">email us directly</span>
-                <span className="text-base font-medium text-[#2b2622] lowercase group-hover:text-[#ff5a1f] transition-colors">nizhal.community@gmail.com</span>
+                <span className="text-base font-medium text-[#2b2622] lowercase group-hover:text-[#522D21] transition-colors">nizhal.community@gmail.com</span>
               </div>
             </a>
 
@@ -205,7 +205,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleNameChange}
                         placeholder="how should we call you?" 
-                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#ff5a1f] focus:ring-2 focus:ring-[#ff5a1f]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
                       />
                     </div>
                     <div>
@@ -218,7 +218,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@domain.com" 
-                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#ff5a1f] focus:ring-2 focus:ring-[#ff5a1f]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
                       />
                     </div>
                   </div>
@@ -244,7 +244,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handlePhoneChange}
                       placeholder="enter your 10 digits whatsapp number" 
-                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#ff5a1f] focus:ring-2 focus:ring-[#ff5a1f]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
                     />
                   </div>
 
@@ -261,7 +261,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="share whatever is in your heart..." 
-                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#ff5a1f] focus:ring-2 focus:ring-[#ff5a1f]/10 transition-all lowercase placeholder:text-[#2b2622]/30 resize-none text-[#2b2622]"
+                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 resize-none text-[#2b2622]"
                     />
                   </div>
 
@@ -270,7 +270,7 @@ const Contact = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     type="submit"
-                    className="bg-[#ff5a1f] text-white text-sm sm:text-base font-medium rounded-full px-10 py-3.5 hover:bg-[#e04f1a] transition-all lowercase self-center mx-auto mt-2 shadow-lg shadow-[#ff5a1f]/20 cursor-pointer"
+                    className="bg-[#522D21] text-white text-sm sm:text-base font-medium rounded-full px-10 py-3.5 hover:bg-[#3f2218] transition-all lowercase self-center mx-auto mt-2 shadow-lg shadow-[#522D21]/20 cursor-pointer"
                   >
                     send message
                   </motion.button>

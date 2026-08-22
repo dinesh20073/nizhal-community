@@ -45,7 +45,7 @@ const Navbar = () => {
         {/* Right button (Desktop) */}
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-          className="hidden md:block bg-[#ff5a1f] text-white text-sm font-medium rounded-full px-6 py-3 hover:scale-105 transition-transform duration-300 lowercase relative z-50 shadow-lg shadow-[#2b2622]/10"
+          className="hidden md:block bg-[#522D21] text-white text-sm font-medium rounded-full px-6 py-3 hover:scale-105 hover:bg-[#3f2218] transition-all duration-300 lowercase relative z-50 shadow-lg shadow-[#522D21]/20 cursor-pointer"
         >
           join community
         </button>
@@ -110,7 +110,7 @@ const Navbar = () => {
                 setIsOpen(false);
                 window.dispatchEvent(new CustomEvent('openJoinModal'));
               }}
-              className="mt-8 bg-[#ff5a1f] text-white text-lg font-medium rounded-full px-10 py-4 active:scale-95 transition-transform duration-300 lowercase shadow-xl shadow-[#2b2622]/10"
+              className="mt-8 bg-[#522D21] text-white text-lg font-medium rounded-full px-10 py-4 active:scale-95 hover:bg-[#3f2218] transition-all duration-300 lowercase shadow-xl shadow-[#522D21]/20 cursor-pointer"
             >
               join community
             </motion.button>

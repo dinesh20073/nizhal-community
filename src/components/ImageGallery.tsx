@@ -23,7 +23,7 @@ const ImageGallery = () => {
           href="https://www.instagram.com/nizhal.community/" 
           target="_blank" 
           rel="noreferrer"
-          className="flex items-center gap-2 text-sm lowercase border border-[#2b2622]/10 rounded-full px-6 py-3 hover:bg-[#ff5a1f] hover:text-white transition-colors"
+          className="flex items-center gap-2 text-sm lowercase border border-[#2b2622]/10 rounded-full px-6 py-3 hover:bg-[#522D21] hover:border-[#522D21] hover:text-white transition-all cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

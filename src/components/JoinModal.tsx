@@ -242,7 +242,7 @@ const JoinModal = () => {
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-4 w-full bg-[#ff5a1f] text-white font-medium rounded-xl px-8 py-4 hover:bg-[#e04a16] transition-colors lowercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="mt-4 w-full bg-[#522D21] text-white font-medium rounded-xl px-8 py-4 hover:bg-[#3f2218] transition-colors lowercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#522D21]/15"
                   >
                     {isSubmitting ? (
                       <>
