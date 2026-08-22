@@ -1,5 +1,6 @@
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
+import activeListeningVideoUrl from './assets/active-listening.mp4';
 import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
@@ -54,12 +55,26 @@ const Hero = () => {
           {/* Pillar 1: Active Listening */}
           <div className="p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 hover:bg-[#ebe3d9]/30 transition-colors flex flex-col justify-between group">
             <div>
-              <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center justify-between mb-8">
                 <div className="h-12 w-12 border border-[#2b2622]/15 bg-[#2b2622]/5 flex items-center justify-center group-hover:border-[#522D21] transition-colors">
                   <svg className="w-5 h-5 text-[#2b2622]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                 </div>
                 <span className="text-xs font-mono text-[#2b2622]/30 group-hover:text-[#522D21] transition-colors">01</span>
               </div>
+
+              {/* Active Listening Video Showcase inside Box */}
+              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 border border-[#2b2622]/15 bg-[#2b2622]/5 shadow-sm">
+                <video
+                  src={activeListeningVideoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover grayscale contrast-115 brightness-95 group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+              </div>
+
               <h3 className="text-2xl font-medium mb-4 lowercase text-[#2b2622]">active listening</h3>
               <p className="text-[#2b2622]/60 lowercase leading-relaxed text-sm md:text-base">
                 speak without fear of judgment. our community is built on the foundation of hearing each other out, deeply and respectfully.
