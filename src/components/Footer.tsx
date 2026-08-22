@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-1 sm:gap-4 items-center">
           
           {/* Left Column: Tagline */}
-          <div className="col-span-5 flex flex-col items-start text-left pl-0 sm:pl-16 md:pl-28 lg:pl-32">
+          <div className="col-span-5 flex flex-col items-start text-left pl-0 sm:pl-16 md:pl-28 lg:pl-32 md:-translate-y-4 lg:-translate-y-6">
             <h2 className="font-['Caveat'] text-[#8c3a3a] text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold leading-tight mb-1 tracking-tight">
               For the community,<br />
               by the community. <span className="inline-block text-sm sm:text-2xl lg:text-3xl font-normal">♡</span>
@@ -47,7 +47,7 @@ const Footer = () => {
           </div>
 
           {/* Right Column: Stay Connected */}
-          <div className="col-span-5 flex flex-col items-end text-right pr-0 sm:pr-8 md:pr-16 lg:pr-24">
+          <div className="col-span-5 flex flex-col items-end text-right pr-0 sm:pr-8 md:pr-16 lg:pr-24 md:-translate-y-4 lg:-translate-y-6">
             <h3 className="font-['Caveat'] text-[#8c3a3a] text-lg sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 tracking-tight">
               Stay Connected <span className="inline-block font-normal text-sm sm:text-xl">♡</span>
             </h3>
