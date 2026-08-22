@@ -28,10 +28,10 @@ const About = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-55 brightness-105"
         />
-        {/* Reduced subtle whitish scrim overlay for rich video presence */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/55 via-[#fcfaf8]/25 to-[#fcfaf8]/55 pointer-events-none" />
+        {/* Soft, light and airy scrim overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/55 to-[#fcfaf8]/85 pointer-events-none" />
       </div>
 
       <div className="max-w-4xl mx-auto my-auto w-full text-center relative z-10 py-10 md:py-14">
