@@ -11,22 +11,22 @@ const Hero = () => {
           <img
             src={heroBgUrl}
             alt="Nizhal Community Circle of Warmth"
-            className="w-full h-full object-cover opacity-85 select-none"
+            className="w-full h-full object-cover select-none"
           />
-          {/* Ambient lighting overlays for smooth integration */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#fcfaf8] via-transparent to-[#fcfaf8]/40 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/30 via-transparent to-[#fcfaf8] pointer-events-none" />
+          {/* Subtle natural vignette to make white words pop */}
+          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#fcfaf8] to-transparent pointer-events-none" />
         </div>
 
-        {/* Foreground 3 Words Alone */}
+        {/* Foreground 3 Words Alone in White */}
         <div className="relative h-full w-full pointer-events-none z-10">
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] left-4 md:left-12 top-[16%] lowercase select-none drop-shadow-sm">
+          <h1 className="hero-title absolute text-white font-medium text-[15vw] md:text-[12vw] left-4 md:left-12 top-[16%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             listen
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] right-4 md:right-12 top-[40%] lowercase select-none drop-shadow-sm">
+          <h1 className="hero-title absolute text-white font-medium text-[15vw] md:text-[12vw] right-4 md:right-12 top-[40%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             connect
           </h1>
-          <h1 className="hero-title absolute text-[#2b2622] font-medium text-[15vw] md:text-[12vw] left-[12%] md:left-[22%] bottom-[10%] lowercase select-none drop-shadow-sm">
+          <h1 className="hero-title absolute text-white font-medium text-[15vw] md:text-[12vw] left-[12%] md:left-[22%] bottom-[10%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             belong
           </h1>
         </div>
