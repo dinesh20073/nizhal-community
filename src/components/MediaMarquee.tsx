@@ -80,14 +80,14 @@ const MediaMarquee = () => {
   const displayItems = [...mediaFrames, ...mediaFrames];
 
   return (
-    <div className="w-full bg-[#fcfaf8] overflow-hidden select-none py-4 sm:py-6 relative border-b border-[#2b2622]/5">
+    <div className="w-full bg-[#fcfaf8] overflow-hidden select-none py-0 relative">
       {/* Soft gradient edge fade overlays matching page background */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
 
       {/* Infinite Overlapping Marquee Reel */}
       <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
-        <div className="flex -space-x-12 sm:-space-x-16 md:-space-x-24 items-center shrink-0 pr-14 md:pr-24">
+        <div className="flex -space-x-16 sm:-space-x-28 md:-space-x-40 lg:-space-x-48 items-center shrink-0 pr-20 md:pr-36">
           {displayItems.map((item, index) => {
             const zIndex = 10 + (index % mediaFrames.length);
 
@@ -95,7 +95,7 @@ const MediaMarquee = () => {
               <div
                 key={`${item.id}-${index}`}
                 style={{ zIndex }}
-                className={`relative w-52 sm:w-64 md:w-72 h-72 sm:h-88 md:h-96 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[5px] border-[#fcfaf8] shadow-xl md:shadow-2xl shadow-[#2b2622]/15 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-110 hover:-translate-y-4 hover:rotate-0 cursor-pointer ${
+                className={`relative w-64 sm:w-80 md:w-96 lg:w-[420px] h-[360px] sm:h-[460px] md:h-[540px] lg:h-[580px] rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[6px] border-[#fcfaf8] shadow-2xl shadow-[#2b2622]/20 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-105 hover:-translate-y-2 hover:rotate-0 cursor-pointer ${
                   item.tilt || 'rotate-0'
                 }`}
               >
@@ -116,8 +116,8 @@ const MediaMarquee = () => {
 
                 {/* Frame Label / Caption Badge */}
                 {item.label && (
-                  <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/95 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-sm">
+                  <div className="absolute bottom-6 left-6 right-6 z-10">
+                    <span className="text-xs sm:text-sm font-mono uppercase tracking-widest text-white/95 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-md">
                       {item.label}
                     </span>
                   </div>
