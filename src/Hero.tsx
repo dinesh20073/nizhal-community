@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useInView } from 'framer-motion';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
@@ -13,9 +14,16 @@ const Hero = () => {
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
   const activeListeningRef = useRef<HTMLVideoElement>(null);
 
+  const pillar1ContainerRef = useRef<HTMLDivElement>(null);
+  const pillar3ContainerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll detection: Active when in the center viewport of mobile
+  const isPillar1InView = useInView(pillar1ContainerRef, { margin: "-25% 0px -25% 0px" });
+  const isPillar3InView = useInView(pillar3ContainerRef, { margin: "-25% 0px -25% 0px" });
+
   useEffect(() => {
     if (sharedPresenceRef.current) {
-      sharedPresenceRef.current.playbackRate = 0.75;
+      sharedPresenceRef.current.playbackRate = 0.38;
     }
     if (activeListeningRef.current) {
       activeListeningRef.current.playbackRate = 0.7;
@@ -69,8 +77,9 @@ const Hero = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-[#2b2622]/10">
-          {/* Pillar 1: Active Listening (Left - Full Box Video - B&W by default, Color on Hover/Select) */}
+          {/* Pillar 1: Active Listening (Left - Full Box Video - B&W by default, Color on Scroll / Hover / Select) */}
           <div 
+            ref={pillar1ContainerRef}
             onClick={() => setIsPillar1Active(!isPillar1Active)}
             className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
           >
@@ -84,7 +93,7 @@ const Hero = () => {
                 muted
                 playsInline
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar1Active 
+                  isPillar1Active || isPillar1InView
                     ? 'grayscale-0 scale-105 brightness-100' 
                     : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
                 }`}
@@ -120,8 +129,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence (Right - Full Box Video - B&W by default, Color on Hover/Select) */}
+          {/* Pillar 3: Shared Presence (Right - Full Box Video - B&W by default, Color on Scroll / Hover / Select) */}
           <div 
+            ref={pillar3ContainerRef}
             onClick={() => setIsPillar3Active(!isPillar3Active)}
             className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-end group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
           >
@@ -135,7 +145,7 @@ const Hero = () => {
                 muted
                 playsInline
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  isPillar3Active 
+                  isPillar3Active || isPillar3InView
                     ? 'grayscale-0 scale-105 brightness-100' 
                     : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
                 }`}
