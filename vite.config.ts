@@ -9,5 +9,13 @@ export default defineConfig(({ command }) => ({
     react(),
   ],
   base: process.env.BASE_PATH || (command === 'build' ? '/nizhal-community/' : '/'),
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      }
+    }
+  }
 }))
 

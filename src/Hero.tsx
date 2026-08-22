@@ -1,4 +1,5 @@
 import heroBgUrl from './assets/hero-bg.png';
+import ctaBgUrl from './assets/cta-bg.png';
 import ImageGallery from './components/ImageGallery';
 
 const Hero = () => {
@@ -110,19 +111,32 @@ const Hero = () => {
       <ImageGallery />
 
       {/* 4. Final CTA */}
-      <section className="py-32 px-6 md:px-10 text-center flex flex-col items-center justify-center border-t border-[#2b2622]/5 bg-gradient-to-t from-[#f4efe8] to-[#fcfaf8]">
-        <h2 className="hero-title text-6xl md:text-8xl font-medium lowercase mb-8">
-          your story matters.
-        </h2>
-        <p className="text-xl text-[#2b2622]/60 lowercase max-w-xl mb-12">
-          step into a world where connection is intentional and every voice is valued.
-        </p>
-        <button
-          onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-          className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-lg shadow-[#522D21]/10 cursor-pointer"
-        >
-          become a member
-        </button>
+      <section className="relative py-36 md:py-44 px-6 md:px-10 text-center flex flex-col items-center justify-center border-t border-[#2b2622]/5 overflow-hidden bg-[#fcfaf8]">
+        {/* Background Image: Black & White Translucent (High Visibility) */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+          <img 
+            src={ctaBgUrl} 
+            alt="Nizhal Community Gathering" 
+            className="w-full h-full object-cover grayscale contrast-125 brightness-95 opacity-65"
+          />
+          {/* Subtle soft scrim overlay to keep text effortlessly readable */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/75 via-[#fcfaf8]/40 to-[#fcfaf8]/80 pointer-events-none" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <h2 className="hero-title text-6xl md:text-8xl font-medium lowercase mb-8 text-[#2b2622] drop-shadow-sm">
+            your story matters.
+          </h2>
+          <p className="text-xl md:text-2xl text-[#2b2622]/90 lowercase max-w-xl mb-12 leading-relaxed font-normal drop-shadow-sm">
+            step into a world where connection is intentional and every voice is valued.
+          </p>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
+            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-xl shadow-[#522D21]/15 cursor-pointer"
+          >
+            become a member
+          </button>
+        </div>
       </section>
     </div>
   );

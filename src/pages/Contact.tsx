@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bodyBgUrl from '../assets/body.png';
-import bodyMobileBgUrl from '../assets/body-mobile.png';
+import bodyMobileBgUrl from '../assets/body-mobile-2.png';
 
 const topics = [
   "general inquiry",
@@ -12,6 +12,8 @@ const topics = [
 const Contact = () => {
   const [selectedTopic, setSelectedTopic] = useState(topics[0]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,22 +40,58 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, phone: digitsOnly }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.phone.length !== 10) {
       alert("Please enter a valid 10-digit WhatsApp number.");
       return;
     }
-    setIsSubmitted(true);
+
+    setIsSending(true);
+    setErrorMessage('');
+
+    const endpoint = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/send-email';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          topic: selectedTopic,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message.');
+      }
+
+      setIsSubmitted(true);
+    } catch (err: any) {
+      console.error('Email send error:', err);
+      setErrorMessage(
+        err?.message || 'Failed to send message. Please ensure the backend server is running.'
+      );
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setErrorMessage('');
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-28 pb-16 px-6 md:px-12 lg:px-16 text-[#2b2622] flex flex-col justify-center overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
       {/* Decorative Background Artwork - Responsive for Desktop & Mobile */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <picture>
@@ -66,17 +104,14 @@ const Contact = () => {
         </picture>
       </div>
 
-      {/* Background Soft Glow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#ebe3d9]/30 blur-3xl pointer-events-none -z-10" />
-
-      <div className="max-w-6xl mx-auto w-full relative z-10">
+      <div className="max-w-5xl mx-auto my-auto w-full relative z-10">
         
         {/* Page Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-10"
+          className="text-center max-w-2xl mx-auto mb-8 md:mb-10"
         >
           <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-[#2b2622] lowercase mb-3">
             get in touch
@@ -279,42 +314,155 @@ const Contact = () => {
                     />
                   </div>
 
-                  {/* Centered Submit Button */}
-                  <motion.button 
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    type="submit"
-                    className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-sm sm:text-base font-semibold rounded-full px-10 py-3.5 hover:bg-[#f6dbe0] transition-all lowercase self-center mx-auto mt-2 shadow-lg shadow-[#522D21]/10 cursor-pointer"
-                  >
-                    send message
-                  </motion.button>
+                  {/* Error Alert */}
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200/60 text-xs text-red-700 leading-relaxed lowercase text-center">
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  {/* Centered Submit Button with Rich Interactive Feedback */}
+                  <div className="flex flex-col items-center gap-2 mt-3">
+                    <motion.button 
+                      whileHover={!isSending ? { scale: 1.04, y: -2 } : {}}
+                      whileTap={!isSending ? { scale: 0.94 } : {}}
+                      type="submit"
+                      disabled={isSending}
+                      className={`relative overflow-hidden bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-sm sm:text-base font-semibold rounded-full px-12 py-3.5 hover:bg-[#f8d7dc] active:bg-[#f3c5cd] transition-all duration-300 lowercase self-center mx-auto shadow-md shadow-[#522D21]/10 cursor-pointer flex items-center justify-center gap-3 select-none ${
+                        isSending ? 'opacity-90 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      {isSending ? (
+                        <>
+                          <motion.div 
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            className="w-5 h-5 border-2 border-[#522D21]/30 border-t-[#522D21] rounded-full"
+                          />
+                          <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="font-medium"
+                          >
+                            sending with warmth...
+                          </motion.span>
+                          <motion.span
+                            animate={{ x: [0, 4, 0], y: [0, -3, 0] }}
+                            transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                          >
+                            🕊️
+                          </motion.span>
+                        </>
+                      ) : (
+                        <>
+                          <span>send message</span>
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
                 </motion.form>
               ) : (
-                /* Success State */
+                /* Interactive Success State with Floating Particle Effects */
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center text-center py-12 px-4"
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ type: "spring", duration: 0.6, bounce: 0.3 }}
+                  className="flex flex-col items-center justify-center text-center py-10 px-4 relative"
                 >
-                  <div className="h-16 w-16 bg-[#25D366]/10 text-[#25D366] rounded-full flex items-center justify-center mb-6 border border-[#25D366]/20">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/>
-                    </svg>
-                  </div>
-                  <h3 className="hero-title text-2xl sm:text-3xl font-medium tracking-tight mb-2 lowercase text-[#2b2622]">
-                    your voice has reached us.
-                  </h3>
-                  <p className="text-[#2b2622]/70 text-sm leading-relaxed lowercase max-w-sm mb-6">
-                    thank you for sharing a piece of your world with nizhal community. our caretakers will get back to you shortly.
-                  </p>
-                  <button
-                    onClick={handleReset}
-                    className="text-xs text-[#2b2622]/60 hover:text-[#2b2622] underline underline-offset-4 lowercase transition-colors cursor-pointer"
+                  {/* Floating celebratory particles */}
+                  {[...Array(8)].map((_, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ 
+                        opacity: 1, 
+                        y: 0, 
+                        x: (i % 2 === 0 ? 1 : -1) * (i * 18),
+                        scale: 0.5 
+                      }}
+                      animate={{ 
+                        opacity: [1, 0.8, 0], 
+                        y: -80 - (i * 12), 
+                        scale: [0.5, 1.2, 0.8],
+                        rotate: (i % 2 === 0 ? 45 : -45) * i
+                      }}
+                      transition={{ 
+                        duration: 1.8 + (i * 0.15), 
+                        ease: "easeOut",
+                        delay: i * 0.08 
+                      }}
+                      className="absolute text-lg pointer-events-none select-none"
+                    >
+                      {['✨', '🌸', '💫', '🌿', '♡', '✨', '🕊️', '🌸'][i]}
+                    </motion.span>
+                  ))}
+
+                  {/* Animated Spring Success Badge */}
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -90 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 260, 
+                      damping: 18,
+                      delay: 0.15 
+                    }}
+                    className="h-20 w-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-5 border-2 border-emerald-200/80 shadow-lg shadow-emerald-600/10 relative"
                   >
-                    send another message
-                  </button>
+                    <motion.svg 
+                      className="w-10 h-10" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/>
+                    </motion.svg>
+                  </motion.div>
+
+                  {/* Success Title */}
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.4 }}
+                    className="hero-title text-2xl sm:text-3xl font-medium tracking-tight mb-2.5 lowercase text-[#2b2622]"
+                  >
+                    message sent with warmth ♡
+                  </motion.h3>
+
+                  {/* Success Message */}
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35, duration: 0.4 }}
+                    className="text-[#2b2622]/75 text-sm leading-relaxed lowercase max-w-sm mb-6 font-normal"
+                  >
+                    your voice has reached us safely. our caretakers at nizhal will read your words and get back to you shortly.
+                  </motion.p>
+
+                  {/* Action Buttons */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45, duration: 0.4 }}
+                    className="flex flex-col sm:flex-row items-center gap-3"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleReset}
+                      className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-xs sm:text-sm font-semibold rounded-full px-7 py-2.5 hover:bg-[#f6dbe0] transition-all lowercase shadow-sm cursor-pointer"
+                    >
+                      send another message
+                    </motion.button>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
