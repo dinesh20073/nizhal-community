@@ -101,7 +101,7 @@ const Contact = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Background Video: Full Mute, Looping, Slow 0.5x, Whitest Aesthetic matching About Page */}
+      {/* Background Video: Full Mute, Looping, Slow 0.5x, Ultra Whitest Luminous Aesthetic */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
         <video
           ref={videoRef}
@@ -114,10 +114,10 @@ const Contact = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="w-full h-full object-cover opacity-55 brightness-105"
+          className="w-full h-full object-cover opacity-35 brightness-110 contrast-95"
         />
-        {/* Soft, light and airy scrim overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/55 to-[#fcfaf8]/85 pointer-events-none" />
+        {/* Ultra-whitish soft scrim overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/95 via-[#fcfaf8]/75 to-[#fcfaf8]/95 pointer-events-none" />
       </div>
 
       <div className="max-w-5xl mx-auto my-auto w-full relative z-10">
