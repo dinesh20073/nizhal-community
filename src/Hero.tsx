@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
@@ -9,6 +9,18 @@ import MediaMarquee from './components/MediaMarquee';
 const Hero = () => {
   const [isPillar1Active, setIsPillar1Active] = useState(false);
   const [isPillar3Active, setIsPillar3Active] = useState(false);
+
+  const sharedPresenceRef = useRef<HTMLVideoElement>(null);
+  const activeListeningRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (sharedPresenceRef.current) {
+      sharedPresenceRef.current.playbackRate = 0.4;
+    }
+    if (activeListeningRef.current) {
+      activeListeningRef.current.playbackRate = 0.6;
+    }
+  }, []);
 
   return (
     <div className="w-full bg-[#fcfaf8] text-[#2b2622] selection:bg-[#2b2622]/30">
@@ -65,6 +77,7 @@ const Hero = () => {
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
+                ref={activeListeningRef}
                 src={activeListeningVideoUrl}
                 autoPlay
                 loop
@@ -129,6 +142,7 @@ const Hero = () => {
             {/* Full-Box Background Video */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
               <video
+                ref={sharedPresenceRef}
                 src={sharedPresenceVideoUrl}
                 autoPlay
                 loop
