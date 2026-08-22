@@ -23,7 +23,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (sharedPresenceRef.current) {
-      sharedPresenceRef.current.playbackRate = 0.38;
+      sharedPresenceRef.current.playbackRate = 0.55;
     }
     if (activeListeningRef.current) {
       activeListeningRef.current.playbackRate = 0.7;
