@@ -182,16 +182,16 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/75 via-[#fcfaf8]/40 to-[#fcfaf8]/80 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <h2 className="hero-title text-6xl md:text-8xl font-medium lowercase mb-8 text-[#2b2622] drop-shadow-sm">
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center -mt-6 md:-mt-10">
+          <h2 className="hero-title text-6xl md:text-8xl font-medium lowercase mb-6 text-[#2b2622] drop-shadow-sm">
             your story matters.
           </h2>
-          <p className="text-xl md:text-2xl text-[#2b2622]/90 lowercase max-w-xl mb-12 leading-relaxed font-normal drop-shadow-sm">
+          <p className="text-xl md:text-2xl text-[#2b2622]/90 lowercase max-w-xl mb-16 md:mb-20 leading-relaxed font-normal drop-shadow-sm">
             step into a world where connection is intentional and every voice is valued.
           </p>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-xl shadow-[#522D21]/15 cursor-pointer"
+            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-xl shadow-[#522D21]/15 cursor-pointer mt-2"
           >
             become a member
           </button>
