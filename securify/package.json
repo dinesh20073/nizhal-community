@@ -1,9 +1,0 @@
-{
-  "name": "securify-redirect",
-  "version": "1.0.0",
-  "description": "Auto-redirects npm commands to the root project",
-  "scripts": {
-    "dev": "cd .. && npm run dev",
-    "build": "cd .. && npm run build"
-  }
-}

@@ -1,15 +1,13 @@
 {
-  "name": "securify",
+  "name": "nizhal-community",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node -e \"const fs = require('fs'); fs.copyFileSync('dist/index.html', 'dist/404.html');\"",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -28,7 +26,6 @@
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
-    "gh-pages": "^6.3.0",
     "globals": "^17.6.0",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
