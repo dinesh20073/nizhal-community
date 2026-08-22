@@ -4,6 +4,7 @@ import ctaBgUrl from '../assets/cta-bg.png';
 import heroBgUrl from '../assets/hero-bg.png';
 import bodyBgUrl from '../assets/body.png';
 import bodyMobile2Url from '../assets/body-mobile-2.png';
+import activeListeningVideoUrl from '../assets/active-listening.mp4';
 
 export interface FrameItem {
   id: string | number;
@@ -11,6 +12,7 @@ export interface FrameItem {
   src: string;
   alt?: string;
   label?: string;
+  tilt?: string;
 }
 
 // 🎞️ Add or customize your photos and videos here!
@@ -20,94 +22,116 @@ export const mediaFrames: FrameItem[] = [
     type: 'video',
     src: aboutVideoUrl,
     alt: 'Nizhal Community Meetup',
-    label: 'stories & warmth'
+    label: 'stories & warmth',
+    tilt: '-rotate-2'
   },
   {
     id: 2,
     type: 'image',
     src: ctaBgUrl,
     alt: 'Night Beach Gathering',
-    label: 'community circle'
+    label: 'community circle',
+    tilt: 'rotate-3'
   },
   {
     id: 3,
-    type: 'image',
-    src: heroBgUrl,
-    alt: 'Connecting Moments',
-    label: 'human presence'
+    type: 'video',
+    src: activeListeningVideoUrl,
+    alt: 'Active Listening Gathering',
+    label: 'listening spaces',
+    tilt: '-rotate-1'
   },
   {
     id: 4,
-    type: 'video',
-    src: aboutVideoUrl,
-    alt: 'Quiet Space Together',
-    label: 'listening space'
+    type: 'image',
+    src: heroBgUrl,
+    alt: 'Connecting Moments',
+    label: 'human presence',
+    tilt: 'rotate-2'
   },
   {
     id: 5,
-    type: 'image',
-    src: bodyBgUrl,
-    alt: 'Serene Backdrop',
-    label: 'belonging'
+    type: 'video',
+    src: aboutVideoUrl,
+    alt: 'Quiet Space Together',
+    label: 'quiet moments',
+    tilt: '-rotate-3'
   },
   {
     id: 6,
     type: 'image',
+    src: bodyBgUrl,
+    alt: 'Serene Backdrop',
+    label: 'belonging',
+    tilt: 'rotate-1'
+  },
+  {
+    id: 7,
+    type: 'image',
     src: bodyMobile2Url,
     alt: 'Shared Conversations',
-    label: 'safe & open'
+    label: 'safe & open',
+    tilt: '-rotate-2'
   }
 ];
 
 const MediaMarquee = () => {
-  // Duplicate for seamless infinite marquee loop
+  // Duplicate for seamless infinite overlapping marquee loop
   const displayItems = [...mediaFrames, ...mediaFrames];
 
   return (
-    <section className="py-16 md:py-20 bg-[#f4efe8] border-y border-[#2b2622]/10 overflow-hidden relative select-none">
+    <section className="py-20 md:py-28 bg-[#f4efe8] border-y border-[#2b2622]/10 overflow-hidden relative select-none">
       {/* Subtle edge fade overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#f4efe8] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#f4efe8] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-r from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#f4efe8] via-[#f4efe8]/80 to-transparent z-20 pointer-events-none" />
 
-      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
-        <div className="flex gap-5 md:gap-8 items-center shrink-0 pr-5 md:pr-8">
-          {displayItems.map((item, index) => (
-            <div
-              key={`${item.id}-${index}`}
-              className="relative w-48 sm:w-56 md:w-64 h-64 sm:h-76 md:h-88 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/5 border border-[#2b2622]/15 shadow-sm group shrink-0 transition-transform duration-500 hover:scale-[1.03]"
-            >
-              {/* Media Content - Always Black and White & Full Mute */}
-              {item.type === 'video' ? (
-                <VideoFrame src={item.src} alt={item.alt} />
-              ) : (
-                <img
-                  src={item.src}
-                  alt={item.alt || 'Nizhal Community Frame'}
-                  className="w-full h-full object-cover grayscale contrast-120 brightness-95 transition-all duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              )}
+      {/* Infinite Overlapping Marquee Reel */}
+      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-6">
+        <div className="flex -space-x-10 sm:-space-x-14 md:-space-x-20 items-center shrink-0 pr-12 md:pr-20">
+          {displayItems.map((item, index) => {
+            const zIndex = 10 + (index % mediaFrames.length);
 
-              {/* Minimal Translucent Grain / Tint Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                style={{ zIndex }}
+                className={`relative w-52 sm:w-64 md:w-72 h-72 sm:h-88 md:h-96 rounded-2xl md:rounded-3xl overflow-hidden bg-[#2b2622]/10 border-4 md:border-[5px] border-[#f4efe8] shadow-xl md:shadow-2xl shadow-[#2b2622]/20 group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-110 hover:-translate-y-4 hover:rotate-0 cursor-pointer ${
+                  item.tilt || 'rotate-0'
+                }`}
+              >
+                {/* Media Content - Black and White Default & Full Mute */}
+                {item.type === 'video' ? (
+                  <VideoFrame src={item.src} alt={item.alt} />
+                ) : (
+                  <img
+                    src={item.src}
+                    alt={item.alt || 'Nizhal Community Frame'}
+                    className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+                    loading="lazy"
+                  />
+                )}
 
-              {/* Frame Label / Caption */}
-              {item.label && (
-                <div className="absolute bottom-3 left-3 right-3 z-10">
-                  <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/90 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-                    {item.label}
-                  </span>
-                </div>
-              )}
-            </div>
-          ))}
+                {/* Minimal Translucent Grain & Gradient Scrim */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent group-hover:from-black/50 transition-colors duration-500 pointer-events-none" />
+
+                {/* Frame Label / Caption Badge */}
+                {item.label && (
+                  <div className="absolute bottom-4 left-4 right-4 z-10">
+                    <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/95 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-sm">
+                      {item.label}
+                    </span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 };
 
-// Video Frame Helper Component (Ensures full mute, autoPlay, loop, slow motion)
+// Video Frame Helper Component (Ensures full mute, autoPlay, loop, slow motion, hover reveal)
 const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -126,7 +150,7 @@ const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
       muted
       playsInline
       aria-label={alt || 'Nizhal Video Frame'}
-      className="w-full h-full object-cover grayscale contrast-120 brightness-95 transition-all duration-700 group-hover:scale-105"
+      className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
     />
   );
 };
