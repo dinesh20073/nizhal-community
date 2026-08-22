@@ -2,17 +2,22 @@ import { useRef, useEffect } from 'react';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
+import safeSpacesVideoUrl from './assets/safe-spaces.mp4';
 import sharedPresenceVideoUrl from './assets/shared-presence.mp4';
 import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
   const sharedPresenceRef = useRef<HTMLVideoElement>(null);
+  const safeSpacesRef = useRef<HTMLVideoElement>(null);
   const activeListeningRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (sharedPresenceRef.current) {
       sharedPresenceRef.current.playbackRate = 0.55;
+    }
+    if (safeSpacesRef.current) {
+      safeSpacesRef.current.playbackRate = 0.6;
     }
     if (activeListeningRef.current) {
       activeListeningRef.current.playbackRate = 0.7;
@@ -101,17 +106,29 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 2: Safe Spaces */}
-          <div className="p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 hover:bg-[#ebe3d9]/30 transition-colors flex flex-col justify-between group min-h-[380px] md:min-h-[440px]">
-            <div>
-              <div className="flex items-center justify-between mb-10">
-                <div className="h-12 w-12 border border-[#2b2622]/15 bg-[#2b2622]/5 flex items-center justify-center group-hover:border-[#522D21] transition-colors">
-                  <svg className="w-5 h-5 text-[#2b2622]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                </div>
-                <span className="text-xs font-mono text-[#2b2622]/30 group-hover:text-[#522D21] transition-colors">02</span>
-              </div>
-              <h3 className="text-2xl font-medium mb-4 lowercase text-[#2b2622]">safe spaces</h3>
-              <p className="text-[#2b2622]/60 lowercase leading-relaxed text-sm md:text-base">
+          {/* Pillar 2: Safe Spaces (Middle - B&W by default, Color ONLY when cursor is over it) */}
+          <div className="relative p-8 md:p-12 lg:p-14 border-b md:border-b-0 md:border-r border-[#2b2622]/10 flex flex-col justify-end group overflow-hidden select-none min-h-[380px] md:min-h-[440px] cursor-pointer">
+            {/* Full-Box Background Video */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+              <video
+                ref={safeSpacesRef}
+                src={safeSpacesVideoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+              />
+              {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/20 group-hover:to-transparent" />
+            </div>
+
+            {/* Foreground Content */}
+            <div className="relative z-10 text-white">
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
+                safe spaces
+              </h3>
+              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
                 every interaction is moderated to ensure a toxic-free environment. you have full control over who you connect with.
               </p>
             </div>
