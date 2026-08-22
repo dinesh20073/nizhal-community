@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
 
           {/* Center Column: Nizhal Logo Seal */}
-          <div className="col-span-2 flex flex-col items-center justify-center -mt-2 sm:-mt-4">
+          <div className="col-span-2 flex flex-col items-center justify-center -mt-2 sm:-mt-4 md:translate-y-3 lg:translate-y-4">
             <Link to="/" className="group flex flex-col items-center cursor-pointer">
               {/* Circular Logo Frame */}
               <div className="w-11 h-11 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 sm:border-4 border-[#cda2a2] bg-[#f5e6e6]/95 p-0.5 sm:p-1 flex items-center justify-center shadow-md shadow-[#2b2622]/10 transition-transform duration-300 group-hover:scale-105 overflow-hidden backdrop-blur-sm">
@@ -41,7 +41,7 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-24 lg:mt-32 whitespace-nowrap">
+            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-20 lg:mt-24 whitespace-nowrap">
               © {currentYear} nizhal
             </span>
           </div>
