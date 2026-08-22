@@ -2,11 +2,13 @@ import { useState } from 'react';
 import heroBgUrl from './assets/hero-bg.png';
 import ctaBgUrl from './assets/cta-bg.png';
 import activeListeningVideoUrl from './assets/active-listening.mp4';
+import sharedPresenceVideoUrl from './assets/shared-presence.mp4';
 import ImageGallery from './components/ImageGallery';
 import MediaMarquee from './components/MediaMarquee';
 
 const Hero = () => {
   const [isPillar1Active, setIsPillar1Active] = useState(false);
+  const [isPillar3Active, setIsPillar3Active] = useState(false);
 
   return (
     <div className="w-full bg-[#fcfaf8] text-[#2b2622] selection:bg-[#2b2622]/30">
@@ -119,19 +121,51 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Pillar 3: Shared Presence */}
-          <div className="p-8 md:p-12 lg:p-14 hover:bg-[#ebe3d9]/30 transition-colors flex flex-col justify-between group">
-            <div>
-              <div className="flex items-center justify-between mb-10">
-                <div className="h-12 w-12 border border-[#2b2622]/15 bg-[#2b2622]/5 flex items-center justify-center group-hover:border-[#522D21] transition-colors">
-                  <svg className="w-5 h-5 text-[#2b2622]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          {/* Pillar 3: Shared Presence (Full Box Video - B&W by default, Color on Hover/Select) */}
+          <div 
+            onClick={() => setIsPillar3Active(!isPillar3Active)}
+            className="relative p-8 md:p-12 lg:p-14 flex flex-col justify-between group overflow-hidden cursor-pointer select-none min-h-[380px] md:min-h-[440px]"
+          >
+            {/* Full-Box Background Video */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+              <video
+                src={sharedPresenceVideoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                  isPillar3Active 
+                    ? 'grayscale-0 scale-105 brightness-100' 
+                    : 'grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105'
+                }`}
+              />
+              {/* Soft Scrim for effortless text readability in both B&W and Color mode */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60 transition-opacity duration-500 group-hover:from-black/75 group-hover:via-black/30 group-hover:to-black/50" />
+            </div>
+
+            {/* Foreground Content */}
+            <div className="relative z-10 flex flex-col justify-between h-full text-white">
+              <div>
+                <div className="flex items-center justify-between mb-8 md:mb-12">
+                  <div className="h-12 w-12 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center rounded-xl group-hover:border-white/50 transition-colors">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] uppercase tracking-wider font-mono text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/15 backdrop-blur-sm">
+                      {isPillar3Active ? '● color active' : 'hover / tap'}
+                    </span>
+                    <span className="text-xs font-mono text-white/50">03</span>
+                  </div>
                 </div>
-                <span className="text-xs font-mono text-[#2b2622]/30 group-hover:text-[#522D21] transition-colors">03</span>
+
+                <h3 className="text-2xl md:text-3xl font-medium mb-4 lowercase text-white tracking-tight">
+                  shared presence
+                </h3>
+                <p className="text-white/80 lowercase leading-relaxed text-sm md:text-base max-w-sm">
+                  join silent reading rooms, ambient study sessions, or open mic nights. sometimes simply being together is enough.
+                </p>
               </div>
-              <h3 className="text-2xl font-medium mb-4 lowercase text-[#2b2622]">shared presence</h3>
-              <p className="text-[#2b2622]/60 lowercase leading-relaxed text-sm md:text-base">
-                join silent reading rooms, ambient study sessions, or open mic nights. sometimes simply being together is enough.
-              </p>
             </div>
           </div>
         </div>
