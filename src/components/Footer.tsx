@@ -59,7 +59,7 @@ const Footer = () => {
                 href="https://www.instagram.com/nizhal.community/" 
                 target="_blank" 
                 rel="noreferrer"
-                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#d62976] text-white flex items-center justify-center hover:bg-[#c12268] hover:scale-110 transition-all shadow-sm"
                 aria-label="Instagram"
               >
                 <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" viewBox="0 0 16 16" fill="currentColor">
@@ -72,7 +72,7 @@ const Footer = () => {
                 href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
                 target="_blank" 
                 rel="noreferrer"
-                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20ba5a] hover:scale-110 transition-all shadow-sm"
                 aria-label="WhatsApp"
               >
                 <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" viewBox="0 0 16 16" fill="currentColor">
@@ -87,7 +87,7 @@ const Footer = () => {
                   e.preventDefault();
                   window.location.href = "mailto:nizhal.community@gmail.com?subject=Connecting%20with%20Nizhal%20Community";
                 }}
-                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#2b2622] text-white flex items-center justify-center hover:bg-[#522D21] transition-colors shadow-sm"
+                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#522D21] text-white flex items-center justify-center hover:bg-[#3f2218] hover:scale-110 transition-all shadow-sm"
                 aria-label="Email"
               >
                 <Mail className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
