@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import bodyBgUrl from '../assets/body.png';
+import bodyMobileBgUrl from '../assets/body-mobile.png';
 import aboutVideoUrl from '../assets/about-bg.mp4';
 
 const About = () => {
@@ -15,8 +17,19 @@ const About = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-[#fcfaf8] pt-32 pb-20 px-6 md:px-10 text-[#2b2622] flex flex-col justify-center overflow-hidden">
-      {/* Background Video: Full Mute, Looping, Slow 0.5x */}
+      {/* Lighter, Warm & Clean Background with Signature Artwork + Subtle Video */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+        {/* Layer 1: Crisp Warm Signature Artwork */}
+        <picture className="absolute inset-0 w-full h-full">
+          <source media="(max-width: 768px)" srcSet={bodyMobileBgUrl} />
+          <img 
+            src={bodyBgUrl} 
+            alt="Nizhal About Background Artwork" 
+            className="w-full h-full object-cover md:object-fill opacity-90 brightness-105"
+          />
+        </picture>
+
+        {/* Layer 2: Subtle Ambient Video Motion */}
         <video
           ref={videoRef}
           src={aboutVideoUrl}
@@ -28,10 +41,11 @@ const About = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="w-full h-full object-cover opacity-55 brightness-105"
+          className="absolute inset-0 w-full h-full object-cover opacity-25 brightness-115 contrast-95 mix-blend-multiply"
         />
-        {/* Soft, light and airy scrim overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/85 via-[#fcfaf8]/55 to-[#fcfaf8]/85 pointer-events-none" />
+
+        {/* Layer 3: Ultra-light Soft Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfaf8]/50 via-transparent to-[#fcfaf8]/50 pointer-events-none" />
       </div>
 
       <div className="max-w-4xl mx-auto my-auto w-full text-center relative z-10 py-10 md:py-14">
