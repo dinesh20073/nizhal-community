@@ -3,12 +3,12 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
   ],
-  base: process.env.BASE_PATH || (process.env.NETLIFY ? '/' : (command === 'build' ? '/nizhal-community/' : '/')),
+  base: process.env.BASE_PATH || '/',
   server: {
     proxy: {
       '/api': {
@@ -17,5 +17,5 @@ export default defineConfig(({ command }) => ({
       }
     }
   }
-}))
+})
 
