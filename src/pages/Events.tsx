@@ -229,18 +229,14 @@ const Events = () => {
             const isVideo = item.type === 'video-polaroid';
 
             return (
-              <motion.a
+              <motion.div
                 key={item.id}
-                href={item.instagramLink}
-                target="_blank"
-                rel="noreferrer"
                 initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -2 : 2 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 whileHover={{ scale: 1.04, rotate: 0, zIndex: 30 }}
                 transition={{ duration: 0.3 }}
-                className={`relative group cursor-pointer shrink-0 transition-all block ${item.rotation} ${item.widthClass}`}
-                title={`Open ${item.title} on Instagram`}
+                className={`relative group shrink-0 transition-all block ${item.rotation} ${item.widthClass}`}
               >
                 {/* Washi Tape / Paper Tape Accents */}
                 {item.tapePosition === 'top' && (
@@ -271,18 +267,13 @@ const Events = () => {
                     </div>
 
                     {/* Handwritten Polaroid Caption */}
-                    <div className="px-1 pt-1 flex items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-xs uppercase tracking-wider text-[#2b2622]/60 font-semibold mb-0.5">
-                          {item.title}
-                        </h3>
-                        <p className="font-['Caveat'] text-[#8c3a3a] text-2xl font-bold leading-tight">
-                          {item.handwrittenNote}
-                        </p>
-                      </div>
-                      <span className="text-[10px] text-[#522D21]/50 group-hover:text-[#522D21] transition-colors shrink-0 mt-1">
-                        ↗
-                      </span>
+                    <div className="px-1 pt-1">
+                      <h3 className="text-xs uppercase tracking-wider text-[#2b2622]/60 font-semibold mb-0.5">
+                        {item.title}
+                      </h3>
+                      <p className="font-['Caveat'] text-[#8c3a3a] text-2xl font-bold leading-tight">
+                        {item.handwrittenNote}
+                      </p>
                     </div>
                   </div>
                 ) : (
@@ -294,7 +285,7 @@ const Events = () => {
                     </p>
                   </div>
                 )}
-              </motion.a>
+              </motion.div>
             );
           })}
         </div>
