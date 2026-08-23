@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
 import logoUrl from '../assets/logo.jpg';
-import footerBannerImg from '../assets/ChatGPT Image Aug 22, 2026, 11_02_05 AM.png';
+import footerBannerImg from '../assets/footer-bg.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
