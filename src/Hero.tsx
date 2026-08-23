@@ -60,14 +60,14 @@ const Hero = () => {
 
         {/* Foreground 3 Words Alone in White */}
         <div className="relative h-full w-full pointer-events-none z-10">
-          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] left-6 md:left-14 top-[15%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-            listen
+          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] left-6 md:left-14 top-[15%] select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+            Listen
           </h1>
-          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] right-6 md:right-14 top-[15%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-            connect
+          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] right-6 md:right-14 top-[15%] select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+            Connect
           </h1>
-          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] left-1/2 -translate-x-1/2 bottom-[10%] lowercase select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-center whitespace-nowrap">
-            belong
+          <h1 className="hero-title absolute text-white font-medium text-[11vw] md:text-[8.5vw] left-1/2 -translate-x-1/2 bottom-[10%] select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-center whitespace-nowrap">
+            Belong
           </h1>
         </div>
       </section>
@@ -77,10 +77,10 @@ const Hero = () => {
         {/* Title Heading - Centered */}
         <div className="px-6 md:px-14 pt-20 pb-8 max-w-4xl mx-auto text-center">
           <span className="text-xs uppercase tracking-widest text-[#2b2622]/40 font-medium block mb-4">
-            our core pillars
+            Our Core Pillars
           </span>
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight lowercase">
-            a different kind of network.
+          <h2 className="text-4xl md:text-6xl font-medium tracking-tight">
+            A different kind of network.
           </h2>
         </div>
 
@@ -91,8 +91,8 @@ const Hero = () => {
 
         {/* Subtitle / Paragraph description placed below the carousel - Centered */}
         <div className="px-6 md:px-14 pt-8 pb-16 max-w-3xl mx-auto text-center">
-          <p className="text-lg md:text-xl text-[#2b2622]/60 lowercase leading-relaxed">
-            we strip away the noise of modern social platforms. here, you won't find algorithms or endless scrolls—just genuine spaces designed for human connection.
+          <p className="text-lg md:text-xl text-[#2b2622]/60 leading-relaxed">
+            We strip away the noise of modern social platforms. Here, you won't find algorithms or endless scrolls—just genuine spaces designed for human connection.
           </p>
         </div>
 
@@ -127,11 +127,11 @@ const Hero = () => {
 
             {/* Foreground Content */}
             <div className="relative z-10 text-white">
-              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
-                active listening
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 text-white tracking-tight">
+                Active Listening
               </h3>
-              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
-                speak without fear of judgment. our community is built on the foundation of hearing each other out, deeply and respectfully.
+              <p className="text-white/85 leading-relaxed text-sm md:text-base max-w-sm font-normal">
+                Speak without fear of judgment. Our community is built on the foundation of hearing each other out, deeply and respectfully.
               </p>
             </div>
           </div>
@@ -166,11 +166,11 @@ const Hero = () => {
 
             {/* Foreground Content */}
             <div className="relative z-10 text-white">
-              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
-                safe spaces
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 text-white tracking-tight">
+                Safe Spaces
               </h3>
-              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
-                every interaction is moderated to ensure a toxic-free environment. you have full control over who you connect with.
+              <p className="text-white/85 leading-relaxed text-sm md:text-base max-w-sm font-normal">
+                Every interaction is moderated to ensure a toxic-free environment. You have full control over who you connect with.
               </p>
             </div>
           </div>
@@ -205,11 +205,11 @@ const Hero = () => {
 
             {/* Foreground Content */}
             <div className="relative z-10 text-white">
-              <h3 className="text-2xl md:text-3xl font-medium mb-3 lowercase text-white tracking-tight">
-                shared presence
+              <h3 className="text-2xl md:text-3xl font-medium mb-3 text-white tracking-tight">
+                Shared Presence
               </h3>
-              <p className="text-white/85 lowercase leading-relaxed text-sm md:text-base max-w-sm font-normal">
-                join silent reading rooms, ambient study sessions, or open mic nights. sometimes simply being together is enough.
+              <p className="text-white/85 leading-relaxed text-sm md:text-base max-w-sm font-normal">
+                Join silent reading rooms, ambient study sessions, or open mic nights. Sometimes simply being together is enough.
               </p>
             </div>
           </div>
@@ -230,17 +230,17 @@ const Hero = () => {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center -mt-6 md:-mt-10">
-          <h2 className="hero-title text-6xl md:text-8xl font-medium lowercase mb-6 text-[#2b2622] drop-shadow-sm">
-            your story matters.
+          <h2 className="hero-title text-6xl md:text-8xl font-medium mb-6 text-[#2b2622] drop-shadow-sm">
+            Your story matters.
           </h2>
-          <p className="text-xl md:text-2xl text-[#2b2622]/90 lowercase max-w-xl mb-16 md:mb-20 leading-relaxed font-normal drop-shadow-sm">
-            step into a world where connection is intentional and every voice is valued.
+          <p className="text-xl md:text-2xl text-[#2b2622]/90 max-w-xl mb-16 md:mb-20 leading-relaxed font-normal drop-shadow-sm">
+            Step into a world where connection is intentional and every voice is valued.
           </p>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all lowercase shadow-xl shadow-[#522D21]/15 cursor-pointer mt-2"
+            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all shadow-xl shadow-[#522D21]/15 cursor-pointer mt-2"
           >
-            become a member
+            Become a Member
           </button>
         </div>
       </section>

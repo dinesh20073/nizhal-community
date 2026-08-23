@@ -5,9 +5,9 @@ import bodyMobileBgUrl from '../assets/body-mobile-2.png';
 import contactVideoUrl from '../assets/contact-bg.mp4';
 
 const topics = [
-  "general inquiry",
-  "volunteer",
-  "collaborate"
+  "General Inquiry",
+  "Volunteer",
+  "Collaborate"
 ];
 
 const Contact = () => {
@@ -34,7 +34,7 @@ const Contact = () => {
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    if (selectedTopic === 'collaborate') {
+    if (selectedTopic.toLowerCase() === 'collaborate') {
       // Allow letters, numbers, spaces, and common org chars
       const cleaned = val.replace(/[^a-zA-Z0-9\s&.,'-]/g, '');
       setFormData((prev) => ({ ...prev, name: cleaned }));
@@ -143,11 +143,11 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-8 md:mb-10"
         >
-          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-[#2b2622] lowercase mb-3">
-            get in touch
+          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-[#2b2622] mb-3">
+            Get in Touch
           </h1>
-          <p className="text-sm sm:text-base text-[#2b2622]/70 lowercase leading-relaxed">
-            we’d love to hear from you. drop us a message, share your thoughts, or connect directly with our community.
+          <p className="text-sm sm:text-base text-[#2b2622]/70 leading-relaxed">
+            We’d love to hear from you. Drop us a message, share your thoughts, or connect directly with our community.
           </p>
         </motion.div>
 
@@ -174,8 +174,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/60 lowercase">follow our journey</span>
-                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#d62976] transition-colors">@nizhal.community</span>
+                <span className="text-xs text-[#2b2622]/60">Follow our journey</span>
+                <span className="text-base font-semibold text-[#2b2622] group-hover:text-[#d62976] transition-colors">@nizhal.community</span>
               </div>
             </a>
 
@@ -192,8 +192,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/60 lowercase">whatsapp group</span>
-                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#25D366] transition-colors">join nizhal circle</span>
+                <span className="text-xs text-[#2b2622]/60">WhatsApp Group</span>
+                <span className="text-base font-semibold text-[#2b2622] group-hover:text-[#25D366] transition-colors">Join Nizhal Circle</span>
               </div>
             </a>
 
@@ -213,18 +213,18 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xs text-[#2b2622]/60 lowercase">email us directly</span>
-                <span className="text-base font-semibold text-[#2b2622] lowercase group-hover:text-[#522D21] transition-colors">nizhal.community@gmail.com</span>
+                <span className="text-xs text-[#2b2622]/60">Email us directly</span>
+                <span className="text-base font-semibold text-[#2b2622] group-hover:text-[#522D21] transition-colors">nizhal.community@gmail.com</span>
               </div>
             </a>
 
             {/* Warm Community Note (Fills remaining height) */}
             <div className="flex-1 flex flex-col justify-center p-6 sm:p-7 rounded-2xl bg-[#ede4d8] border border-[#2b2622]/15 shadow-sm text-left">
               <span className="font-['Caveat'] text-[#8c3a3a] text-2xl sm:text-3xl font-bold block mb-2">
-                a safe space to talk ♡
+                A safe space to talk ♡
               </span>
-              <p className="text-xs sm:text-sm text-[#2b2622]/75 lowercase leading-relaxed">
-                every question shared with us is treated with genuine warmth, confidentiality, and deep care. we typically respond within 24 hours.
+              <p className="text-xs sm:text-sm text-[#2b2622]/75 leading-relaxed">
+                Every question shared with us is treated with genuine warmth, confidentiality, and deep care. We typically respond within 24 hours.
               </p>
             </div>
           </motion.div>
@@ -249,8 +249,8 @@ const Contact = () => {
                 >
                   {/* Topic Selector Pills - 3 Clean Equal Columns Without Scroll */}
                   <div>
-                    <label className="text-xs text-[#2b2622]/60 font-medium lowercase block mb-2">
-                      what is on your mind?
+                    <label className="text-xs text-[#2b2622]/60 font-medium block mb-2">
+                      What is on your mind?
                     </label>
                     <div className="grid grid-cols-3 gap-2 w-full">
                       {topics.map((topic) => (
@@ -258,7 +258,7 @@ const Contact = () => {
                           key={topic}
                           type="button"
                           onClick={() => setSelectedTopic(topic)}
-                          className={`w-full py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all duration-200 lowercase cursor-pointer truncate ${
+                          className={`w-full py-2 px-1 text-center rounded-xl text-[11px] sm:text-xs transition-all duration-200 cursor-pointer truncate ${
                             selectedTopic === topic
                               ? 'bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold shadow-sm'
                               : 'bg-[#dfd3c3] text-[#2b2622]/80 hover:bg-[#d6c7b4] border border-[#2b2622]/15'
@@ -273,8 +273,8 @@ const Contact = () => {
                   {/* Name / Org Name & Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-[#2b2622]/60 font-medium lowercase block mb-1.5">
-                        {selectedTopic === 'collaborate' ? 'your organization name *' : 'your name *'}
+                      <label className="text-xs text-[#2b2622]/60 font-medium block mb-1.5">
+                        {selectedTopic.toLowerCase() === 'collaborate' ? 'Your organization name *' : 'Your name *'}
                       </label>
                       <input 
                         type="text" 
@@ -283,13 +283,13 @@ const Contact = () => {
                         maxLength={60}
                         value={formData.name}
                         onChange={handleNameChange}
-                        placeholder="how should we call you?" 
-                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                        placeholder="How should we call you?" 
+                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all placeholder:text-[#2b2622]/30 text-[#2b2622]"
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-[#2b2622]/60 font-medium lowercase block mb-1.5">
-                        your email *
+                      <label className="text-xs text-[#2b2622]/60 font-medium block mb-1.5">
+                        Your email *
                       </label>
                       <input 
                         type="email" 
@@ -297,7 +297,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@domain.com" 
-                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                        className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all placeholder:text-[#2b2622]/30 text-[#2b2622]"
                       />
                     </div>
                   </div>
@@ -305,10 +305,10 @@ const Contact = () => {
                   {/* WhatsApp Number (Mandatory - 10 Digits Only) */}
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-xs text-[#2b2622]/60 font-medium lowercase">
-                        whatsapp number *
+                      <label className="text-xs text-[#2b2622]/60 font-medium">
+                        WhatsApp number *
                       </label>
-                      <span className="text-[10px] text-[#2b2622]/40 lowercase">
+                      <span className="text-[10px] text-[#2b2622]/40">
                         {formData.phone.length}/10 digits
                       </span>
                     </div>
@@ -322,15 +322,15 @@ const Contact = () => {
                       title="Please enter a valid 10-digit WhatsApp number"
                       value={formData.phone}
                       onChange={handlePhoneChange}
-                      placeholder="enter your 10 digits whatsapp number" 
-                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 text-[#2b2622]"
+                      placeholder="Enter your 10 digits WhatsApp number" 
+                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all placeholder:text-[#2b2622]/30 text-[#2b2622]"
                     />
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className="text-xs text-[#2b2622]/60 font-medium lowercase block mb-1.5">
-                      your message *
+                    <label className="text-xs text-[#2b2622]/60 font-medium block mb-1.5">
+                      Your message *
                     </label>
                     <textarea 
                       required
@@ -339,14 +339,14 @@ const Contact = () => {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="share whatever is in your heart..." 
-                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all lowercase placeholder:text-[#2b2622]/30 resize-none text-[#2b2622]"
+                      placeholder="Share whatever is in your heart..." 
+                      className="w-full bg-[#fcfaf8] border border-[#2b2622]/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#522D21] focus:ring-2 focus:ring-[#522D21]/10 transition-all placeholder:text-[#2b2622]/30 resize-none text-[#2b2622]"
                     />
                   </div>
 
                   {/* Error Alert */}
                   {errorMessage && (
-                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200/60 text-xs text-red-700 leading-relaxed lowercase text-center">
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200/60 text-xs text-red-700 leading-relaxed text-center">
                       {errorMessage}
                     </div>
                   )}
@@ -358,7 +358,7 @@ const Contact = () => {
                       whileTap={!isSending ? { scale: 0.94 } : {}}
                       type="submit"
                       disabled={isSending}
-                      className={`relative overflow-hidden bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-sm sm:text-base font-semibold rounded-full px-12 py-3.5 hover:bg-[#f8d7dc] active:bg-[#f3c5cd] transition-all duration-300 lowercase self-center mx-auto shadow-md shadow-[#522D21]/10 cursor-pointer flex items-center justify-center gap-3 select-none ${
+                      className={`relative overflow-hidden bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-sm sm:text-base font-semibold rounded-full px-12 py-3.5 hover:bg-[#f8d7dc] active:bg-[#f3c5cd] transition-all duration-300 self-center mx-auto shadow-md shadow-[#522D21]/10 cursor-pointer flex items-center justify-center gap-3 select-none ${
                         isSending ? 'opacity-90 cursor-not-allowed' : ''
                       }`}
                     >
@@ -374,7 +374,7 @@ const Contact = () => {
                             animate={{ opacity: 1 }}
                             className="font-medium"
                           >
-                            sending with warmth...
+                            Sending with warmth...
                           </motion.span>
                           <motion.span
                             animate={{ x: [0, 4, 0], y: [0, -3, 0] }}
@@ -385,7 +385,7 @@ const Contact = () => {
                         </>
                       ) : (
                         <>
-                          <span>send message</span>
+                          <span>Send Message</span>
                           <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -462,9 +462,9 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.25, duration: 0.4 }}
-                    className="hero-title text-2xl sm:text-3xl font-medium tracking-tight mb-2.5 lowercase text-[#2b2622]"
+                    className="hero-title text-2xl sm:text-3xl font-medium tracking-tight mb-2.5 text-[#2b2622]"
                   >
-                    message sent with warmth ♡
+                    Message sent with warmth ♡
                   </motion.h3>
 
                   {/* Success Message */}
@@ -472,9 +472,9 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.35, duration: 0.4 }}
-                    className="text-[#2b2622]/75 text-sm leading-relaxed lowercase max-w-sm mb-6 font-normal"
+                    className="text-[#2b2622]/75 text-sm leading-relaxed max-w-sm mb-6 font-normal"
                   >
-                    your voice has reached us safely. our caretakers at nizhal will read your words and get back to you shortly.
+                    Your voice has reached us safely. Our caretakers at Nizhal will read your words and get back to you shortly.
                   </motion.p>
 
                   {/* Action Buttons */}
@@ -488,9 +488,9 @@ const Contact = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleReset}
-                      className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-xs sm:text-sm font-semibold rounded-full px-7 py-2.5 hover:bg-[#f6dbe0] transition-all lowercase shadow-sm cursor-pointer"
+                      className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-xs sm:text-sm font-semibold rounded-full px-7 py-2.5 hover:bg-[#f6dbe0] transition-all shadow-sm cursor-pointer"
                     >
-                      send another message
+                      Send another message
                     </motion.button>
                   </motion.div>
                 </motion.div>

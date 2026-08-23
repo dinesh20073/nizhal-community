@@ -17,19 +17,19 @@ interface PostItem {
 }
 
 const INSTA_POSTS: PostItem[] = [
-  { id: 1, type: 'video', src: activeListeningVideoUrl, caption: 'active listening circle. speaking without judgment 🌿', likes: '428', isReel: true },
-  { id: 2, type: 'image', src: ctaBgUrl, caption: 'night beach gathering with the circle of warmth 🌊', likes: '892' },
-  { id: 3, type: 'video', src: sharedPresenceVideoUrl, caption: 'silent presence & ambient study rooms ✨', likes: '614', isReel: true },
-  { id: 4, type: 'image', src: heroBgUrl, caption: 'listening, connecting, belonging 💫', likes: '1.1k' },
-  { id: 5, type: 'video', src: safeSpacesVideoUrl, caption: 'safe & toxic-free spaces for genuine human connection 🤝', likes: '753', isReel: true },
-  { id: 6, type: 'image', src: bodyBgUrl, caption: 'moments of belonging and shared laughter 💛', likes: '940' },
+  { id: 1, type: 'video', src: activeListeningVideoUrl, caption: 'Active listening circle. Speaking without judgment 🌿', likes: '428', isReel: true },
+  { id: 2, type: 'image', src: ctaBgUrl, caption: 'Night beach gathering with the circle of warmth 🌊', likes: '892' },
+  { id: 3, type: 'video', src: sharedPresenceVideoUrl, caption: 'Silent presence & ambient study rooms ✨', likes: '614', isReel: true },
+  { id: 4, type: 'image', src: heroBgUrl, caption: 'Listening, connecting, belonging 💫', likes: '1.1k' },
+  { id: 5, type: 'video', src: safeSpacesVideoUrl, caption: 'Safe & toxic-free spaces for genuine human connection 🤝', likes: '753', isReel: true },
+  { id: 6, type: 'image', src: bodyBgUrl, caption: 'Moments of belonging and shared laughter 💛', likes: '940' },
 ];
 
 const HIGHLIGHTS = [
-  { id: 1, title: 'meetups', img: ctaBgUrl },
-  { id: 2, title: 'stories', img: heroBgUrl },
-  { id: 3, title: 'beach', img: bodyBgUrl },
-  { id: 4, title: 'presence', img: logoImg },
+  { id: 1, title: 'Meetups', img: ctaBgUrl },
+  { id: 2, title: 'Stories', img: heroBgUrl },
+  { id: 3, title: 'Beach', img: bodyBgUrl },
+  { id: 4, title: 'Presence', img: logoImg },
 ];
 
 const ImageGallery = () => {
@@ -44,25 +44,25 @@ const ImageGallery = () => {
               live instagram feed
             </span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight lowercase mb-3">
-            on the gram.
+          <h2 className="text-4xl md:text-6xl font-medium tracking-tight mb-3">
+            On the gram.
           </h2>
-          <p className="text-lg text-[#2b2622]/60 lowercase max-w-md leading-relaxed">
-            glimpses into our community, safe spaces, and shared moments.
+          <p className="text-lg text-[#2b2622]/60 max-w-md leading-relaxed">
+            Glimpses into our community, safe spaces, and shared moments.
           </p>
         </div>
         <a 
           href="https://www.instagram.com/nizhal.community/" 
           target="_blank" 
           rel="noreferrer"
-          className="inline-flex items-center gap-2.5 text-sm lowercase font-medium border border-[#2b2622]/15 bg-[#2b2622]/5 text-[#2b2622] rounded-full px-7 py-3.5 hover:bg-[#522D21] hover:border-[#522D21] hover:text-white transition-all cursor-pointer shadow-sm hover:scale-105"
+          className="inline-flex items-center gap-2.5 text-sm font-medium border border-[#2b2622]/15 bg-[#2b2622]/5 text-[#2b2622] rounded-full px-7 py-3.5 hover:bg-[#522D21] hover:border-[#522D21] hover:text-white transition-all cursor-pointer shadow-sm hover:scale-105"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
-          follow @nizhal.community
+          Follow @nizhal.community
         </a>
       </div>
 
@@ -143,27 +143,27 @@ const ImageGallery = () => {
                 <div className="flex-1 flex justify-around text-center">
                   <div>
                     <span className="block font-bold text-xs sm:text-sm text-[#1a1a1a]">18</span>
-                    <span className="text-[10px] text-[#1a1a1a]/60 font-medium">posts</span>
+                    <span className="text-[10px] text-[#1a1a1a]/60 font-medium">Posts</span>
                   </div>
                   <div>
                     <span className="block font-bold text-xs sm:text-sm text-[#1a1a1a]">2,410</span>
                     <span className="text-[10px] text-rose-600 font-semibold flex items-center justify-center gap-0.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping inline-block mr-0.5" />
-                      followers
+                      Followers
                     </span>
                   </div>
                   <div>
                     <span className="block font-bold text-xs sm:text-sm text-[#1a1a1a]">142</span>
-                    <span className="text-[10px] text-[#1a1a1a]/60 font-medium">following</span>
+                    <span className="text-[10px] text-[#1a1a1a]/60 font-medium">Following</span>
                   </div>
                 </div>
               </div>
 
               {/* Bio Details */}
               <div className="text-[11px] leading-tight mb-2.5 text-[#1a1a1a]">
-                <h3 className="font-bold text-xs mb-0.5">nizhal • circle of warmth</h3>
-                <p className="text-[#1a1a1a]/85 font-normal">a quiet space beside you 🌿</p>
-                <p className="text-[#1a1a1a]/85 font-normal">human stories • active listening • safe space</p>
+                <h3 className="font-bold text-xs mb-0.5">Nizhal • Circle of Warmth</h3>
+                <p className="text-[#1a1a1a]/85 font-normal">A quiet space beside you 🌿</p>
+                <p className="text-[#1a1a1a]/85 font-normal">Human stories • Active listening • Safe space</p>
                 <span className="text-blue-600 font-medium block mt-0.5 text-[10px]">
                   🔗 nizhal.community
                 </span>
@@ -186,7 +186,7 @@ const ImageGallery = () => {
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 border border-black/20 group-hover:border-rose-500 transition-colors">
                       <img src={h.img} alt={h.title} className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" />
                     </div>
-                    <span className="text-[9px] text-[#1a1a1a]/70 lowercase font-medium">{h.title}</span>
+                    <span className="text-[9px] text-[#1a1a1a]/70 font-medium">{h.title}</span>
                   </div>
                 ))}
               </div>

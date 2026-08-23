@@ -55,9 +55,9 @@ const InstagramFeed = () => {
           href="https://www.instagram.com/nizhal.community/" 
           target="_blank" 
           rel="noreferrer"
-          className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 font-semibold px-8 py-4 rounded-full hover:bg-[#f6dbe0] transition-all lowercase shadow-md shadow-[#522D21]/10 cursor-pointer"
+          className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 font-semibold px-8 py-4 rounded-full hover:bg-[#f6dbe0] transition-all shadow-md shadow-[#522D21]/10 cursor-pointer"
         >
-          view more on instagram
+          View More on Instagram
         </a>
       </div>
     </section>

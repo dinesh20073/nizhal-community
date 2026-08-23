@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = ["home", "about", "events", "contact"];
+  const links = ["Home", "About", "Events", "Contact"];
 
   return (
     <>
@@ -15,19 +15,19 @@ const Navbar = () => {
         {/* Left pill */}
         <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 bg-[#fcfaf8]/90 backdrop-blur-xl border border-[#2b2622]/15 shadow-md shadow-[#403a35]/10 rounded-full pl-3 pr-6 py-2 relative z-50 transition-all duration-300 hover:bg-[#fcfaf8]">
           <img src={logoUrl} alt="Nizhal Logo" className="h-7 w-7 rounded-[25%] object-cover" />
-          <span className="text-[#2b2622] text-sm font-semibold tracking-wide lowercase">nizhal community</span>
+          <span className="text-[#2b2622] text-sm font-semibold tracking-wide">Nizhal Community</span>
         </Link>
 
         {/* Center pill (Desktop) - High Visibility Glass Effect */}
         <div className="hidden md:flex items-center gap-1 bg-[#fcfaf8]/90 backdrop-blur-xl border border-[#2b2622]/15 shadow-md shadow-[#403a35]/10 rounded-full p-1.5 relative">
           {links.map((item) => {
-            const path = item === 'home' ? '/' : `/${item}`;
+            const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
             const isActive = location.pathname === path;
             return (
               <Link
                 key={item}
                 to={path}
-                className={`relative px-5 py-2 rounded-full text-sm lowercase transition-all duration-200 ease-out z-10 font-medium ${
+                className={`relative px-5 py-2 rounded-full text-sm transition-all duration-200 ease-out z-10 font-medium ${
                   isActive 
                     ? 'text-[#2b2622] font-semibold' 
                     : 'text-[#2b2622]/75 hover:text-[#2b2622] hover:bg-[#2b2622]/5'
@@ -49,9 +49,9 @@ const Navbar = () => {
         {/* Right button (Desktop) */}
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
-          className="hidden md:block bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-sm font-semibold rounded-full px-6 py-3 hover:scale-105 hover:bg-[#f6dbe0] transition-all duration-300 lowercase relative z-50 shadow-md shadow-[#522D21]/10 cursor-pointer"
+          className="hidden md:block bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-sm font-semibold rounded-full px-6 py-3 hover:scale-105 hover:bg-[#f6dbe0] transition-all duration-300 relative z-50 shadow-md shadow-[#522D21]/10 cursor-pointer"
         >
-          join community
+          Join Community
         </button>
 
         {/* Mobile Menu Toggle */}
@@ -85,14 +85,14 @@ const Navbar = () => {
             className="fixed inset-0 z-40 bg-[#fcfaf8]/80 backdrop-blur-2xl saturate-150 flex flex-col items-center justify-center gap-8"
           >
             {links.map((item) => {
-              const path = item === 'home' ? '/' : `/${item}`;
+              const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
               const isActive = location.pathname === path;
               return (
                 <div key={item}>
                   <Link
                     to={path}
                     onClick={() => setIsOpen(false)}
-                    className={`text-5xl font-medium tracking-tight lowercase transition-colors duration-200 ${isActive ? 'text-[#2b2622] font-semibold' : 'text-[#2b2622]/50 hover:text-[#2b2622]'}`}
+                    className={`text-5xl font-medium tracking-tight transition-colors duration-200 ${isActive ? 'text-[#2b2622] font-semibold' : 'text-[#2b2622]/50 hover:text-[#2b2622]'}`}
                   >
                     {item}
                   </Link>
@@ -104,9 +104,9 @@ const Navbar = () => {
                 setIsOpen(false);
                 window.dispatchEvent(new CustomEvent('openJoinModal'));
               }}
-              className="mt-8 bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-lg font-semibold rounded-full px-10 py-4 hover:bg-[#f6dbe0] transition-colors duration-200 lowercase shadow-lg shadow-[#522D21]/10 cursor-pointer"
+              className="mt-8 bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-lg font-semibold rounded-full px-10 py-4 hover:bg-[#f6dbe0] transition-colors duration-200 shadow-lg shadow-[#522D21]/10 cursor-pointer"
             >
-              join community
+              Join Community
             </button>
           </motion.div>
         )}

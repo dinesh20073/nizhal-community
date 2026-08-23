@@ -24,8 +24,8 @@ const Footer = () => {
           {/* Left Column: Tagline */}
           <div className="col-span-5 flex flex-col items-start text-left pl-0 sm:pl-16 md:pl-28 lg:pl-32 md:-translate-y-4 lg:-translate-y-6">
             <h2 className="font-['Caveat'] text-[#8c3a3a] text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold leading-tight mb-1 tracking-tight">
-              For the community,<br />
-              by the community. <span className="inline-block text-sm sm:text-2xl lg:text-3xl font-normal">♡</span>
+              You are never alone<br />
+              in the shadow. <span className="inline-block text-sm sm:text-2xl lg:text-3xl font-normal">♡</span>
             </h2>
           </div>
 
@@ -41,8 +41,8 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 lowercase mt-1 sm:mt-1.5 md:mt-20 lg:mt-24 whitespace-nowrap">
-              © {currentYear} nizhal
+            <span className="text-[9px] sm:text-xs text-[#2b2622]/60 mt-1 sm:mt-1.5 md:mt-20 lg:mt-24 whitespace-nowrap">
+              © {currentYear} Nizhal Community
             </span>
           </div>
 
@@ -94,8 +94,8 @@ const Footer = () => {
               </a>
             </div>
 
-            <p className="text-[9px] sm:text-xs text-[#2b2622]/75 lowercase leading-tight max-w-[130px] sm:max-w-xs">
-              follow our journey and be a part of the circle of warmth!
+            <p className="text-[9px] sm:text-xs text-[#2b2622]/75 leading-tight max-w-[130px] sm:max-w-xs">
+              Follow our journey and be a part of the circle of warmth!
             </p>
           </div>
         </div>

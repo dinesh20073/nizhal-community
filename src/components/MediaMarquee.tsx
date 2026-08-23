@@ -22,7 +22,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'video',
     src: aboutVideoUrl,
     alt: 'Nizhal Community Meetup',
-    label: 'stories & warmth',
+    label: 'Stories & Warmth',
     tilt: '-rotate-2'
   },
   {
@@ -30,7 +30,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'image',
     src: ctaBgUrl,
     alt: 'Night Beach Gathering',
-    label: 'community circle',
+    label: 'Community Circle',
     tilt: 'rotate-3'
   },
   {
@@ -38,7 +38,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'video',
     src: activeListeningVideoUrl,
     alt: 'Active Listening Gathering',
-    label: 'listening spaces',
+    label: 'Listening Spaces',
     tilt: '-rotate-1'
   },
   {
@@ -46,7 +46,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'image',
     src: heroBgUrl,
     alt: 'Connecting Moments',
-    label: 'human presence',
+    label: 'Human Presence',
     tilt: 'rotate-2'
   },
   {
@@ -54,7 +54,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'video',
     src: aboutVideoUrl,
     alt: 'Quiet Space Together',
-    label: 'quiet moments',
+    label: 'Quiet Moments',
     tilt: '-rotate-3'
   },
   {
@@ -62,7 +62,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'image',
     src: bodyBgUrl,
     alt: 'Serene Backdrop',
-    label: 'belonging',
+    label: 'Belonging',
     tilt: 'rotate-1'
   },
   {
@@ -70,7 +70,7 @@ export const mediaFrames: FrameItem[] = [
     type: 'image',
     src: bodyMobile2Url,
     alt: 'Shared Conversations',
-    label: 'safe & open',
+    label: 'Safe & Open',
     tilt: '-rotate-2'
   }
 ];

@@ -40,14 +40,14 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="hero-title font-medium text-5xl sm:text-6xl md:text-8xl mb-8 md:mb-12 lowercase text-[#2b2622] drop-shadow-sm">
-            about us
+          <h1 className="hero-title font-medium text-5xl sm:text-6xl md:text-8xl mb-8 md:mb-12 text-[#2b2622] drop-shadow-sm">
+            About Us
           </h1>
-          <p className="text-xl sm:text-2xl md:text-3xl text-[#2b2622]/90 lowercase max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8 font-normal drop-shadow-sm">
-            nizhal community is a quiet space beside you. we believe in the power of genuine human connection and listening.
+          <p className="text-xl sm:text-2xl md:text-3xl text-[#2b2622]/90 max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8 font-normal drop-shadow-sm">
+            Nizhal Community is a quiet space beside you. We believe in the power of genuine human connection and listening.
           </p>
-          <p className="text-base sm:text-lg md:text-xl text-[#2b2622]/75 lowercase leading-relaxed max-w-2xl mx-auto font-normal">
-            in a loud, fast-paced world, finding a place to simply exist without expectations is rare. we built this community to bring people together, share stories, and foster empathy. everyone has a story worth hearing.
+          <p className="text-base sm:text-lg md:text-xl text-[#2b2622]/75 leading-relaxed max-w-2xl mx-auto font-normal">
+            In a loud, fast-paced world, finding a place to simply exist without expectations is rare. We built this community to bring people together, share stories, and foster empathy. Everyone has a story worth hearing.
           </p>
         </motion.div>
       </div>

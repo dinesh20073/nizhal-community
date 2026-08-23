@@ -31,19 +31,19 @@ const PageTitleManager = () => {
     const path = location.pathname.replace(/\/$/, '') || '/';
     switch (path) {
       case '/':
-        document.title = 'nizhal : circle of warmth';
+        document.title = 'Nizhal : Circle of Warmth';
         break;
       case '/about':
-        document.title = 'about nizhal';
+        document.title = 'About Nizhal';
         break;
       case '/contact':
-        document.title = 'contact nizhal';
+        document.title = 'Contact Nizhal';
         break;
       case '/events':
-        document.title = 'nizhal events';
+        document.title = 'Nizhal Events';
         break;
       default:
-        document.title = 'nizhal : circle of warmth';
+        document.title = 'Nizhal : Circle of Warmth';
     }
   }, [location]);
 

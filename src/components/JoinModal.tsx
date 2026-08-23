@@ -71,15 +71,15 @@ const JoinModal = () => {
       const result = await response.json();
 
       if (result.status === 'exists') {
-        setErrorMsg('you are already a member');
+        setErrorMsg('You are already a member.');
       } else if (result.status === 'success') {
         setIsSubmitted(true);
       } else {
-        setErrorMsg('something went wrong. please try again.');
+        setErrorMsg('Something went wrong. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setErrorMsg('network error. please try again.');
+      setErrorMsg('Network error. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -138,13 +138,13 @@ const JoinModal = () => {
 
             {!isSubmitted ? (
               <>
-                <h2 className="text-3xl font-medium text-[#2b2622] mb-3 lowercase tracking-tight">become a member</h2>
-                <p className="text-[#2b2622]/60 lowercase leading-relaxed mb-6 text-sm">
-                  join our growing community. get access to exclusive events, private spaces, and meaningful connections.
+                <h2 className="text-3xl font-medium text-[#2b2622] mb-3 tracking-tight">Become a Member</h2>
+                <p className="text-[#2b2622]/60 leading-relaxed mb-6 text-sm">
+                  Join our growing community. Get access to exclusive events, private spaces, and meaningful connections.
                 </p>
 
                 {errorMsg && (
-                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm lowercase text-center">
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
                     {errorMsg}
                   </div>
                 )}
@@ -157,8 +157,8 @@ const JoinModal = () => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      placeholder="first name" 
-                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
+                      placeholder="First name" 
+                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
                     />
                     <input 
                       type="text" 
@@ -166,8 +166,8 @@ const JoinModal = () => {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       required
-                      placeholder="last name" 
-                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
+                      placeholder="Last name" 
+                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm min-w-0"
                     />
                   </div>
                   
@@ -178,12 +178,12 @@ const JoinModal = () => {
                         value={formData.gender}
                         onChange={handleInputChange}
                         required
-                        className={`bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase w-full text-sm appearance-none ${formData.gender ? 'text-[#2b2622]' : 'text-[#2b2622]/30'}`}
+                        className={`bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors w-full text-sm appearance-none ${formData.gender ? 'text-[#2b2622]' : 'text-[#2b2622]/30'}`}
                       >
-                        <option value="" disabled className="bg-[#ebe3d9] text-[#2b2622]/50">gender</option>
-                        <option value="male" className="bg-[#ebe3d9] text-[#2b2622]">male</option>
-                        <option value="female" className="bg-[#ebe3d9] text-[#2b2622]">female</option>
-                        <option value="other" className="bg-[#ebe3d9] text-[#2b2622]">other (we love you for who you are ♡)</option>
+                        <option value="" disabled className="bg-[#ebe3d9] text-[#2b2622]/50">Gender</option>
+                        <option value="male" className="bg-[#ebe3d9] text-[#2b2622]">Male</option>
+                        <option value="female" className="bg-[#ebe3d9] text-[#2b2622]">Female</option>
+                        <option value="other" className="bg-[#ebe3d9] text-[#2b2622]">Other (We love you for who you are ♡)</option>
                       </select>
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#2b2622]/50">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -195,19 +195,19 @@ const JoinModal = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0">
                     <div className="relative min-w-0 w-full flex-1 overflow-hidden">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-sm pointer-events-none z-10 lowercase bg-[#fcfaf8]/20 px-1 rounded">
-                        {!dob ? "date of birth" : "dob:"}
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-sm pointer-events-none z-10 bg-[#fcfaf8]/20 px-1 rounded">
+                        {!dob ? "Date of birth" : "DOB:"}
                       </span>
                       <input 
                         type="date" 
                         required
                         value={dob}
                         onChange={handleDobChange}
-                        className={`bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl pl-[110px] pr-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer ${!dob ? 'text-[#2b2622]/30' : 'text-[#2b2622]'}`}
+                        className={`bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl pl-[110px] pr-4 py-4 outline-none focus:border-[#2b2622]/40 transition-colors w-full text-sm [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer ${!dob ? 'text-[#2b2622]/30' : 'text-[#2b2622]'}`}
                         style={{ minWidth: 0, width: '100%', boxSizing: 'border-box' }}
                       />
                       {age !== null && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-xs lowercase bg-[#ebe3d9] px-2 py-1 rounded whitespace-nowrap">
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2b2622]/50 text-xs bg-[#ebe3d9] px-2 py-1 rounded whitespace-nowrap">
                           {age} yrs
                         </span>
                       )}
@@ -221,9 +221,9 @@ const JoinModal = () => {
                       required
                       pattern="[0-9]{10}"
                       maxLength={10}
-                      title="please enter a valid 10-digit phone number"
-                      placeholder="phone number" 
-                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
+                      title="Please enter a valid 10-digit phone number"
+                      placeholder="Phone number" 
+                      className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
                     />
                   </div>
 
@@ -234,31 +234,31 @@ const JoinModal = () => {
                     onChange={handleInputChange}
                     required
                     pattern=".+@gmail\.com$"
-                    title="must be a @gmail.com address"
-                    placeholder="your email (@gmail.com)" 
-                    className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors lowercase placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
+                    title="Must be a @gmail.com address"
+                    placeholder="Your email (@gmail.com)" 
+                    className="bg-[#fcfaf8]/50 border border-[#2b2622]/10 rounded-xl px-5 py-4 outline-none focus:border-[#2b2622]/40 transition-colors placeholder:text-[#2b2622]/30 text-[#2b2622] w-full text-sm"
                   />
 
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-4 w-full bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 font-semibold rounded-xl px-8 py-4 hover:bg-[#f6dbe0] transition-colors lowercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#522D21]/10"
+                    className="mt-4 w-full bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 font-semibold rounded-xl px-8 py-4 hover:bg-[#f6dbe0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#522D21]/10"
                   >
                     {isSubmitting ? (
                       <>
                         <svg className="animate-spin h-5 w-5 text-[#522D21]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                        submitting...
+                        Submitting...
                       </>
                     ) : (
-                      'submit application'
+                      'Submit Application'
                     )}
                   </button>
                 </form>
 
                 {/* Socials / Direct Join Area */}
                 <div className="mt-8 pt-8 border-t border-[#2b2622]/5 flex flex-col items-center text-center">
-                  <p className="text-[#2b2622]/60 text-sm mb-1 lowercase">or connect with us directly</p>
-                  <p className="text-[#2b2622]/30 text-xs mb-5 lowercase italic tracking-wide">your presence is a gift. step into our world whenever you're ready.</p>
+                  <p className="text-[#2b2622]/60 text-sm mb-1">Or connect with us directly</p>
+                  <p className="text-[#2b2622]/30 text-xs mb-5 italic tracking-wide">Your presence is a gift. Step into our world whenever you're ready.</p>
                   <SocialCard />
                 </div>
               </>
@@ -271,11 +271,11 @@ const JoinModal = () => {
                 <div className="h-20 w-20 bg-[#2b2622]/5 rounded-full flex items-center justify-center mb-6 border border-[#2b2622]/10">
                   <svg className="w-8 h-8 text-[#2b2622]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7"></path></svg>
                 </div>
-                <h3 className="text-3xl font-medium tracking-tight mb-4 lowercase text-[#2b2622]">
-                  application received.
+                <h3 className="text-3xl font-medium tracking-tight mb-4 text-[#2b2622]">
+                  Application received.
                 </h3>
-                <p className="text-[#2b2622]/60 text-sm leading-relaxed lowercase mb-8">
-                  thank you for taking the first step. we're excited to learn more about you. while you wait, join our community directly below:
+                <p className="text-[#2b2622]/60 text-sm leading-relaxed mb-8">
+                  Thank you for taking the first step. We're excited to learn more about you. While you wait, join our community directly below:
                 </p>
                 <SocialCard />
               </motion.div>
