@@ -8,7 +8,7 @@ export default defineConfig(({ command }) => ({
     tailwindcss(),
     react(),
   ],
-  base: process.env.BASE_PATH || (command === 'build' ? '/nizhal-community/' : '/'),
+  base: process.env.BASE_PATH || (process.env.NETLIFY ? '/' : (command === 'build' ? '/nizhal-community/' : '/')),
   server: {
     proxy: {
       '/api': {
