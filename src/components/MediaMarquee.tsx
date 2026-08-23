@@ -137,9 +137,15 @@ const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.6;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {});
+      const vid = videoRef.current;
+      vid.playbackRate = 0.6;
+      vid.defaultMuted = true;
+      vid.muted = true;
+      const attemptPlay = () => {
+        vid.play().catch(() => {});
+      };
+      attemptPlay();
+      vid.addEventListener('loadeddata', attemptPlay, { once: true });
     }
   }, []);
 
@@ -156,7 +162,7 @@ const VideoFrame = ({ src, alt }: { src: string; alt?: string }) => {
       disableRemotePlayback
       preload="auto"
       aria-label={alt || 'Nizhal Video Frame'}
-      className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
+      className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700 pointer-events-none"
     />
   );
 };

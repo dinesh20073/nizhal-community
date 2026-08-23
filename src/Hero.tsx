@@ -34,8 +34,13 @@ const Hero = () => {
     const playSafe = (vid: HTMLVideoElement | null, rate: number) => {
       if (!vid) return;
       vid.playbackRate = rate;
+      vid.defaultMuted = true;
       vid.muted = true;
-      vid.play().catch(() => {});
+      const attemptPlay = () => {
+        vid.play().catch(() => {});
+      };
+      attemptPlay();
+      vid.addEventListener('loadeddata', attemptPlay, { once: true });
     };
 
     playSafe(sharedPresenceRef.current, 0.55);

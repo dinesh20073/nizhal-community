@@ -15,9 +15,15 @@ const Contact = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {});
+      const vid = videoRef.current;
+      vid.playbackRate = 0.5;
+      vid.defaultMuted = true;
+      vid.muted = true;
+      const attemptPlay = () => {
+        vid.play().catch(() => {});
+      };
+      attemptPlay();
+      vid.addEventListener('loadeddata', attemptPlay, { once: true });
     }
   }, []);
 
@@ -127,7 +133,7 @@ const Contact = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-42 brightness-118 contrast-95"
+          className="absolute inset-0 w-full h-full object-cover opacity-42 brightness-118 contrast-95 pointer-events-none"
         />
 
         {/* Layer 3: Balanced Soft Whitish Scrim Overlay */}

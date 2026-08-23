@@ -42,3 +42,27 @@ body {
   letter-spacing: -0.04em;
   line-height: 0.95;
 }
+
+/* Eradicate any browser-level play buttons or media overlays */
+video::-webkit-media-controls,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+video::-moz-media-controls {
+  display: none !important;
+}
+
+video {
+  pointer-events: none !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+

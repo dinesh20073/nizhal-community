@@ -9,9 +9,15 @@ const About = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {});
+      const vid = videoRef.current;
+      vid.playbackRate = 0.5;
+      vid.defaultMuted = true;
+      vid.muted = true;
+      const attemptPlay = () => {
+        vid.play().catch(() => {});
+      };
+      attemptPlay();
+      vid.addEventListener('loadeddata', attemptPlay, { once: true });
     }
   }, []);
 
@@ -41,7 +47,7 @@ const About = () => {
           disablePictureInPicture
           disableRemotePlayback
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-25 brightness-115 contrast-95 mix-blend-multiply"
+          className="absolute inset-0 w-full h-full object-cover opacity-25 brightness-115 contrast-95 mix-blend-multiply pointer-events-none"
         />
 
         {/* Layer 3: Ultra-light Soft Vignette */}

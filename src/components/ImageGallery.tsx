@@ -222,7 +222,7 @@ const ImageGallery = () => {
                       controls={false}
                       disablePictureInPicture
                       disableRemotePlayback
-                      className="w-full h-full object-cover grayscale contrast-125 group-hover/post:grayscale-0 group-hover/post:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover grayscale contrast-125 group-hover/post:grayscale-0 group-hover/post:scale-105 transition-all duration-500 pointer-events-none"
                     />
                   ) : (
                     <img
@@ -232,13 +232,7 @@ const ImageGallery = () => {
                     />
                   )}
 
-                  {post.isReel && (
-                    <div className="absolute top-1 right-1 text-white drop-shadow-md">
-                      <svg className="w-3 h-3 fill-white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                    </div>
-                  )}
-
-                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/post:opacity-100 transition-opacity flex items-center justify-center text-white">
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/post:opacity-100 transition-opacity flex items-center justify-center text-white pointer-events-none">
                     <svg className="w-4 h-4 fill-white drop-shadow" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                   </div>
                 </div>
