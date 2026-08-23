@@ -13,16 +13,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MESSAGES_FILE = path.join(__dirname, 'messages.json');
 const LOGO_PATH = path.join(__dirname, '..', 'public', 'logo.png');
 
 app.use(cors());
 app.use(express.json());
-
-// Initialize local messages store if not exists
-if (!fs.existsSync(MESSAGES_FILE)) {
-  fs.writeFileSync(MESSAGES_FILE, JSON.stringify([], null, 2));
-}
 
 // Gmail SMTP Transporter
 const transporter = nodemailer.createTransport({
@@ -43,7 +37,7 @@ function toTitleCase(str) {
     .join(' ');
 }
 
-// API Endpoint to send emails & store submissions
+// API Endpoint to send emails directly to Nizhal email
 app.post('/api/send-email', async (req, res) => {
   try {
     const { name, email, phone, topic, message } = req.body;
@@ -60,26 +54,7 @@ app.post('/api/send-email', async (req, res) => {
       timeStyle: 'short'
     });
 
-    // Save to local log/database
-    const newMessage = {
-      id: Date.now(),
-      time,
-      name: formattedName,
-      email,
-      phone,
-      topic: formattedTopic,
-      message,
-      status: 'received'
-    };
-
-    try {
-      const existing = JSON.parse(fs.readFileSync(MESSAGES_FILE, 'utf-8') || '[]');
-      existing.unshift(newMessage);
-      fs.writeFileSync(MESSAGES_FILE, JSON.stringify(existing, null, 2));
-      console.log(`\n📬 [NEW MESSAGE RECEIVED] From: ${formattedName} (${email}) | Topic: ${formattedTopic}`);
-    } catch (fsErr) {
-      console.error('File save error:', fsErr);
-    }
+    console.log(`\n📬 [NEW MESSAGE RECEIVED] From: ${formattedName} (${email}) | Topic: ${formattedTopic}`);
 
     // OpenTable Style Email Template
     const htmlContent = `
@@ -217,16 +192,6 @@ ${message}
   } catch (error) {
     console.error('Email send error:', error);
     return res.status(500).json({ error: 'Failed to send email. Please check server logs.' });
-  }
-});
-
-// View local inbox
-app.get('/api/messages', (req, res) => {
-  try {
-    const messages = JSON.parse(fs.readFileSync(MESSAGES_FILE, 'utf-8') || '[]');
-    res.json({ total: messages.length, messages });
-  } catch (e) {
-    res.status(500).json({ error: 'Could not read messages' });
   }
 });
 
