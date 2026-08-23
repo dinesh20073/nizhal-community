@@ -42,11 +42,16 @@ export default async function handler(req, res) {
       timeStyle: 'short'
     });
 
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables');
+      return res.status(500).json({ error: 'Server email credentials are not configured.' });
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER || 'otp.passcode@gmail.com',
-        pass: process.env.GMAIL_APP_PASSWORD || 'amquhmdiqxhkrect'
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
       }
     });
 
@@ -94,7 +99,7 @@ export default async function handler(req, res) {
     `;
 
     const mailOptions = {
-      from: `"Nizhal Website" <${process.env.GMAIL_USER || 'otp.passcode@gmail.com'}>`,
+      from: `"Nizhal Website" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFY_EMAIL || 'nizhalcommunity@gmail.com',
       replyTo: email,
       subject: `[Nizhal Community] ${formattedTopic} from ${formattedName}`,

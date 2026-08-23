@@ -16,6 +16,11 @@ dist-ssr
 .env.*
 !.env.example
 
+# Temporary & Deleted Files
+delete/
+delete
+
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
