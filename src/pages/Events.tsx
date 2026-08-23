@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 // Local Video Assets
 import activeListeningVideoUrl from '../assets/active-listening.mp4';
@@ -193,8 +193,6 @@ const SCRAPBOOK_MEMORIES: ScrapbookItem[] = [
 ];
 
 const Events = () => {
-  const [activeItem, setActiveItem] = useState<ScrapbookItem | null>(null);
-
   return (
     <div className="relative bg-[#f7f3ee] text-[#2b2622] min-h-screen overflow-x-hidden selection:bg-[#8c3a3a]/20">
       {/* Organic Warm Background Texture */}
@@ -231,15 +229,18 @@ const Events = () => {
             const isVideo = item.type === 'video-polaroid';
 
             return (
-              <motion.div
+              <motion.a
                 key={item.id}
+                href={item.instagramLink}
+                target="_blank"
+                rel="noreferrer"
                 initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -2 : 2 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 whileHover={{ scale: 1.04, rotate: 0, zIndex: 30 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setActiveItem(item)}
-                className={`relative group cursor-pointer shrink-0 transition-all ${item.rotation} ${item.widthClass}`}
+                className={`relative group cursor-pointer shrink-0 transition-all block ${item.rotation} ${item.widthClass}`}
+                title={`Open ${item.title} on Instagram`}
               >
                 {/* Washi Tape / Paper Tape Accents */}
                 {item.tapePosition === 'top' && (
@@ -270,13 +271,18 @@ const Events = () => {
                     </div>
 
                     {/* Handwritten Polaroid Caption */}
-                    <div className="px-1 pt-1">
-                      <h3 className="text-xs uppercase tracking-wider text-[#2b2622]/60 font-semibold mb-0.5">
-                        {item.title}
-                      </h3>
-                      <p className="font-['Caveat'] text-[#8c3a3a] text-2xl font-bold leading-tight">
-                        {item.handwrittenNote}
-                      </p>
+                    <div className="px-1 pt-1 flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="text-xs uppercase tracking-wider text-[#2b2622]/60 font-semibold mb-0.5">
+                          {item.title}
+                        </h3>
+                        <p className="font-['Caveat'] text-[#8c3a3a] text-2xl font-bold leading-tight">
+                          {item.handwrittenNote}
+                        </p>
+                      </div>
+                      <span className="text-[10px] text-[#522D21]/50 group-hover:text-[#522D21] transition-colors shrink-0 mt-1">
+                        ↗
+                      </span>
                     </div>
                   </div>
                 ) : (
@@ -288,7 +294,7 @@ const Events = () => {
                     </p>
                   </div>
                 )}
-              </motion.div>
+              </motion.a>
             );
           })}
         </div>
@@ -310,67 +316,6 @@ const Events = () => {
         </div>
 
       </div>
-
-      {/* Lightbox Pop-up for Single Memory */}
-      <AnimatePresence>
-        {activeItem && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveItem(null)}
-              className="fixed inset-0 bg-[#2b2622]/75 backdrop-blur-sm"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="relative max-w-xl w-full bg-[#ffffff] p-5 pb-6 rounded-md shadow-2xl z-10 flex flex-col border border-[#2b2622]/20"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs uppercase tracking-widest text-[#2b2622]/60 font-semibold">
-                  {activeItem.title}
-                </span>
-                <button 
-                  onClick={() => setActiveItem(null)}
-                  className="w-8 h-8 rounded-full bg-[#ede4d8] hover:bg-[#dfd3c3] text-[#2b2622] flex items-center justify-center transition-colors cursor-pointer text-sm"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {activeItem.src && (
-                <div className="w-full aspect-[4/5] bg-[#dfd3c3] rounded-xs overflow-hidden mb-4 shadow-inner">
-                  {activeItem.type === 'video-polaroid' ? (
-                    <AutoPlayVideo src={activeItem.src} alt={activeItem.title} />
-                  ) : (
-                    <img src={activeItem.src} alt={activeItem.title} className="w-full h-full object-cover" />
-                  )}
-                </div>
-              )}
-
-              <p className="font-['Caveat'] text-[#8c3a3a] text-3xl font-bold text-center mb-4 leading-tight">
-                {activeItem.handwrittenNote}
-              </p>
-
-              <div className="flex items-center justify-center pt-3 border-t border-[#2b2622]/10">
-                <a
-                  href={activeItem.instagramLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold px-6 py-2.5 rounded-full hover:bg-[#f6dbe0] transition-all text-xs flex items-center gap-1.5 shadow-xs"
-                >
-                  <span>Open on Instagram</span>
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
