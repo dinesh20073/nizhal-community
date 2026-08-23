@@ -184,7 +184,7 @@ ${message}
       from: `"Nizhal Website" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFY_EMAIL || 'nizhalcommunity@gmail.com',
       replyTo: email,
-      subject: `🔔 [Nizhal Community] ${formattedName} regarding ${formattedTopic} | ${time}`,
+      subject: `🔔Nizhal Community | ${formattedName} regarding ${formattedTopic} | ${time}`,
       html: htmlContent
     };
 
