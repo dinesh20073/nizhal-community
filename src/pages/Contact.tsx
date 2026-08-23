@@ -67,7 +67,7 @@ const Contact = () => {
     setIsSending(true);
     setErrorMessage('');
 
-    const endpoint = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/send-email';
+    const endpoint = import.meta.env.VITE_API_URL || '/api/send-email';
 
     try {
       const response = await fetch(endpoint, {
@@ -94,7 +94,7 @@ const Contact = () => {
     } catch (err: any) {
       console.error('Email send error:', err);
       setErrorMessage(
-        err?.message || 'Failed to send message. Please ensure the backend server is running.'
+        err?.message || 'Failed to send message. Please try again or reach out directly on WhatsApp/Instagram.'
       );
     } finally {
       setIsSending(false);
