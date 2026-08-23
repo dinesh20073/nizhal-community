@@ -56,6 +56,12 @@ app.post('/api/send-email', async (req, res) => {
 
     console.log(`\n📬 [NEW MESSAGE RECEIVED] From: ${formattedName} (${email}) | Topic: ${formattedTopic}`);
 
+    const encodedName = encodeURIComponent(formattedName);
+    const encodedTopic = encodeURIComponent(formattedTopic);
+    const whatsappUrl = `https://wa.me/91${phone}?text=Hi%20${encodedName},%20thank%20you%20for%20reaching%20out%20to%20Nizhal%20Community%20regarding%20${encodedTopic}!`;
+    const mailtoUrl = `mailto:${email}?subject=Re:%20Nizhal%20Community%20-%20${encodedTopic}`;
+    const telUrl = `tel:+91${phone}`;
+
     // OpenTable Style Email Template
     const htmlContent = `
       <!DOCTYPE html>
@@ -63,106 +69,98 @@ app.post('/api/send-email', async (req, res) => {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Message Received</title>
+        <title>New Inquiry Received</title>
       </head>
-      <body style="margin: 0; padding: 32px 15px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f6f7f9; color: #334155;">
-        
-        <!-- Outer Container -->
-        <div style="max-width: 560px; margin: 0 auto;">
+      <body style="margin: 0; padding: 36px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f6f7f9; color: #1e293b;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; padding: 40px 32px; box-shadow: 0 6px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
           
-          <!-- Top Centered Logo -->
-          <div style="text-align: center; margin-bottom: 24px;">
-            <img 
-              src="cid:nizhallogo" 
-              alt="Nizhal Community" 
-              width="76" 
-              height="76" 
-              style="width: 76px; height: 76px; border-radius: 50%; display: inline-block; object-fit: cover; border: 2px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.06);" 
-            />
-          </div>
-
-          <!-- Main White Card -->
-          <div style="background-color: #ffffff; border-radius: 12px; padding: 40px 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eef2f6;">
-            
-            <!-- Headline -->
-            <h1 style="color: #3b6680; font-size: 26px; font-weight: 500; margin: 0 0 14px 0; letter-spacing: -0.3px;">
-              New message received
+          <!-- Top Header -->
+          <div style="text-align: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 24px; margin-bottom: 28px;">
+            <div style="display: inline-block; background-color: #fdf2f4; color: #8c3a3a; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+              New Website Inquiry
+            </div>
+            <h1 style="color: #1e293b; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">
+              ${formattedName}
             </h1>
-
-            <!-- Intro Text -->
-            <p style="font-size: 15px; color: #475569; line-height: 1.6; margin: 0 0 26px 0;">
-              Hello Nizhal team,<br>
-              A new message by <strong style="color: #1e293b;">${formattedName}</strong> regarding <strong style="color: #1e293b;">${formattedTopic}</strong> has been received on the website.
+            <p style="font-size: 15px; color: #64748b; margin: 0;">
+              Topic: <strong style="color: #8c3a3a;">${formattedTopic}</strong> • ${time}
             </p>
-
-            <!-- Primary Action Button (OpenTable Red / Nizhal Rose) -->
-            <div style="margin: 28px 0;">
-              <a 
-                href="mailto:${email}?subject=Re: Nizhal Community - ${formattedTopic}" 
-                style="background-color: #c94a5e; color: #ffffff; text-decoration: none; padding: 14px 34px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block; box-shadow: 0 3px 8px rgba(201, 74, 94, 0.28);"
-              >
-                Reply to ${formattedName}
-              </a>
-            </div>
-
-            <!-- Divider / Details Intro -->
-            <div style="font-size: 14px; color: #64748b; margin: 26px 0 16px 0;">
-              Or, you can connect directly via WhatsApp or review the details below:
-            </div>
-
-            <!-- Message Card Box -->
-            <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 20px; text-align: left; margin-bottom: 24px;">
-              
-              <!-- Sender Info Row -->
-              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
-                <tr>
-                  <td style="font-size: 13px; color: #64748b; padding-bottom: 6px; width: 90px; font-weight: 600;">Sender:</td>
-                  <td style="font-size: 14px; color: #1e293b; font-weight: 600; padding-bottom: 6px;">${formattedName}</td>
-                </tr>
-                <tr>
-                  <td style="font-size: 13px; color: #64748b; padding-bottom: 6px; font-weight: 600;">Email:</td>
-                  <td style="font-size: 14px; color: #2563eb; padding-bottom: 6px;">
-                    <a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="font-size: 13px; color: #64748b; padding-bottom: 6px; font-weight: 600;">WhatsApp:</td>
-                  <td style="font-size: 14px; color: #16a34a; font-weight: 600; padding-bottom: 6px;">
-                    <a href="https://wa.me/91${phone}" style="color: #16a34a; text-decoration: none;">+91 ${phone} (Chat on WhatsApp)</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="font-size: 13px; color: #64748b; padding-bottom: 6px; font-weight: 600;">Topic:</td>
-                  <td style="font-size: 14px; color: #991b1b; font-weight: 600; padding-bottom: 6px;">${formattedTopic}</td>
-                </tr>
-                <tr>
-                  <td style="font-size: 13px; color: #64748b; font-weight: 600;">Received:</td>
-                  <td style="font-size: 13px; color: #64748b;">${time}</td>
-                </tr>
-              </table>
-
-              <!-- Full Message Body -->
-              <div style="border-top: 1px dashed #cbd5e1; padding-top: 14px; margin-top: 6px;">
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; color: #64748b; margin-bottom: 8px;">
-                  Message:
-                </div>
-                <div style="font-size: 15px; line-height: 1.7; color: #1e293b; white-space: pre-wrap; word-break: break-word;">
-${message}
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Footer note inside card -->
-            <p style="font-size: 13px; color: #94a3b8; line-height: 1.5; margin: 0;">
-              Contacted via Nizhal Community website
-            </p>
-
           </div>
 
-          <!-- Bottom Subtext -->
-          <div style="text-align: center; margin-top: 24px; color: #94a3b8; font-size: 12px;">
-            Nizhal Community • A quiet space beside you
+          <!-- 3 Prominent Quick Action Buttons -->
+          <div style="margin: 0 0 32px 0;">
+            <table role="presentation" style="width: 100%; border-collapse: separate; border-spacing: 8px;">
+              <tr>
+                <td style="width: 50%; text-align: center;">
+                  <a 
+                    href="${mailtoUrl}" 
+                    style="display: block; background-color: #8c3a3a; color: #ffffff; text-decoration: none; padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(140, 58, 58, 0.25);"
+                  >
+                    ✉️ Reply in Email
+                  </a>
+                </td>
+                <td style="width: 50%; text-align: center;">
+                  <a 
+                    href="${whatsappUrl}" 
+                    style="display: block; background-color: #25D366; color: #ffffff; text-decoration: none; padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);"
+                  >
+                    💬 Reply in WhatsApp
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align: center; padding-top: 4px;">
+                  <a 
+                    href="${telUrl}" 
+                    style="display: block; background-color: #f1f5f9; color: #334155; text-decoration: none; padding: 11px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; border: 1px solid #e2e8f0;"
+                  >
+                    📞 Call +91 ${phone}
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Big Details Card -->
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px 22px; margin-bottom: 28px;">
+            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 12px;">
+              Contact Information
+            </div>
+            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 15px;">
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; width: 100px; font-weight: 600;">Email:</td>
+                <td style="padding: 6px 0;">
+                  <a href="mailto:${email}" style="color: #2563eb; font-weight: 600; text-decoration: none; font-size: 16px;">${email}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; font-weight: 600;">Phone:</td>
+                <td style="padding: 6px 0; color: #1e293b; font-weight: 600; font-size: 16px;">
+                  +91 ${phone}
+                </td>
+              </tr>
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; font-weight: 600;">Topic:</td>
+                <td style="padding: 6px 0; color: #8c3a3a; font-weight: 700;">
+                  ${formattedTopic}
+                </td>
+              </tr>
+            </table>
+
+            <!-- Message Box -->
+            <div style="border-top: 1px dashed #cbd5e1; padding-top: 18px; margin-top: 16px;">
+              <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 10px;">
+                Message Content
+              </div>
+              <div style="font-size: 16px; line-height: 1.7; color: #1e293b; white-space: pre-wrap; word-break: break-word; background-color: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+${message}
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Footer -->
+          <div style="text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+            Nizhal Community • A quiet space beside you ♡
           </div>
 
         </div>

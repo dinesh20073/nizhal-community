@@ -55,44 +55,112 @@ export default async function handler(req, res) {
       }
     });
 
+    const encodedName = encodeURIComponent(formattedName);
+    const encodedTopic = encodeURIComponent(formattedTopic);
+    const whatsappUrl = `https://wa.me/91${phone}?text=Hi%20${encodedName},%20thank%20you%20for%20reaching%20out%20to%20Nizhal%20Community%20regarding%20${encodedTopic}!`;
+    const mailtoUrl = `mailto:${email}?subject=Re:%20Nizhal%20Community%20-%20${encodedTopic}`;
+    const telUrl = `tel:+91${phone}`;
+
     const htmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>New Inquiry Received</title>
       </head>
-      <body style="margin: 0; padding: 32px 15px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f6f7f9; color: #334155;">
-        <div style="max-width: 560px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; padding: 36px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #eef2f6;">
-          <h2 style="color: #3b6680; font-size: 24px; font-weight: 600; margin: 0 0 16px 0;">
-            New message for Nizhal Community
-          </h2>
-          <p style="font-size: 15px; color: #475569; line-height: 1.6; margin: 0 0 24px 0;">
-            A new inquiry has been submitted by <strong style="color: #1e293b;">${formattedName}</strong> regarding <strong style="color: #1e293b;">${formattedTopic}</strong>.
-          </p>
-
-          <div style="margin: 24px 0;">
-            <a 
-              href="mailto:${email}?subject=Re: Nizhal Community - ${formattedTopic}" 
-              style="background-color: #c94a5e; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; display: inline-block;"
-            >
-              Reply to ${formattedName}
-            </a>
+      <body style="margin: 0; padding: 36px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f6f7f9; color: #1e293b;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; padding: 40px 32px; box-shadow: 0 6px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+          
+          <!-- Top Header -->
+          <div style="text-align: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 24px; margin-bottom: 28px;">
+            <div style="display: inline-block; background-color: #fdf2f4; color: #8c3a3a; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+              New Website Inquiry
+            </div>
+            <h1 style="color: #1e293b; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">
+              ${formattedName}
+            </h1>
+            <p style="font-size: 15px; color: #64748b; margin: 0;">
+              Topic: <strong style="color: #8c3a3a;">${formattedTopic}</strong> • ${time}
+            </p>
           </div>
 
-          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; text-align: left; margin: 20px 0;">
-            <p style="margin: 6px 0; font-size: 14px;"><strong>Sender:</strong> ${formattedName}</p>
-            <p style="margin: 6px 0; font-size: 14px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
-            <p style="margin: 6px 0; font-size: 14px;"><strong>WhatsApp:</strong> <a href="https://wa.me/91${phone}" style="color: #16a34a;">+91 ${phone} (Chat)</a></p>
-            <p style="margin: 6px 0; font-size: 14px;"><strong>Topic:</strong> ${formattedTopic}</p>
-            <p style="margin: 6px 0; font-size: 14px;"><strong>Time:</strong> ${time}</p>
-            <hr style="border: none; border-top: 1px dashed #cbd5e1; margin: 14px 0;" />
-            <div style="font-size: 14px; color: #1e293b; white-space: pre-wrap; line-height: 1.6;">${message}</div>
+          <!-- 3 Prominent Quick Action Buttons -->
+          <div style="margin: 0 0 32px 0;">
+            <table role="presentation" style="width: 100%; border-collapse: separate; border-spacing: 8px;">
+              <tr>
+                <td style="width: 50%; text-align: center;">
+                  <a 
+                    href="${mailtoUrl}" 
+                    style="display: block; background-color: #8c3a3a; color: #ffffff; text-decoration: none; padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(140, 58, 58, 0.25);"
+                  >
+                    ✉️ Reply in Email
+                  </a>
+                </td>
+                <td style="width: 50%; text-align: center;">
+                  <a 
+                    href="${whatsappUrl}" 
+                    style="display: block; background-color: #25D366; color: #ffffff; text-decoration: none; padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);"
+                  >
+                    💬 Reply in WhatsApp
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align: center; padding-top: 4px;">
+                  <a 
+                    href="${telUrl}" 
+                    style="display: block; background-color: #f1f5f9; color: #334155; text-decoration: none; padding: 11px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; border: 1px solid #e2e8f0;"
+                  >
+                    📞 Call +91 ${phone}
+                  </a>
+                </td>
+              </tr>
+            </table>
           </div>
 
-          <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 24px;">
-            Sent via Nizhal Community Website • A quiet space beside you
-          </p>
+          <!-- Big Details Card -->
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px 22px; margin-bottom: 28px;">
+            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 12px;">
+              Contact Information
+            </div>
+            <table role="presentation" style="width: 100%; border-collapse: collapse; font-size: 15px;">
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; width: 100px; font-weight: 600;">Email:</td>
+                <td style="padding: 6px 0;">
+                  <a href="mailto:${email}" style="color: #2563eb; font-weight: 600; text-decoration: none; font-size: 16px;">${email}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; font-weight: 600;">Phone:</td>
+                <td style="padding: 6px 0; color: #1e293b; font-weight: 600; font-size: 16px;">
+                  +91 ${phone}
+                </td>
+              </tr>
+              <tr>
+                <td style="color: #64748b; padding: 6px 0; font-weight: 600;">Topic:</td>
+                <td style="padding: 6px 0; color: #8c3a3a; font-weight: 700;">
+                  ${formattedTopic}
+                </td>
+              </tr>
+            </table>
+
+            <!-- Message Box -->
+            <div style="border-top: 1px dashed #cbd5e1; padding-top: 18px; margin-top: 16px;">
+              <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 10px;">
+                Message Content
+              </div>
+              <div style="font-size: 16px; line-height: 1.7; color: #1e293b; white-space: pre-wrap; word-break: break-word; background-color: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+${message}
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Footer -->
+          <div style="text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+            Nizhal Community • A quiet space beside you ♡
+          </div>
+
         </div>
       </body>
       </html>
