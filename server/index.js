@@ -37,6 +37,24 @@ function toTitleCase(str) {
     .join(' ');
 }
 
+function formatCustomDateIST() {
+  const now = new Date();
+  const istString = now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  const d = new Date(istString);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
+  
+  let hours = d.getHours();
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? String(hours).padStart(2, '0') : '12';
+  
+  return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+}
+
 // API Endpoint to send emails directly to Nizhal email
 app.post('/api/send-email', async (req, res) => {
   try {
@@ -48,11 +66,7 @@ app.post('/api/send-email', async (req, res) => {
 
     const formattedTopic = toTitleCase(topic || 'General Inquiry');
     const formattedName = toTitleCase(name);
-    const time = new Date().toLocaleString('en-IN', { 
-      timeZone: 'Asia/Kolkata',
-      dateStyle: 'medium',
-      timeStyle: 'short'
-    });
+    const time = formatCustomDateIST();
 
     console.log(`\n📬 [NEW MESSAGE RECEIVED] From: ${formattedName} (${email}) | Topic: ${formattedTopic}`);
 
@@ -169,10 +183,10 @@ ${message}
     `;
 
     const mailOptions = {
-      from: `"Nizhal Website" <${process.env.GMAIL_USER || 'otp.passcode@gmail.com'}>`,
+      from: `"Nizhal Website" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFY_EMAIL || 'nizhalcommunity@gmail.com',
       replyTo: email,
-      subject: `[Nizhal Community] New Inquiry: ${formattedTopic} from ${formattedName}`,
+      subject: `🔔 [Nizhal Community] ${formattedName} regarding ${formattedTopic} | ${time}`,
       html: htmlContent,
       attachments: fs.existsSync(LOGO_PATH) ? [
         {
