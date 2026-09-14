@@ -1,8 +1,33 @@
 {
   "rewrites": [
     {
+      "source": "/register/:path*",
+      "destination": "https://admin.nizhalcommunity.in/register/:path*"
+    },
+    {
+      "source": "/pay/:path*",
+      "destination": "https://admin.nizhalcommunity.in/pay/:path*"
+    },
+    {
+      "source": "/pass/:path*",
+      "destination": "https://admin.nizhalcommunity.in/pass/:path*"
+    },
+    {
+      "source": "/status/:path*",
+      "destination": "https://admin.nizhalcommunity.in/status/:path*"
+    },
+    {
+      "source": "/static/:path*",
+      "destination": "https://admin.nizhalcommunity.in/static/:path*"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "https://admin.nizhalcommunity.in/media/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
 }
+
