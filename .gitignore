@@ -19,6 +19,7 @@ dist-ssr
 # Temporary & Deleted Files
 delete/
 delete
+assests/
 
 
 # Editor directories and files
