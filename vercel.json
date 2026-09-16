@@ -43,28 +43,28 @@
   ],
   "rewrites": [
     {
-      "source": "/register/:path*",
-      "destination": "https://admin.nizhalcommunity.in/register/:path*"
+      "source": "/register/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/register/$1"
     },
     {
-      "source": "/pay/:path*",
-      "destination": "https://admin.nizhalcommunity.in/pay/:path*"
+      "source": "/pay/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/pay/$1"
     },
     {
-      "source": "/pass/:path*",
-      "destination": "https://admin.nizhalcommunity.in/pass/:path*"
+      "source": "/pass/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/pass/$1"
     },
     {
-      "source": "/status/:path*",
-      "destination": "https://admin.nizhalcommunity.in/status/:path*"
+      "source": "/status/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/status/$1"
     },
     {
-      "source": "/static/:path*",
-      "destination": "https://admin.nizhalcommunity.in/static/:path*"
+      "source": "/static/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/static/$1"
     },
     {
-      "source": "/media/:path*",
-      "destination": "https://admin.nizhalcommunity.in/media/:path*"
+      "source": "/media/(.*)",
+      "destination": "https://admin.nizhalcommunity.in/media/$1"
     },
     {
       "source": "/(.*)",
