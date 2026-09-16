@@ -6,6 +6,16 @@
   BASE_PATH = "/"
 
 [[redirects]]
+  from = "/register"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "/register/"
+  to = "/"
+  status = 302
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

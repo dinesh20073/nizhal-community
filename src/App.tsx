@@ -50,6 +50,14 @@ const PageTitleManager = () => {
   return null;
 };
 
+// Forward client-side navigation of proxied routes to the server for reverse proxying
+const ExternalRouteHandler = () => {
+  useEffect(() => {
+    window.location.href = window.location.pathname + window.location.search;
+  }, []);
+  return null;
+};
+
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -61,6 +69,11 @@ const AnimatedRoutes = () => {
           <Route path="/about" element={<PageTransition><About /></PageTransition>} />
           <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/register" element={<Navigate to="/" replace />} />
+          <Route path="/register/*" element={<ExternalRouteHandler />} />
+          <Route path="/pay/*" element={<ExternalRouteHandler />} />
+          <Route path="/pass/*" element={<ExternalRouteHandler />} />
+          <Route path="/status/*" element={<ExternalRouteHandler />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>

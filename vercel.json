@@ -1,32 +1,58 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/register/:path*/",
-      "destination": "https://admin.nizhalcommunity.in/register/:path*/"
+      "source": "/register",
+      "destination": "/",
+      "permanent": false
     },
+    {
+      "source": "/register/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pay",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pay/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pass",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/pass/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/status",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/status/",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
     {
       "source": "/register/:path*",
       "destination": "https://admin.nizhalcommunity.in/register/:path*"
-    },
-    {
-      "source": "/pay/:path*/",
-      "destination": "https://admin.nizhalcommunity.in/pay/:path*/"
     },
     {
       "source": "/pay/:path*",
       "destination": "https://admin.nizhalcommunity.in/pay/:path*"
     },
     {
-      "source": "/pass/:path*/",
-      "destination": "https://admin.nizhalcommunity.in/pass/:path*/"
-    },
-    {
       "source": "/pass/:path*",
       "destination": "https://admin.nizhalcommunity.in/pass/:path*"
-    },
-    {
-      "source": "/status/:path*/",
-      "destination": "https://admin.nizhalcommunity.in/status/:path*/"
     },
     {
       "source": "/status/:path*",
