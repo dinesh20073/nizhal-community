@@ -295,15 +295,9 @@ const Events = () => {
           <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2">
             more memories in the making... ♡
           </p>
-          <p className="text-xs sm:text-sm text-[#2b2622]/70 leading-relaxed mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#2b2622]/70 leading-relaxed font-normal">
             come sit beside us in our upcoming circles.
           </p>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('openUpcomingEventModal'))}
-            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold px-8 py-3.5 rounded-full hover:bg-[#f6dbe0] hover:scale-105 transition-all shadow-md shadow-[#522D21]/10 cursor-pointer text-sm"
-          >
-            Upcoming Event
-          </button>
         </div>
 
       </div>
