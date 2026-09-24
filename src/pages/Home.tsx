@@ -242,10 +242,10 @@ const Home = () => {
             Step into a world where connection is intentional and every voice is valued.
           </p>
           <button
-            onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
+            onClick={() => window.dispatchEvent(new CustomEvent('openUpcomingEventModal'))}
             className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 text-lg font-semibold rounded-full px-10 py-5 hover:scale-105 hover:bg-[#f6dbe0] transition-all shadow-xl shadow-[#522D21]/15 cursor-pointer mt-2"
           >
-            Become a Member
+            Upcoming Event
           </button>
         </div>
       </section>

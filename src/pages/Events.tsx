@@ -299,10 +299,10 @@ const Events = () => {
             come sit beside us in our upcoming circles.
           </p>
           <button
-            onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
+            onClick={() => window.dispatchEvent(new CustomEvent('openUpcomingEventModal'))}
             className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold px-8 py-3.5 rounded-full hover:bg-[#f6dbe0] hover:scale-105 transition-all shadow-md shadow-[#522D21]/10 cursor-pointer text-sm"
           >
-            Become a Member
+            Upcoming Event
           </button>
         </div>
 

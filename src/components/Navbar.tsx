@@ -48,10 +48,10 @@ const Navbar = () => {
 
         {/* Right button (Desktop) */}
         <button
-          onClick={() => window.dispatchEvent(new CustomEvent('openJoinModal'))}
+          onClick={() => window.dispatchEvent(new CustomEvent('openUpcomingEventModal'))}
           className="hidden md:block bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-sm font-semibold rounded-full px-6 py-3 hover:scale-105 hover:bg-[#f6dbe0] transition-all duration-300 relative z-50 shadow-md shadow-[#522D21]/10 cursor-pointer"
         >
-          Join Community
+          Upcoming Event
         </button>
 
         {/* Mobile Menu Toggle */}
@@ -102,11 +102,11 @@ const Navbar = () => {
             <button
               onClick={() => {
                 setIsOpen(false);
-                window.dispatchEvent(new CustomEvent('openJoinModal'));
+                window.dispatchEvent(new CustomEvent('openUpcomingEventModal'));
               }}
               className="mt-8 bg-[#FCEBED] text-[#522D21] border border-[#522D21]/20 text-lg font-semibold rounded-full px-10 py-4 hover:bg-[#f6dbe0] transition-colors duration-200 shadow-lg shadow-[#522D21]/10 cursor-pointer"
             >
-              Join Community
+              Upcoming Event
             </button>
           </motion.div>
         )}
