@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SocialCard from './SocialCard';
 
 const JoinModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,20 +90,17 @@ const JoinModal = () => {
                 </svg>
               </div>
 
-              <h3 className="text-xl font-medium text-[#2b2622] mb-2 tracking-tight">
+              <h3 className="text-xl font-medium text-[#2b2622] mb-3 tracking-tight">
                 Next Gathering Coming Soon
               </h3>
-              <p className="text-[#2b2622]/70 text-sm leading-relaxed mb-4">
-                We are curating our next intimate circle. Spaces are kept warm, welcoming, and intentionally small so every story is heard.
-              </p>
 
               <div className="bg-[#f7f2ea]/90 border border-[#2b2622]/10 rounded-xl px-4 py-3 text-xs text-[#2b2622]/75 leading-relaxed">
                 📢 Announcements, dates, and invites are dropped first in our WhatsApp circle and Instagram page.
               </div>
             </div>
 
-            {/* Direct Connect Buttons */}
-            <div className="relative z-10 flex flex-col gap-3 mb-6">
+            {/* Direct Connect Buttons (Big Icons) */}
+            <div className="relative z-10 flex flex-col gap-3 mb-5">
               {/* WhatsApp Button */}
               <a 
                 href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
@@ -152,12 +148,11 @@ const JoinModal = () => {
               </a>
             </div>
 
-            {/* Socials / Direct Join Area */}
-            <div className="relative z-10 pt-5 border-t border-[#2b2622]/10 flex flex-col items-center text-center">
-              <p className="text-[#2b2622]/60 text-xs mb-3 italic tracking-wide">
+            {/* Note below big icons */}
+            <div className="relative z-10 pt-4 border-t border-[#2b2622]/10 text-center">
+              <p className="text-[#2b2622]/60 text-xs italic tracking-wide">
                 Your presence is a gift. Step into our world whenever you're ready.
               </p>
-              <SocialCard />
             </div>
           </motion.div>
         </div>
