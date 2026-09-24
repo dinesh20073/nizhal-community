@@ -67,9 +67,6 @@ const JoinModal = () => {
 
             {/* Header */}
             <div className="relative z-10 text-center mb-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8c3a3a]/10 text-[#8c3a3a] text-xs font-semibold uppercase tracking-wider mb-3">
-                ✦ Nizhal Circles
-              </span>
               <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-[#2b2622] mb-1">
                 Upcoming Event
               </h2>
