@@ -1,0 +1,314 @@
+.upcoming-events-section {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Cabin', sans-serif;
+  padding: 50px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fcfaf8;
+  border-top: 1px solid rgba(43, 38, 34, 0.05);
+}
+
+.upcoming-events-section * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background image: exact filter (grayscale contrast-125 brightness-95 opacity-65) */
+.upcoming-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #fcfaf8;
+}
+
+.upcoming-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%) contrast(1.25) brightness(0.95);
+  opacity: 0.65;
+}
+
+/* Subtle soft scrim overlay matching Your story matters (from-[#fcfaf8]/75 via-[#fcfaf8]/40 to-[#fcfaf8]/80) */
+.upcoming-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(252, 250, 248, 0.75) 0%, rgba(252, 250, 248, 0.4) 50%, rgba(252, 250, 248, 0.8) 100%);
+  pointer-events: none;
+}
+
+.upcoming-events-section div.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Grid for tickets: 2 columns on desktop, 1 on mobile */
+.upcoming-events-section .ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.upcoming-events-section .item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 12px;
+  overflow: visible;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(43, 38, 34, 0.09);
+  border: 1px solid rgba(43, 38, 34, 0.08);
+  min-height: 220px;
+}
+
+/* Left stub: Date (Bigger for PC) */
+.upcoming-events-section .item-right {
+  flex: 0 0 145px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-right: 2.5px dashed #bbb;
+  padding: 24px 12px;
+  text-align: center;
+}
+
+/* Half-circle notch cutouts matching the background */
+.upcoming-events-section .item-right .up-border,
+.upcoming-events-section .item-right .down-border {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-color: #f7f3ee;
+  border-radius: 50%;
+  right: -14px;
+  z-index: 5;
+}
+
+.upcoming-events-section .item-right .up-border {
+  top: -14px;
+}
+
+.upcoming-events-section .item-right .down-border {
+  bottom: -14px;
+}
+
+.upcoming-events-section .item-right .num {
+  font-size: 54px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1;
+  font-family: 'Cabin', sans-serif;
+}
+
+.upcoming-events-section .item-right .day {
+  color: #555;
+  font-size: 21px;
+  font-weight: 600;
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-family: 'Cabin', sans-serif;
+}
+
+/* Right body: Event details (Bigger for PC) */
+.upcoming-events-section .item-left {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 28px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.upcoming-events-section .item-left .event {
+  color: #777;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.upcoming-events-section .item-left .title {
+  color: #111;
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.upcoming-events-section .item-left .sce,
+.upcoming-events-section .item-left .loc {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+
+.upcoming-events-section .item-left .sce .icon,
+.upcoming-events-section .item-left .loc .icon {
+  font-size: 16px;
+  color: #666;
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+}
+
+.upcoming-events-section .item-left .sce p,
+.upcoming-events-section .item-left .loc p {
+  color: #555;
+  font-size: 14.5px;
+  word-spacing: 1px;
+}
+
+.upcoming-events-section .btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.upcoming-events-section .booked,
+.upcoming-events-section .tickets,
+.upcoming-events-section .cancel {
+  color: #fff;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: 'Cabin', sans-serif;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.upcoming-events-section .booked:hover,
+.upcoming-events-section .tickets:hover,
+.upcoming-events-section .cancel:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.upcoming-events-section .booked {
+  background: #3D71E9;
+}
+
+.upcoming-events-section .tickets {
+  background: #777;
+}
+
+.upcoming-events-section .cancel {
+  background: #DF5454;
+}
+
+/* Tablet Breakpoint (Moderate sizing) */
+@media only screen and (max-width: 1024px) {
+  .upcoming-events-section .ticket-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .upcoming-events-section .item-right {
+    flex: 0 0 120px;
+    padding: 18px 8px;
+  }
+
+  .upcoming-events-section .item-right .num {
+    font-size: 42px;
+  }
+
+  .upcoming-events-section .item-right .day {
+    font-size: 17px;
+  }
+
+  .upcoming-events-section .item-left {
+    padding: 18px 20px 16px 20px;
+  }
+
+  .upcoming-events-section .item-left .title {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .upcoming-events-section {
+    padding: 28px 12px;
+  }
+
+  .upcoming-events-section .upcomming {
+    font-size: 22px;
+    border-left-width: 6px;
+    margin-bottom: 14px;
+  }
+
+  .upcoming-events-section .item {
+    min-height: auto;
+  }
+
+  .upcoming-events-section .item-right {
+    flex: 0 0 82px;
+    padding: 12px 6px;
+  }
+
+  .upcoming-events-section .item-right .num {
+    font-size: 28px;
+  }
+
+  .upcoming-events-section .item-right .day {
+    font-size: 13px;
+  }
+
+  .upcoming-events-section .item-right .up-border,
+  .upcoming-events-section .item-right .down-border {
+    width: 18px;
+    height: 18px;
+    right: -9px;
+  }
+
+  .upcoming-events-section .item-right .up-border {
+    top: -9px;
+  }
+
+  .upcoming-events-section .item-right .down-border {
+    bottom: -9px;
+  }
+
+  .upcoming-events-section .item-left {
+    padding: 12px 14px 12px 14px;
+  }
+
+  .upcoming-events-section .item-left .title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .upcoming-events-section .item-left .event {
+    font-size: 11px;
+  }
+
+  .upcoming-events-section .item-left .sce p,
+  .upcoming-events-section .item-left .loc p {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .upcoming-events-section .booked {
+    padding: 5px 14px;
+    font-size: 13px;
+  }
+}

@@ -28,22 +28,14 @@ const PageTitleManager = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/, '') || '/';
-    switch (path) {
-      case '/':
-        document.title = 'Nizhal : Circle of Warmth';
-        break;
-      case '/about':
-        document.title = 'About Nizhal';
-        break;
-      case '/contact':
-        document.title = 'Contact Nizhal';
-        break;
-      case '/events':
-        document.title = 'Nizhal Events';
-        break;
-      default:
-        document.title = 'Nizhal : Circle of Warmth';
+    if (location.pathname === '/about') {
+      document.title = 'About Us | Nizhal Community';
+    } else if (location.pathname === '/events') {
+      document.title = 'Events | Nizhal Community';
+    } else if (location.pathname === '/contact') {
+      document.title = 'Contact | Nizhal Community';
+    } else {
+      document.title = 'Nizhal Community';
     }
   }, [location]);
 

@@ -29,7 +29,7 @@ const SocialCard = () => {
       
       {/* WhatsApp */}
       <motion.a 
-        href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
+        href="https://chat.whatsapp.com/Ix1OhO0vgzr1niRCxNcYaO?s=cl&p=i&iam=2" 
         target="_blank" 
         rel="noreferrer"
         initial={{ scale: 0.9, opacity: 0 }}

@@ -100,7 +100,7 @@ const JoinModal = () => {
             <div className="relative z-10 flex flex-col gap-3 mb-5">
               {/* WhatsApp Button */}
               <a 
-                href="https://chat.whatsapp.com/DjwhofsCU4M0WAXNTLBzLl" 
+                href="https://chat.whatsapp.com/Ix1OhO0vgzr1niRCxNcYaO?s=cl&p=i&iam=2" 
                 target="_blank" 
                 rel="noreferrer"
                 className="group flex items-center justify-between gap-3 bg-[#25D366]/10 hover:bg-[#25D366] text-[#1b7a3e] hover:text-white border border-[#25D366]/30 px-5 py-3.5 rounded-xl transition-all duration-200 shadow-sm"
