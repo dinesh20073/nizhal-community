@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // Local Video Assets
@@ -193,6 +193,70 @@ const SCRAPBOOK_MEMORIES: ScrapbookItem[] = [
 ];
 
 const Events = () => {
+  const [memories, setMemories] = useState<ScrapbookItem[]>(SCRAPBOOK_MEMORIES);
+
+  useEffect(() => {
+    const metaEnv = (import.meta as any)?.env;
+    const globalProcessEnv = (globalThis as any)?.process?.env;
+    const envUrl: string | undefined = 
+      metaEnv?.NEXT_PUBLIC_MEDIA_API_URL || 
+      metaEnv?.VITE_MEDIA_API_URL || 
+      globalProcessEnv?.NEXT_PUBLIC_MEDIA_API_URL;
+
+    if (!envUrl) return;
+
+    const fetchMedia = async () => {
+      try {
+        const res = await fetch(envUrl, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const records = Array.isArray(data) ? data : (data?.media || []);
+
+        if (records && records.length > 0) {
+          const rotations = ['-rotate-2', 'rotate-3', '-rotate-3', 'rotate-2', '-rotate-1', 'rotate-1'];
+          const widthClasses = ['w-full sm:w-80', 'w-full sm:w-72', 'w-full sm:w-76'];
+          const tapePositions: ('top' | 'top-right' | 'top-left')[] = ['top', 'top-right', 'top-left'];
+
+          const mapped: ScrapbookItem[] = records.map((item: any, idx: number) => {
+            let src = item.url || '';
+            if (src.includes('drive.google.com')) {
+              const fileIdMatch = 
+                src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+                src.match(/[?&]id=([a-zA-Z0-9_-]+)/) ||
+                src.match(/\/d\/([a-zA-Z0-9_-]+)/);
+              if (fileIdMatch) {
+                src = `https://lh3.googleusercontent.com/d/${fileIdMatch[1]}=w1000`;
+              }
+            }
+
+            const isVideo = item.media_type === 'video';
+            const isNote = item.media_type === 'note' || (!src && item.description);
+
+            return {
+              id: String(item.id || `backend-${idx}`),
+              type: isNote ? 'note' : isVideo ? 'video-polaroid' : 'polaroid',
+              title: item.title || 'Gathering Memory',
+              src: src || undefined,
+              handwrittenNote: item.subtitle || item.handwrittenNote || item.description || item.highlight_quote || 'moments together ♡',
+              rotation: rotations[idx % rotations.length],
+              widthClass: widthClasses[idx % widthClasses.length],
+              tapePosition: tapePositions[idx % tapePositions.length],
+              instagramLink: item.instagram_link || item.url || 'https://www.instagram.com/nizhal.community/'
+            };
+          });
+
+          setMemories(mapped);
+        }
+      } catch (err) {
+        console.warn('Could not load backend media, using default memories:', err);
+      }
+    };
+
+    fetchMedia();
+  }, []);
+
   return (
     <div className="relative bg-[#f7f3ee] text-[#2b2622] min-h-screen overflow-x-hidden selection:bg-[#8c3a3a]/20">
       {/* Organic Warm Background Texture */}
@@ -224,7 +288,7 @@ const Events = () => {
 
         {/* Artsy Scattered Scrapbook Collage Wall */}
         <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-10 md:gap-12">
-          {SCRAPBOOK_MEMORIES.map((item, index) => {
+          {memories.map((item, index) => {
             const isNote = item.type === 'note';
             const isVideo = item.type === 'video-polaroid';
 
@@ -295,17 +359,10 @@ const Events = () => {
           <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2">
             more memories in the making... ♡
           </p>
-          <p className="text-xs sm:text-sm text-[#2b2622]/70 leading-relaxed mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#2b2622]/70 leading-relaxed font-normal">
             come sit beside us in our upcoming circles.
           </p>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('openUpcomingEventModal'))}
-            className="bg-[#FCEBED] text-[#522D21] border border-[#522D21]/30 font-semibold px-8 py-3.5 rounded-full hover:bg-[#f6dbe0] hover:scale-105 transition-all shadow-md shadow-[#522D21]/10 cursor-pointer text-sm"
-          >
-            Upcoming Event
-          </button>
         </div>
-
       </div>
     </div>
   );

@@ -203,7 +203,12 @@ ${message}
     return res.status(200).json({ success: true, message: 'Message sent successfully!' });
   } catch (error) {
     console.error('Email send error:', error);
-    return res.status(500).json({ error: 'Failed to send email. Please check server logs.' });
+    if (error.code === 'EAUTH') {
+      return res.status(500).json({ 
+        error: 'Gmail authentication failed (BadCredentials). Please verify GMAIL_USER and GMAIL_APP_PASSWORD in .env' 
+      });
+    }
+    return res.status(500).json({ error: error.message || 'Failed to send email. Please check server logs.' });
   }
 });
 
@@ -211,10 +216,217 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
+// Dynamic Media endpoint for Scrapbook memories
+app.get('/api/media', (req, res) => {
+  res.json({
+    media: [
+      {
+        id: 'api-mem-1',
+        title: 'Circle by the Sea',
+        subtitle: 'real conversations with good souls ✨',
+        description: 'A sunset gathering where we sat in an open circle by the shore, listening to the tide and sharing honest thoughts that usually stay unspoken.',
+        url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+        category: 'Circle Gatherings',
+        media_type: 'image',
+        sort_order: 1
+      },
+      {
+        id: 'api-mem-2',
+        title: 'Stones and Stories',
+        subtitle: 'painting memories on ocean pebbles 🎨',
+        description: 'Each pebble carried a tiny feeling, a painted word, or a quiet hope. We passed them around the circle before leaving them gently on the sand.',
+        url: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
+        category: 'Art & Expression',
+        media_type: 'image',
+        sort_order: 2
+      },
+      {
+        id: 'api-mem-3',
+        title: 'Strokes and Chords',
+        subtitle: 'acoustic strings & colors in the dusk 🎸',
+        description: 'Sunset Chords — guitar on the warm sand 🎶. Soft melodies drifting with the evening breeze while friends hummed along in gentle stillness.',
+        url: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=800&q=80',
+        category: 'Music & Acoustic',
+        media_type: 'image',
+        sort_order: 3
+      },
+      {
+        id: 'api-mem-4',
+        title: 'Breathe with the Wave',
+        subtitle: 'early morning tide & deep breaths 🌊',
+        description: 'Seaside Peace — barefoot along the morning shoreline. Grounding our feet in cool wet sand and breathing in sync with the ocean pulse.',
+        url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+        category: 'Mindfulness',
+        media_type: 'image',
+        sort_order: 4
+      },
+      {
+        id: 'api-mem-5',
+        title: 'The Colour Chase',
+        subtitle: 'unfiltered laughter & powder splashes 💛',
+        description: 'Running in Colors — just pure childlike joy 🌈. No judgements, no expectations, just spontaneous smiles and vibrant clouds of warmth.',
+        url: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80',
+        category: 'Celebrations',
+        media_type: 'image',
+        sort_order: 5
+      },
+      {
+        id: 'api-mem-6',
+        title: 'Shades of Us',
+        subtitle: 'every shade of you belongs here 🤍',
+        description: 'Warm Portraits — unapologetically ourselves. Safe spaces where every vulnerability is welcomed with unconditional presence.',
+        url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+        category: 'Portraits',
+        media_type: 'image',
+        sort_order: 6
+      },
+      {
+        id: 'api-mem-7',
+        title: 'Bracelets & Besties',
+        subtitle: 'woven threads of kindness & beads 🧶',
+        description: 'Weaving handmade friendship threads while sharing our happiest childhood memories and quiet personal dreams.',
+        url: 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?auto=format&fit=crop&w=800&q=80',
+        category: 'Craft & Keepsakes',
+        media_type: 'image',
+        sort_order: 7
+      }
+    ]
+  });
+});
+
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Nizhal API Server</title>
+      <style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background: #faf8f5;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          color: #1e293b;
+        }
+        .card {
+          background: #ffffff;
+          padding: 2.5rem;
+          border-radius: 16px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+          max-width: 480px;
+          width: 90%;
+          text-align: center;
+          border: 1px solid #f1ece4;
+        }
+        .badge {
+          display: inline-block;
+          background: #dcfce7;
+          color: #15803d;
+          font-size: 12px;
+          font-weight: 700;
+          padding: 4px 12px;
+          border-radius: 999px;
+          margin-bottom: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        h1 {
+          margin: 0 0 8px 0;
+          color: #8c3a3a;
+          font-size: 24px;
+        }
+        p {
+          color: #64748b;
+          font-size: 14px;
+          margin: 0 0 20px 0;
+        }
+        .info-box {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 10px;
+          padding: 16px;
+          text-align: left;
+          font-size: 13px;
+          margin-bottom: 20px;
+        }
+        .info-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 6px 0;
+          border-bottom: 1px solid #edf2f7;
+        }
+        .info-row:last-child {
+          border-bottom: none;
+        }
+        .info-label {
+          color: #64748b;
+          font-weight: 600;
+        }
+        .info-val {
+          font-family: monospace;
+          color: #334155;
+          font-weight: 600;
+        }
+        .link {
+          color: #8c3a3a;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .link:hover {
+          text-decoration: underline;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <span class="badge">● Server Active</span>
+        <h1>Nizhal Backend API</h1>
+        <p>API & Email Notification Service for Nizhal Community</p>
+        <div class="info-box">
+          <div class="info-row">
+            <span class="info-label">Status</span>
+            <span class="info-val" style="color: #15803d;">Running (Port ${PORT})</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Health Check</span>
+            <span class="info-val"><a href="/api/health" class="link">/api/health</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email API</span>
+            <span class="info-val">POST /api/send-email</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Configured Sender</span>
+            <span class="info-val">${process.env.GMAIL_USER || 'Not set'}</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px;">
+          Frontend Web App is running at <a href="http://localhost:5173" class="link">http://localhost:5173</a>
+        </p>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 app.listen(PORT, () => {
   console.log(`\n=================================================`);
   console.log(`🚀 Nizhal Custom Email Server running on http://localhost:${PORT}`);
   console.log(`📧 Sender: ${process.env.GMAIL_USER || 'otp.passcode@gmail.com'}`);
   console.log(`📬 Receiver: ${process.env.NOTIFY_EMAIL || 'nizhalcommunity@gmail.com'}`);
-  console.log(`=================================================\n`);
+  console.log(`=================================================`);
+  
+  transporter.verify((error) => {
+    if (error) {
+      console.warn(`⚠️  Gmail SMTP Authentication failed: ${error.message}`);
+      console.warn(`👉 Please ensure GMAIL_APP_PASSWORD in .env is an active 16-character Google App Password.`);
+    } else {
+      console.log(`✅ Gmail SMTP connection verified and ready to send emails.`);
+    }
+  });
 });

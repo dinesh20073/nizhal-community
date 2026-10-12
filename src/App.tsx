@@ -7,6 +7,7 @@ import PageTransition from './components/PageTransition';
 import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
+import Media from './pages/Media';
 import Contact from './pages/Contact';
 import JoinModal from './components/JoinModal';
 
@@ -28,22 +29,16 @@ const PageTitleManager = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/, '') || '/';
-    switch (path) {
-      case '/':
-        document.title = 'Nizhal : Circle of Warmth';
-        break;
-      case '/about':
-        document.title = 'About Nizhal';
-        break;
-      case '/contact':
-        document.title = 'Contact Nizhal';
-        break;
-      case '/events':
-        document.title = 'Nizhal Events';
-        break;
-      default:
-        document.title = 'Nizhal : Circle of Warmth';
+    if (location.pathname === '/about') {
+      document.title = 'About Us | Nizhal Community';
+    } else if (location.pathname === '/events') {
+      document.title = 'Events | Nizhal Community';
+    } else if (location.pathname === '/media') {
+      document.title = 'Our Scrapbook | Nizhal Community';
+    } else if (location.pathname === '/contact') {
+      document.title = 'Contact | Nizhal Community';
+    } else {
+      document.title = 'Nizhal Community';
     }
   }, [location]);
 
@@ -68,6 +63,7 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/about" element={<PageTransition><About /></PageTransition>} />
           <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
+          <Route path="/media" element={<PageTransition><Media /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="/register" element={<Navigate to="/" replace />} />
           <Route path="/register/*" element={<ExternalRouteHandler />} />
