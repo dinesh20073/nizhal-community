@@ -1,124 +1,160 @@
 /* ============================================================
-   main.css — Master stylesheet
-   Webflow shared CSS loads from CDN in each page <head>.
-   This file: design tokens → resets → components → overrides.
+   main.css — fully bundled, no @import
+   All component styles inlined here so zero extra HTTP requests.
    ============================================================ */
 
-/* 1. Design tokens */
-@import './base/variables.css';
+/* ── VARIABLES ─────────────────────────────────────────────── */
+:root {
+  --color-black:       #0d0d0d;
+  --color-white:       #ffffff;
+  --color-off-white:   #f5f5f5;
+  --color-green:       #1a472a;
+  --color-green-light: #2d6a4f;
+  --color-gray-100:    #f9f9f9;
+  --color-gray-200:    #e5e5e5;
+  --color-gray-400:    #9e9e9e;
+  --color-gray-700:    #3a3a3a;
+  --font-heading: 'Inter', sans-serif;
+  --font-body:    'Manrope', sans-serif;
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --z-nav: 100;
+  --z-above: 10;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+}
 
-/* 2. Reset & global base */
-@import './base/reset.css';
+/* ── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* 3. Components */
-@import './components/navbar.css';
-@import './components/buttons.css';
-@import './components/hero.css';
-@import './components/about.css';
-@import './components/stats.css';
-@import './components/portfolio.css';
-@import './components/testimonials.css';
-@import './components/contact.css';
-@import './components/cta-banner.css';
-@import './components/footer.css';
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-/* ============================================================
-   CRITICAL — Webflow visibility override layer
-   The Webflow shared CSS applies opacity:0 / transform to
-   elements with data-w-id. Without Webflow's interaction
-   engine running on OUR domain, everything stays invisible.
-   These rules force every element visible immediately.
-   ============================================================ */
+body {
+  margin: 0; padding: 0;
+  font-family: var(--font-body);
+  color: var(--color-black);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* Images — Webflow sets opacity:0 on load, transitions to 1 */
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6 { margin: 0; font-family: var(--font-heading); font-weight: 600; line-height: 1.15; }
+p { margin: 0; }
+
+/* ── WEBFLOW VISIBILITY OVERRIDE ────────────────────────────── */
+/*
+  Webflow's shared CSS sets opacity:0 on many elements and expects
+  its own JS engine (locked to webflow.io domain) to animate them in.
+  On GitHub Pages these elements would stay invisible forever.
+  The rules below force everything visible immediately.
+*/
 img,
-.header-image,
-.about-image,
-.stat-image,
-.portfolio-image,
-.testimonial-author-image,
-.footer-logo,
-.navbar-logo                         { opacity: 1 !important; transform: none !important; }
+.header-image, .about-image, .stat-image,
+.portfolio-image, .footer-logo, .navbar-logo     { opacity: 1 !important; transform: none !important; }
 
-/* Headings — Webflow slides/fades them in */
 h1, h2, h3, h4, h5, h6,
-.heading-style-h1,
-.heading-style-h2,
-.heading-style-h3,
-.heading-style-h4,
-.heading-style-h5,
-.heading-style-h6                    { opacity: 1 !important; transform: none !important; }
+.heading-style-h1, .heading-style-h2,
+.heading-style-h3, .heading-style-h4,
+.heading-style-h5, .heading-style-h6             { opacity: 1 !important; transform: none !important; }
 
-/* Paragraphs, labels, body text */
 p, .text-size-large, .text-size-medium,
-.text-size-regular, .text-size-small { opacity: 1 !important; transform: none !important; }
+.text-size-regular, .text-size-small             { opacity: 1 !important; transform: none !important; }
 
-/* Any element with a Webflow interaction ID */
-[data-w-id]                          { opacity: 1 !important; transform: none !important; }
+[data-w-id]                                      { opacity: 1 !important; transform: none !important; }
+.w-condition-invisible                           { display: none !important; }
 
-/* Webflow conditional visibility */
-.w-condition-invisible               { display: none !important; }
-
-/* Section wrappers */
-.section-header,
-.section-about,
-.section-stats,
-.section-portfolio,
-.section-testimonials,
-.section-banner-cta,
-.footer-component                    { opacity: 1 !important; }
-
-/* Buttons */
 .button, .button-secondary,
-.w-inline-block                      { opacity: 1 !important; transform: none !important; }
+.w-inline-block                                  { opacity: 1 !important; transform: none !important; }
 
-/* Stat numbers */
-.stat-number, .stat-item             { opacity: 1 !important; }
+.stat-number, .stat-item                         { opacity: 1 !important; }
+.cta-heading-top, .cta-heading-bottom            { opacity: 1 !important; }
 
-/* CTA headings */
-.cta-heading-top, .cta-heading-bottom { opacity: 1 !important; }
-
-[data-w-id] {
-   opacity: 1 !important;
-}
-
-[data-w-id]>* {
-   opacity: 1 !important;
-}
-
-.w-condition-invisible {
-   display: none !important;
-}
-
-/* ============================================================
-   Scroll-triggered fade-in animations (our own, via JS)
-   Elements get .is-visible class added by animations.js
-   ============================================================ */
-
+/* ── SCROLL FADE-IN ANIMATIONS (our own) ───────────────────── */
 .fade-up {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
+.fade-up.is-visible                              { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2)                            { transition-delay: 0.1s; }
+.fade-up:nth-child(3)                            { transition-delay: 0.2s; }
+.fade-up:nth-child(4)                            { transition-delay: 0.3s; }
 
-.fade-up.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── NAVBAR ─────────────────────────────────────────────────── */
+.navbar-component {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: var(--z-nav);
+  transition: background var(--transition-base), box-shadow var(--transition-base);
 }
-
-/* Stagger delays for grid children */
-.fade-up:nth-child(2) { transition-delay: 0.1s; }
-.fade-up:nth-child(3) { transition-delay: 0.2s; }
-.fade-up:nth-child(4) { transition-delay: 0.3s; }
-
-/* ============================================================
-   Page layout
-   ============================================================ */
-
-.page-wrapper {
-   display: flex;
-   flex-direction: column;
-   min-height: 100vh;
+.navbar-component.is-scrolled {
+  background: rgba(13,13,13,0.93);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
+.navbar-logo       { height: 36px; width: auto; opacity: 1 !important; }
+.navbar-social-link { color: var(--color-white); opacity: 0.6; transition: opacity var(--transition-fast); }
+.navbar-social-link:hover { opacity: 1; }
+.navbar-link       { color: var(--color-white); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em; transition: opacity var(--transition-fast); }
+.navbar-link:hover, .navbar-link.w--current { opacity: 0.7; }
 
-.main-wrapper { flex: 1; }
+/* Hamburger */
+.menu-icon { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.menu-icon-line-top, .menu-icon-line-bottom { width: 22px; height: 2px; background: #fff; transition: transform var(--transition-base); }
+.menu-icon-line-middle { position: relative; width: 22px; height: 2px; }
+.menu-icon-line-middle-top, .menu-icon-line-middle-base { position: absolute; inset: 0; height: 2px; background: #fff; transition: opacity var(--transition-base); }
+.navbar-menu-button { display: block; }
+@media (min-width: 992px) { .navbar-menu-button { display: none; } }
+
+/* ── BUTTONS ────────────────────────────────────────────────── */
+.button {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  background: var(--color-white); color: var(--color-black);
+  font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
+  border-radius: 100px; border: 2px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+}
+.button:hover { transform: translateY(-1px); }
+.button.is-alternate { background: transparent; color: var(--color-white); border-color: rgba(255,255,255,0.35); }
+.button.is-alternate:hover { background: rgba(255,255,255,0.1); border-color: var(--color-white); }
+.button.is-navbar { padding: 8px 16px; font-size: 0.75rem; }
+.button-arrow { width: 18px; height: 18px; flex-shrink: 0; transition: transform var(--transition-fast); }
+.button:hover .button-arrow { transform: translate(2px,-2px); }
+
+/* ── HERO ───────────────────────────────────────────────────── */
+.section-header { position: relative; overflow: hidden; padding-top: 80px; }
+.section-header.background-black { background: var(--color-black); color: var(--color-white); }
+.header-image { opacity: 1 !important; }
+
+/* ── CTA BANNER ─────────────────────────────────────────────── */
+.section-banner-cta { position: relative; overflow: hidden; background: var(--color-black); color: var(--color-white); text-align: center; }
+.cta-heading-top, .cta-heading-bottom { will-change: transform; }
+.cta-heading-top    { transform: translateX(-3%); }
+.cta-heading-bottom { transform: translateX(3%); }
+
+/* ── PORTFOLIO HOVER ────────────────────────────────────────── */
+.portfolio-item { transition: transform var(--transition-base), box-shadow var(--transition-base); }
+.portfolio-item:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.14); }
+.portfolio-image-wrapper { overflow: hidden; }
+.portfolio-image { transition: transform var(--transition-slow); }
+.portfolio-item:hover .portfolio-image { transform: scale(1.06); }
+
+/* ── ABOUT IMAGE ────────────────────────────────────────────── */
+.about-image-wrapper { overflow: hidden; }
+.about-image { transition: transform var(--transition-slow); }
+.about-image-wrapper:hover .about-image { transform: scale(1.04); }
+
+/* ── TABS ───────────────────────────────────────────────────── */
+.w-tab-pane { display: none; }
+.w-tab-pane.w--tab-active { display: block; }
+.w-tab-link.w--current { border-bottom: 2px solid currentColor; }
+
+/* ── PAGE LAYOUT ────────────────────────────────────────────── */
+.page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+.main-wrapper  { flex: 1; }
