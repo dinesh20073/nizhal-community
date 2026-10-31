@@ -1,34 +1,5 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-.vite
+node_modules/
 .env
-.env.*
-!.env.example
-
-# Temporary & Deleted Files
-delete/
-delete
-assests/
-
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+*.log
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
