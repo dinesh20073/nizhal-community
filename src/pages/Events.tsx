@@ -44,7 +44,6 @@ const Events = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
-  const [isAudioMuted, setIsAudioMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Check mobile viewport for optimized fullscreen modal & video loop
@@ -126,7 +125,6 @@ const Events = () => {
   const openModal = (idx: number) => {
     setSelectedIndex(idx);
     setActiveSlideIndex(0);
-    setIsAudioMuted(false);
   };
 
   const closeModal = useCallback(() => {
@@ -149,29 +147,11 @@ const Events = () => {
         setSelectedIndex((selectedIndex + 1) % items.length);
       }
       setActiveSlideIndex(0);
-      setIsAudioMuted(false);
     },
     [selectedIndex, items.length]
   );
 
-  // Toggle video audio / mute state
-  const toggleSound = useCallback((e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.muted || isAudioMuted) {
-      video.muted = false;
-      video.volume = 1.0;
-      video.play().catch(() => {});
-      setIsAudioMuted(false);
-    } else {
-      video.muted = true;
-      setIsAudioMuted(true);
-    }
-  }, [isAudioMuted]);
-
-  // Autoplay video with audio when modal opens or active slide changes
+  // Always keep sound on and autoplay reel video at full volume
   useEffect(() => {
     if (selectedIndex === null) return;
     const item = items[selectedIndex];
@@ -185,30 +165,19 @@ const Events = () => {
     const isVideo = currentSlide.type === 'video' || currentSlide.url?.includes('.mp4');
     if (!isVideo) return;
 
-    const timer = setTimeout(() => {
-      const video = videoRef.current;
-      if (!video) return;
+    const video = videoRef.current;
+    if (!video) return;
 
-      video.volume = 1.0;
-      video.muted = false;
-
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsAudioMuted(false);
-          })
-          .catch((err) => {
-            console.warn('Autoplay unmuted blocked by browser policy:', err);
-            // Fall back to muted playback so the video runs smoothly
-            video.muted = true;
-            video.play().catch(() => {});
-            setIsAudioMuted(true);
-          });
-      }
-    }, 50);
-
-    return () => clearTimeout(timer);
+    video.muted = false;
+    video.volume = 1.0;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Ensure properties stay unmuted for user tap
+        video.muted = false;
+        video.volume = 1.0;
+      });
+    }
   }, [selectedIndex, activeSlideIndex, items]);
 
   // Keyboard navigation for modal
@@ -457,7 +426,21 @@ const Events = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.94, opacity: 0, y: 15 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (videoRef.current) {
+                  videoRef.current.muted = false;
+                  videoRef.current.volume = 1.0;
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
+              onTouchStart={() => {
+                if (videoRef.current) {
+                  videoRef.current.muted = false;
+                  videoRef.current.volume = 1.0;
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
               className="bg-black md:bg-[#1c1a18] text-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl w-auto max-w-[92vw] sm:max-w-md md:max-w-5xl h-[80vh] md:h-[90vh] max-h-[850px] flex flex-col md:flex-row relative border border-white/10"
             >
               {/* Close Button (X) */}
@@ -502,50 +485,28 @@ const Events = () => {
 
                   if (currentSlide.type === 'video' || currentSlide.url?.includes('.mp4')) {
                     return (
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <video
-                          ref={videoRef}
-                          key={currentSlide.url}
-                          src={currentSlide.url}
-                          poster={currentSlide.thumbnail || selectedItem.thumbnail_url}
-                          controls={!isMobileView}
-                          autoPlay
-                          loop
-                          playsInline
-                          muted={isAudioMuted}
-                          onClick={toggleSound}
-                          onVolumeChange={(e) => setIsAudioMuted(e.currentTarget.muted)}
-                          className="w-full h-full object-contain max-h-full cursor-pointer"
-                        />
-
-                        {/* Floating Instagram-style Sound Toggle Button */}
-                        <button
-                          type="button"
-                          onClick={toggleSound}
-                          className="absolute bottom-3.5 right-3.5 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/65 hover:bg-black/85 text-white text-xs font-medium backdrop-blur-md border border-white/25 transition-all cursor-pointer shadow-lg active:scale-95"
-                          aria-label={isAudioMuted ? 'Unmute video' : 'Mute video'}
-                        >
-                          {isAudioMuted ? (
-                            <>
-                              <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M11 5L6 9H2v6h4l5 4V5z" />
-                                <line x1="23" y1="9" x2="17" y2="15" />
-                                <line x1="17" y1="9" x2="23" y2="15" />
-                              </svg>
-                              <span>Tap for sound 🔊</span>
-                            </>
-                          ) : (
-                            <>
-                              <svg className="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                              </svg>
-                              <span>Sound on</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
+                      <video
+                        ref={videoRef}
+                        key={currentSlide.url}
+                        src={currentSlide.url}
+                        poster={currentSlide.thumbnail || selectedItem.thumbnail_url}
+                        controls={!isMobileView}
+                        autoPlay
+                        loop
+                        playsInline
+                        muted={false}
+                        disablePictureInPicture
+                        disableRemotePlayback
+                        onLoadedMetadata={(e) => {
+                          e.currentTarget.muted = false;
+                          e.currentTarget.volume = 1.0;
+                        }}
+                        onPlay={(e) => {
+                          e.currentTarget.muted = false;
+                          e.currentTarget.volume = 1.0;
+                        }}
+                        className="w-full h-full object-contain max-h-full cursor-pointer"
+                      />
                     );
                   }
 
