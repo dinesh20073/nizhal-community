@@ -46,7 +46,7 @@ const About = () => {
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          preload="auto"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover opacity-25 brightness-115 contrast-95 mix-blend-multiply pointer-events-none"
         />
 

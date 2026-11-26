@@ -32,22 +32,22 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const playSafe = (vid: HTMLVideoElement | null, rate: number) => {
+    const playSafe = (vid: HTMLVideoElement | null, rate: number, shouldPlay: boolean) => {
       if (!vid) return;
       vid.playbackRate = rate;
       vid.defaultMuted = true;
       vid.muted = true;
-      const attemptPlay = () => {
+      if (shouldPlay) {
         vid.play().catch(() => {});
-      };
-      attemptPlay();
-      vid.addEventListener('loadeddata', attemptPlay, { once: true });
+      } else {
+        vid.pause();
+      }
     };
 
-    playSafe(sharedPresenceRef.current, 0.55);
-    playSafe(safeSpacesRef.current, 0.6);
-    playSafe(activeListeningRef.current, 0.7);
-  }, []);
+    playSafe(activeListeningRef.current, 0.7, !isMobile || isPillar1InView);
+    playSafe(safeSpacesRef.current, 0.6, !isMobile || isPillar2InView);
+    playSafe(sharedPresenceRef.current, 0.55, !isMobile || isPillar3InView);
+  }, [isMobile, isPillar1InView, isPillar2InView, isPillar3InView]);
 
   return (
     <div className="w-full bg-[#fcfaf8] text-[#2b2622] selection:bg-[#2b2622]/30">
@@ -120,7 +120,7 @@ const Home = () => {
                 controls={false}
                 disablePictureInPicture
                 disableRemotePlayback
-                preload="auto"
+                preload="none"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar1InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
@@ -159,7 +159,7 @@ const Home = () => {
                 controls={false}
                 disablePictureInPicture
                 disableRemotePlayback
-                preload="auto"
+                preload="none"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar2InView 
                     ? 'grayscale-0 scale-105 brightness-100' 
@@ -198,7 +198,7 @@ const Home = () => {
                 controls={false}
                 disablePictureInPicture
                 disableRemotePlayback
-                preload="auto"
+                preload="none"
                 className={`w-full h-full object-cover transition-all duration-700 ${
                   isMobile && isPillar3InView 
                     ? 'grayscale-0 scale-105 brightness-100' 

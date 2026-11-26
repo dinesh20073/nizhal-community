@@ -203,40 +203,53 @@ const MediaMarquee = () => {
   );
 };
 
-// Video Frame Helper Component (Muted preview for background performance)
+// Video Frame Helper Component (Lazy loaded preview: only streams when in visible view)
 const VideoFrame = ({ src, alt, poster }: { src: string; alt?: string; poster?: string }) => {
+  const [isInView, setIsInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      const vid = videoRef.current;
-      vid.playbackRate = 0.8;
-      vid.defaultMuted = true;
-      vid.muted = true;
-      const attemptPlay = () => {
-        vid.play().catch(() => {});
-      };
-      attemptPlay();
-      vid.addEventListener('loadeddata', attemptPlay, { once: true });
-    }
-  }, [src]);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      autoPlay
-      loop
-      muted
-      playsInline
-      controls={false}
-      disablePictureInPicture
-      disableRemotePlayback
-      preload="none"
-      aria-label={alt || 'Nizhal Video Frame'}
-      className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 pointer-events-none"
-    />
+    <div ref={containerRef} className="w-full h-full relative">
+      <img
+        src={poster || src}
+        alt={alt || 'Nizhal Video Frame'}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      {isInView && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="none"
+          aria-label={alt || 'Nizhal Video Frame'}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+      )}
+    </div>
   );
 };
 

@@ -251,6 +251,18 @@ const Events = () => {
                   whileHover={{ scale: 1.03, y: -4 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => openModal(index)}
+                  onMouseEnter={() => {
+                    if (item.media_url?.includes('.mp4')) {
+                      const existing = document.querySelector(`link[href="${item.media_url}"]`);
+                      if (!existing) {
+                        const link = document.createElement('link');
+                        link.rel = 'prefetch';
+                        link.as = 'video';
+                        link.href = item.media_url;
+                        document.head.appendChild(link);
+                      }
+                    }
+                  }}
                   className="w-full sm:w-72 aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl relative group bg-black cursor-pointer shrink-0 transition-all duration-300"
                 >
                   {/* Center Video Player or Thumbnail */}
@@ -469,6 +481,7 @@ const Events = () => {
                         loop
                         playsInline
                         muted={false}
+                        preload="auto"
                         disablePictureInPicture
                         disableRemotePlayback
                         onLoadedMetadata={(e) => {
@@ -666,52 +679,76 @@ const Events = () => {
   );
 };
 
-// Video Player Component for autoplay muted video loops
+// Intelligent Lazy Video Player: Only streams video when directly in viewport or hovered to preserve bandwidth
 const AutoPlayVideo = ({ src, poster }: { src: string; poster?: string }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current && !hasError) {
+    const el = containerRef.current;
+    if (!el) return;
+
+    // Only stream video when card is at least 40% in view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if ((isInView || isHovered) && videoRef.current && !hasError) {
       const vid = videoRef.current;
       vid.playbackRate = 0.75;
       vid.defaultMuted = true;
       vid.muted = true;
-      const play = () => {
-        vid.play().catch(() => {});
-      };
-      play();
-      vid.addEventListener('loadeddata', play, { once: true });
+      vid.play().catch(() => {});
     }
-  }, [src, hasError]);
-
-  if (hasError && poster) {
-    return (
-      <img
-        src={poster}
-        alt="Instagram Reel thumbnail"
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    );
-  }
+  }, [isInView, isHovered, hasError]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      autoPlay
-      loop
-      muted
-      playsInline
-      controls={false}
-      onError={() => setHasError(true)}
-      disablePictureInPicture
-      disableRemotePlayback
-      preload="metadata"
-      className="w-full h-full object-cover pointer-events-none"
-    />
+    <div
+      ref={containerRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-full h-full relative"
+    >
+      {/* Instant lightweight cover image (zero network lag) */}
+      {poster && (
+        <img
+          src={poster}
+          alt="Instagram Reel thumbnail"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+      )}
+
+      {/* Only mount video stream when in view or hovered */}
+      {(isInView || isHovered) && !hasError && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls={false}
+          onError={() => setHasError(true)}
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+      )}
+    </div>
   );
 };
 

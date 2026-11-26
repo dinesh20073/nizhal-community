@@ -82,3 +82,22 @@ a[href*="elf.site"],
   overflow: hidden !important;
 }
 
+/* Elfsight Feed & Slider Styling Overrides: Limit dots to 3 and remove Nizhal handle badges */
+[class*="PaginationDot"]:nth-child(n+4),
+[class*="SliderDots__Dot"]:nth-child(n+4),
+.eapps-instagram-feed-posts-slider-dot:nth-child(n+4),
+.es-slider-dot:nth-child(n+4) {
+  display: none !important;
+}
+
+[class*="PostAuthor"],
+[class*="PostHeader__User"],
+[class*="PostUser"],
+.eapps-instagram-feed-posts-item-author,
+.eapps-instagram-feed-posts-item-user,
+.es-post-author,
+.es-post-user {
+  display: none !important;
+}
+
+

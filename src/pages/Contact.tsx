@@ -132,7 +132,7 @@ const Contact = () => {
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          preload="auto"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover opacity-42 brightness-118 contrast-95 pointer-events-none"
         />
 
