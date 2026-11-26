@@ -1,6 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Local Video Assets (Preserved original community videos)
+import activeListeningVideoUrl from '../assets/active-listening.mp4';
+import safeSpacesVideoUrl from '../assets/safe-spaces.mp4';
+import sharedPresenceVideoUrl from '../assets/shared-presence.mp4';
+import aboutVideoUrl from '../assets/about-bg.mp4';
+
 // Local Artwork Assets
 import bodyBgUrl from '../assets/body.png';
 import bodyMobileBgUrl from '../assets/body-mobile.png';
@@ -22,20 +28,68 @@ export interface InstagramFeedItem {
 const ROTATIONS = ['-rotate-2', 'rotate-2', '-rotate-3', 'rotate-3', '-rotate-1', 'rotate-1'];
 const TAPE_POSITIONS: ('top' | 'top-right' | 'top-left')[] = ['top', 'top-right', 'top-left'];
 
+// Original community videos preserved as in the page template
+const COMMUNITY_VIDEOS: InstagramFeedItem[] = [
+  {
+    id: 'comm-vid-1',
+    media_type: 'VIDEO',
+    media_url: activeListeningVideoUrl,
+    caption: 'Human. Stories. Connection. — listening deeply, no rush, just warmth ♡',
+    permalink: 'https://www.instagram.com/p/DVl32cQgIUO/',
+    timestamp: '2026-11-20T14:30:00+0000',
+    rotation: '-rotate-2',
+    widthClass: 'w-full sm:w-80',
+    tapePosition: 'top',
+  },
+  {
+    id: 'comm-vid-2',
+    media_type: 'VIDEO',
+    media_url: sharedPresenceVideoUrl,
+    caption: 'Strokes and Chords — acoustic strings & watercolor shades under dusk sky 🎸',
+    permalink: 'https://www.instagram.com/reel/DXrp4wBAKt7/',
+    timestamp: '2026-11-18T16:00:00+0000',
+    rotation: 'rotate-2',
+    widthClass: 'w-full sm:w-80',
+    tapePosition: 'top-right',
+  },
+  {
+    id: 'comm-vid-3',
+    media_type: 'VIDEO',
+    media_url: aboutVideoUrl,
+    caption: 'Breathe with the Wave — early morning tide & deep breaths by the shoreline 🌊',
+    permalink: 'https://www.instagram.com/reel/DXo0AIezkxv/',
+    timestamp: '2026-11-12T06:30:00+0000',
+    rotation: '-rotate-3',
+    widthClass: 'w-full sm:w-80',
+    tapePosition: 'top',
+  },
+  {
+    id: 'comm-vid-4',
+    media_type: 'VIDEO',
+    media_url: safeSpacesVideoUrl,
+    caption: 'Safe Spaces & Open Hearts — unapologetically ourselves, held in trust ✨',
+    permalink: 'https://www.instagram.com/reel/DXXFrAdgPvE/',
+    timestamp: '2026-11-04T15:45:00+0000',
+    rotation: 'rotate-3',
+    widthClass: 'w-full sm:w-80',
+    tapePosition: 'top-left',
+  },
+];
+
 const Events = () => {
-  const [items, setItems] = useState<InstagramFeedItem[]>([]);
+  const [items, setItems] = useState<InstagramFeedItem[]>(COMMUNITY_VIDEOS);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<InstagramFeedItem | null>(null);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
 
-  // Fetch real-time Instagram posts automatically
+  // Fetch real-time Instagram photos from the stream (only photos change)
   useEffect(() => {
     let isMounted = true;
 
     async function fetchInstagramRealtime() {
       try {
         setLoading(true);
-        const res = await fetch('/api/instagram/media?limit=24', {
+        const res = await fetch('/api/instagram/media?limit=40', {
           headers: { Accept: 'application/json' },
         });
 
@@ -43,20 +97,46 @@ const Events = () => {
         const data = await res.json();
 
         if (isMounted && Array.isArray(data.media)) {
-          const formatted: InstagramFeedItem[] = data.media.map((raw: any, idx: number) => ({
-            id: raw.id || `ig-${idx}`,
-            media_type: raw.media_type || (raw.url?.endsWith('.mp4') ? 'VIDEO' : 'IMAGE'),
-            media_url: raw.media_url || raw.url || '',
-            thumbnail_url: raw.thumbnail_url || raw.media_url || raw.url || '',
-            caption: raw.caption || raw.handwrittenNote || raw.description || 'moments together in our circle ♡',
-            permalink: raw.permalink || raw.instagramLink || 'https://www.instagram.com/nizhal.community/',
+          // Filter ONLY photos and carousel albums from the feed stream
+          const rawPhotos = data.media.filter(
+            (m: any) => m.media_type === 'IMAGE' || m.media_type === 'CAROUSEL_ALBUM'
+          );
+
+          const formattedPhotos: InstagramFeedItem[] = rawPhotos.map((raw: any, idx: number) => ({
+            id: raw.id || `ig-photo-${idx}`,
+            media_type: raw.media_type || 'IMAGE',
+            media_url: raw.media_url || raw.thumbnail_url || '',
+            thumbnail_url: raw.thumbnail_url || raw.media_url || '',
+            caption: raw.caption || 'moments together in our circle ♡',
+            permalink: raw.permalink || 'https://www.instagram.com/nizhal.community/',
             timestamp: raw.timestamp || new Date().toISOString(),
-            rotation: ROTATIONS[idx % ROTATIONS.length],
+            rotation: ROTATIONS[(idx + 1) % ROTATIONS.length],
             widthClass: 'w-full sm:w-80',
             tapePosition: TAPE_POSITIONS[idx % TAPE_POSITIONS.length],
           }));
 
-          setItems(formatted);
+          // Interleave the preserved community videos with the dynamic live photos
+          const combined: InstagramFeedItem[] = [];
+          const vids = [...COMMUNITY_VIDEOS];
+          const photos = [...formattedPhotos];
+
+          let vIdx = 0;
+          let pIdx = 0;
+
+          // Seamless artistic collage layout (e.g. video, 2-3 photos, video, 2-3 photos...)
+          while (vIdx < vids.length || pIdx < photos.length) {
+            if (vIdx < vids.length) {
+              combined.push(vids[vIdx++]);
+            }
+            if (pIdx < photos.length) {
+              combined.push(photos[pIdx++]);
+            }
+            if (pIdx < photos.length) {
+              combined.push(photos[pIdx++]);
+            }
+          }
+
+          setItems(combined.length > 0 ? combined : COMMUNITY_VIDEOS);
           setIsLiveFeed(Boolean(data.configured && !data.isFallback));
         }
       } catch (err) {
@@ -136,122 +216,11 @@ const Events = () => {
           </div>
         )}
 
-        {/* Empty State when no posts yet */}
-        {!loading && items.length === 0 && (
-          <div className="text-center py-16 max-w-md mx-auto">
-            <p className="font-['Caveat'] text-[#8c3a3a] text-3xl font-bold mb-2">
-              our circle memories are syncing ♡
-            </p>
-            <p className="text-sm text-[#2b2622]/60 mb-6">
-              explore our latest community moments directly on Instagram.
-            </p>
-            <a
-              href="https://www.instagram.com/nizhal.community/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#8c3a3a] text-white text-xs font-semibold hover:bg-[#722e2e] transition-colors shadow-sm"
-            >
-              <span>Visit @nizhal.community on Instagram ↗</span>
-            </a>
-          </div>
-        )}
-
-        {/* Gallery Collage Wall - All Memories as Default */}
+        {/* Gallery Collage Wall - All Items in the Signature Polaroid Frame Template */}
         <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-10 md:gap-12">
           {items.map((item, index) => {
             const isVideo = item.media_type === 'VIDEO';
 
-            // ========================================================
-            // REELS: Displayed SEPARATE WITHOUT THE POLAROID FRAME
-            // Clean 9:16 vertical video card with dark gradient & badge
-            // ========================================================
-            if (isVideo) {
-              return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  whileHover={{ scale: 1.03, y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setSelectedItem(item)}
-                  className="w-full sm:w-72 aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl relative group bg-neutral-900 border border-[#2b2622]/15 cursor-pointer shrink-0"
-                >
-                  {/* Background Video Player or Thumbnail */}
-                  <div className="absolute inset-0 w-full h-full">
-                    {item.media_url?.includes('.mp4') ? (
-                      <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
-                    ) : (
-                      <img
-                        src={item.thumbnail_url || item.media_url}
-                        alt="Instagram Reel"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                    )}
-                  </div>
-
-                  {/* Dark Vignette Gradients for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 pointer-events-none" />
-
-                  {/* Top Reel Badge */}
-                  <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-[11px] font-medium border border-white/10">
-                    <svg className="w-3 h-3 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" />
-                    </svg>
-                    <span>Reel ✦</span>
-                  </div>
-
-                  {/* Top-Right Instagram Logo Icon */}
-                  <a
-                    href={item.permalink}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white hover:bg-black/70 transition-colors border border-white/10"
-                    title="Open on Instagram"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
-                  </a>
-
-                  {/* Floating Center Play Icon on Hover */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/30 scale-90 group-hover:scale-100 transition-transform">
-                      <svg className="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                        <polygon points="5 3 19 12 5 21 5 3" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Bottom Caption & Audio Note */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 text-white">
-                    <p className="text-xs line-clamp-3 leading-relaxed text-white/90 font-light mb-2">
-                      {item.caption}
-                    </p>
-                    <div className="flex items-center justify-between text-[11px] text-white/60 pt-2 border-t border-white/10">
-                      <span className="flex items-center gap-1 text-white/80">
-                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M9 18V5l12-2v13" />
-                          <circle cx="6" cy="18" r="3" />
-                          <circle cx="18" cy="16" r="3" />
-                        </svg>
-                        <span>Original audio</span>
-                      </span>
-                      <span className="text-amber-300 font-medium group-hover:underline">Play Reel ▷</span>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            }
-
-            // ========================================================
-            // IMAGES & CAROUSELS: INSIDE THAT POLAROID FRAME WITH TAPE
-            // Signature aesthetic Polaroid card with handwritten font
-            // ========================================================
             return (
               <motion.div
                 key={item.id}
@@ -276,14 +245,18 @@ const Events = () => {
 
                 {/* Polaroid Frame Container */}
                 <div className="bg-[#ffffff] p-3.5 pb-5 rounded-md shadow-xl border border-[#2b2622]/10 transition-shadow duration-300 group-hover:shadow-2xl">
-                  {/* Photo Frame */}
+                  {/* Photo / Video Frame */}
                   <div className="relative w-full aspect-[4/5] bg-[#dfd3c3] overflow-hidden rounded-xs mb-3 shadow-inner">
-                    <img
-                      src={item.media_url}
-                      alt="Nizhal Community Post"
-                      className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
-                      loading="lazy"
-                    />
+                    {isVideo ? (
+                      <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
+                    ) : (
+                      <img
+                        src={item.media_url}
+                        alt="Nizhal Community Post"
+                        className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
+                        loading="lazy"
+                      />
+                    )}
 
                     {/* Carousel Indicator Badge */}
                     {item.media_type === 'CAROUSEL_ALBUM' && (
@@ -339,29 +312,31 @@ const Events = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedItem(null)}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 15 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#ffffff] rounded-2xl overflow-hidden max-w-[460px] w-full max-h-[92vh] h-[640px] sm:h-[680px] flex flex-col shadow-2xl border border-[#2b2622]/20"
+              className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[92vh] flex flex-col relative border border-[#2b2622]/15"
             >
-              {/* Modal Top Bar */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#2b2622]/10 bg-[#fcfaf8] shrink-0">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-[#2b2622]/10 bg-[#fbf9f6]">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-[#8c3a3a] flex items-center justify-center text-white">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
+                  <div className="w-7 h-7 rounded-full bg-[#8c3a3a] text-white flex items-center justify-center text-xs font-bold">
+                    NC
                   </div>
-                  <span className="text-xs font-semibold text-[#2b2622]">@nizhal.community</span>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-[#8c3a3a]/10 text-[#8c3a3a]">
-                    {selectedItem.media_type === 'VIDEO' ? 'Reel' : 'Post'}
-                  </span>
+                  <div>
+                    <p className="text-xs font-semibold text-[#2b2622]">@nizhal.community</p>
+                    <p className="text-[10px] text-[#2b2622]/60">
+                      {new Date(selectedItem.timestamp).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -369,14 +344,13 @@ const Events = () => {
                     href={selectedItem.permalink}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[11px] text-[#8c3a3a] hover:underline font-medium"
-                    title="Open on Instagram"
+                    className="text-xs text-[#8c3a3a] font-medium hover:underline px-2 py-1 rounded-md hover:bg-[#8c3a3a]/10 transition-colors"
                   >
-                    Open on Instagram ↗
+                    Open Instagram ↗
                   </a>
                   <button
                     onClick={() => setSelectedItem(null)}
-                    className="text-[#2b2622]/50 hover:text-[#2b2622] p-1.5 rounded-full hover:bg-black/5 transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-[#2b2622]/5 hover:bg-[#2b2622]/10 text-[#2b2622] flex items-center justify-center transition-colors"
                     aria-label="Close modal"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -391,7 +365,7 @@ const Events = () => {
               <div className="relative w-full flex-1 bg-[#f9f9f9] overflow-hidden">
                 <iframe
                   src={`${selectedItem.permalink.replace(/\/+$/, '')}/embed/`}
-                  className="w-full h-full border-0"
+                  className="w-full h-full border-0 min-h-[500px]"
                   allowFullScreen
                   scrolling="no"
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -414,6 +388,7 @@ const AutoPlayVideo = ({ src, poster }: { src: string; poster?: string }) => {
   useEffect(() => {
     if (videoRef.current && !hasError) {
       const vid = videoRef.current;
+      vid.playbackRate = 0.75;
       vid.defaultMuted = true;
       vid.muted = true;
       const play = () => {
@@ -449,7 +424,7 @@ const AutoPlayVideo = ({ src, poster }: { src: string; poster?: string }) => {
       disablePictureInPicture
       disableRemotePlayback
       preload="metadata"
-      className="w-full h-full object-cover"
+      className="w-full h-full object-cover pointer-events-none"
     />
   );
 };
