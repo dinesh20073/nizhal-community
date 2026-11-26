@@ -213,7 +213,9 @@ const Events = () => {
             const isVideo = item.media_type === 'VIDEO';
 
             // ========================================================
-            // REELS: NO POLAROID FRAME (Original clean 9:16 video card)
+            // REELS: EXACT TEMPLATE AS PROVIDED IN THE REFERENCE IMAGE
+            // Clean black 9:16 card, Instagram camera glyph in top-right,
+            // center video/thumbnail, and "@nizhal.community" in bottom-left.
             // ========================================================
             if (isVideo) {
               return (
@@ -225,10 +227,10 @@ const Events = () => {
                   whileHover={{ scale: 1.03, y: -4 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => openModal(index)}
-                  className="w-full sm:w-72 aspect-[9/16] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl relative group bg-neutral-900 border border-[#2b2622]/15 cursor-pointer shrink-0 transition-all duration-300"
+                  className="w-full sm:w-72 aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl relative group bg-black cursor-pointer shrink-0 transition-all duration-300"
                 >
-                  {/* Background Video Player or Thumbnail */}
-                  <div className="absolute inset-0 w-full h-full">
+                  {/* Center Video Player or Thumbnail */}
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
                     {item.media_url?.includes('.mp4') ? (
                       <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
                     ) : (
@@ -241,58 +243,18 @@ const Events = () => {
                     )}
                   </div>
 
-                  {/* Dark Vignette Gradients for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 pointer-events-none" />
-
-                  {/* Top Reel Badge */}
-                  <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-medium border border-white/10">
-                    <svg className="w-3 h-3 text-pink-400" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                    <span>Reel ✦</span>
-                  </div>
-
-                  {/* Top-Right Instagram Logo Icon */}
-                  <a
-                    href={item.permalink}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
-                    title="Open on Instagram"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Top-Right: Clean Instagram Camera Icon */}
+                  <div className="absolute top-4 right-4 z-20 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] pointer-events-none">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
                       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                     </svg>
-                  </a>
-
-                  {/* Floating Center Play Icon on Hover */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/30 scale-90 group-hover:scale-100 transition-transform">
-                      <svg className="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                        <polygon points="5 3 19 12 5 21 5 3" />
-                      </svg>
-                    </div>
                   </div>
 
-                  {/* Bottom Caption & Audio Note */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 text-white">
-                    <p className="text-xs line-clamp-3 leading-relaxed text-white/90 font-light mb-2">
-                      {item.caption}
-                    </p>
-                    <div className="flex items-center justify-between text-[11px] text-white/60 pt-2 border-t border-white/10">
-                      <span className="flex items-center gap-1 text-white/80">
-                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M9 18V5l12-2v13" />
-                          <circle cx="6" cy="18" r="3" />
-                          <circle cx="18" cy="16" r="3" />
-                        </svg>
-                        <span>Original audio</span>
-                      </span>
-                      <span className="text-amber-300 font-medium group-hover:underline">Play Reel ▷</span>
-                    </div>
+                  {/* Bottom-Left: Clean Handle Text */}
+                  <div className="absolute bottom-4 left-4 z-20 text-white text-xs sm:text-[13px] font-semibold tracking-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] select-none">
+                    @nizhal.community
                   </div>
                 </motion.div>
               );
