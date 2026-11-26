@@ -63,7 +63,7 @@ function formatCustomDateIST() {
 // GET /api/instagram/media
 app.get('/api/instagram/media', async (req, res) => {
   try {
-    const limit = Math.min(parseInt(req.query.limit, 10) || 8, 20);
+    const limit = Math.min(parseInt(req.query.limit, 10) || 24, 50);
     const result = await fetchInstagramMedia(limit);
     res.setHeader('Cache-Control', 'public, s-maxage=900, stale-while-revalidate=3600');
     return res.status(200).json(result);

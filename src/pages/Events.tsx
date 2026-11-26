@@ -179,8 +179,8 @@ const Events = () => {
                 >
                   {/* Background Video Player or Thumbnail */}
                   <div className="absolute inset-0 w-full h-full">
-                    {item.media_url?.endsWith('.mp4') ? (
-                      <AutoPlayVideo src={item.media_url} />
+                    {item.media_url?.includes('.mp4') ? (
+                      <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
                     ) : (
                       <img
                         src={item.thumbnail_url || item.media_url}
@@ -407,11 +407,12 @@ const Events = () => {
 };
 
 // Video Player Component for autoplay muted video loops
-const AutoPlayVideo = ({ src }: { src: string }) => {
+const AutoPlayVideo = ({ src, poster }: { src: string; poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && !hasError) {
       const vid = videoRef.current;
       vid.defaultMuted = true;
       vid.muted = true;
@@ -421,20 +422,33 @@ const AutoPlayVideo = ({ src }: { src: string }) => {
       play();
       vid.addEventListener('loadeddata', play, { once: true });
     }
-  }, [src]);
+  }, [src, hasError]);
+
+  if (hasError && poster) {
+    return (
+      <img
+        src={poster}
+        alt="Instagram Reel thumbnail"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    );
+  }
 
   return (
     <video
       ref={videoRef}
       src={src}
+      poster={poster}
       autoPlay
       loop
       muted
       playsInline
       controls={false}
+      onError={() => setHasError(true)}
       disablePictureInPicture
       disableRemotePlayback
-      preload="auto"
+      preload="metadata"
       className="w-full h-full object-cover"
     />
   );
