@@ -203,36 +203,35 @@ const MediaMarquee = () => {
   );
 };
 
-// Video Frame Helper Component (Lazy loaded preview: only streams when in visible view)
+// Video Frame Helper Component (Instant poster frame, streams video on hover to preserve bandwidth)
 const VideoFrame = ({ src, alt, poster }: { src: string; alt?: string; poster?: string }) => {
-  const [isInView, setIsInView] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    if (isHovered && videoRef.current) {
+      const vid = videoRef.current;
+      vid.playbackRate = 0.85;
+      vid.defaultMuted = true;
+      vid.muted = true;
+      vid.play().catch(() => {});
+    }
+  }, [isHovered]);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-full h-full relative"
+    >
       <img
         src={poster || src}
         alt={alt || 'Nizhal Video Frame'}
         className="w-full h-full object-cover"
         loading="lazy"
+        decoding="async"
       />
-      {isInView && (
+      {isHovered && (
         <video
           ref={videoRef}
           src={src}
@@ -244,7 +243,7 @@ const VideoFrame = ({ src, alt, poster }: { src: string; alt?: string; poster?: 
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          preload="none"
+          preload="metadata"
           aria-label={alt || 'Nizhal Video Frame'}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />

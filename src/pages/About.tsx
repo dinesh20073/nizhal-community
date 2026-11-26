@@ -39,7 +39,6 @@ const About = () => {
         <video
           ref={videoRef}
           src={aboutVideoUrl}
-          autoPlay
           loop
           muted
           playsInline

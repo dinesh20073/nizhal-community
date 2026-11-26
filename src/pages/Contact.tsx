@@ -125,7 +125,6 @@ const Contact = () => {
         <video
           ref={videoRef}
           src={contactVideoUrl}
-          autoPlay
           loop
           muted
           playsInline

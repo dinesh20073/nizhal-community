@@ -113,7 +113,6 @@ const Home = () => {
               <video
                 ref={activeListeningRef}
                 src={activeListeningVideoUrl}
-                autoPlay
                 loop
                 muted
                 playsInline
@@ -152,7 +151,6 @@ const Home = () => {
               <video
                 ref={safeSpacesRef}
                 src={safeSpacesVideoUrl}
-                autoPlay
                 loop
                 muted
                 playsInline
@@ -191,7 +189,6 @@ const Home = () => {
               <video
                 ref={sharedPresenceRef}
                 src={sharedPresenceVideoUrl}
-                autoPlay
                 loop
                 muted
                 playsInline
