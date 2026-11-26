@@ -89,6 +89,10 @@ const Events = () => {
       <div className="relative z-10 pt-28 pb-24 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+          <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-1">
+            our little scrapbook ♡
+          </p>
+
           {/* Instagram Handle Badge */}
           <a
             href="https://www.instagram.com/nizhal.community/"

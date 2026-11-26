@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import JoinModal from './components/JoinModal';
 
 // Automatically cleans any legacy hash in the URL like /#/contact to /contact
@@ -34,6 +35,8 @@ const PageTitleManager = () => {
       document.title = 'Events | Nizhal Community';
     } else if (location.pathname === '/contact') {
       document.title = 'Contact | Nizhal Community';
+    } else if (location.pathname === '/privacy-policy') {
+      document.title = 'Privacy Policy | Nizhal Community';
     } else {
       document.title = 'Nizhal Community';
     }
@@ -61,6 +64,7 @@ const AnimatedRoutes = () => {
           <Route path="/about" element={<PageTransition><About /></PageTransition>} />
           <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
           <Route path="/register" element={<Navigate to="/" replace />} />
           <Route path="/register/*" element={<ExternalRouteHandler />} />
           <Route path="/pay/*" element={<ExternalRouteHandler />} />
