@@ -42,7 +42,6 @@ const Events = () => {
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [isLiveFeed, setIsLiveFeed] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -99,7 +98,6 @@ const Events = () => {
           }));
 
           setItems(formatted);
-          setIsLiveFeed(true);
         }
       } catch (err) {
         console.warn('Could not fetch real-time Instagram feed:', err);
@@ -207,37 +205,16 @@ const Events = () => {
       <div className="relative z-10 pt-28 pb-24 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-1">
+          <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-3">
             our little scrapbook ♡
           </p>
-
-          {/* Instagram Handle Badge */}
-          <a
-            href="https://www.instagram.com/nizhal.community/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#8c3a3a]/10 hover:bg-[#8c3a3a]/15 text-[#8c3a3a] text-xs font-semibold uppercase tracking-wider mb-3 transition-colors duration-200"
-          >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-            </svg>
-            <span>@nizhal.community</span>
-            {isLiveFeed && (
-              <span className="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-100/80 px-1.5 py-0.5 rounded-full lowercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                live
-              </span>
-            )}
-          </a>
 
           <h1 className="hero-title font-medium text-5xl sm:text-6xl md:text-7xl text-[#2b2622] tracking-tight mb-3">
             Gatherings & Memories
           </h1>
 
           <p className="font-['Caveat'] text-[#2b2622]/80 text-2xl sm:text-3xl leading-snug">
-            realtime photos, video reels, and scribbled thoughts from our community circles.
+            realtime photos, video reels, and scribbled thoughts from our events.
           </p>
         </div>
 
@@ -390,9 +367,6 @@ const Events = () => {
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </button>
-            <p className="mt-2.5 text-xs text-[#2b2622]/55 font-medium">
-              Showing {Math.min(visibleCount, items.length)} of {items.length} community memories
-            </p>
           </div>
         )}
 
@@ -402,7 +376,7 @@ const Events = () => {
             more memories in the making... ♡
           </p>
           <p className="text-xs sm:text-sm text-[#2b2622]/70 leading-relaxed font-normal">
-            come sit beside us in our upcoming circles.
+            come sit beside us in our upcoming events.
           </p>
         </div>
       </div>
