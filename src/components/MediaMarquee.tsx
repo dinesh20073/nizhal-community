@@ -148,19 +148,16 @@ const MediaMarquee = () => {
       <div className="absolute right-0 top-0 bottom-0 w-20 md:w-36 bg-gradient-to-l from-[#fcfaf8] via-[#fcfaf8]/80 to-transparent z-20 pointer-events-none" />
 
       {/* Infinite Overlapping Marquee Reel */}
-      <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
+      <div className="flex whitespace-nowrap animate-marquee">
         <div className="flex -space-x-12 sm:-space-x-16 md:-space-x-24 items-center shrink-0 pr-14 md:pr-24">
           {displayItems.map((item, index) => {
             const zIndex = 10 + (index % frames.length);
 
             return (
-              <a
+              <div
                 key={`${item.id}-${index}`}
-                href={item.permalink || 'https://www.instagram.com/nizhal.community/'}
-                target="_blank"
-                rel="noreferrer"
                 style={{ zIndex }}
-                className={`relative w-52 sm:w-64 md:w-72 h-68 sm:h-80 md:h-88 rounded-2xl md:rounded-3xl overflow-hidden border-4 md:border-[5px] border-[#fcfaf8] shadow-xl group shrink-0 transition-all duration-500 ease-out hover:!z-50 hover:scale-105 hover:-translate-y-2 hover:rotate-0 cursor-pointer block bg-[#dfd3c3] ${
+                className={`relative w-52 sm:w-64 md:w-72 h-68 sm:h-80 md:h-88 rounded-2xl md:rounded-3xl overflow-hidden border-4 md:border-[5px] border-[#fcfaf8] shadow-xl shrink-0 block bg-[#dfd3c3] select-none ${
                   item.tilt || 'rotate-0'
                 }`}
               >
@@ -171,13 +168,13 @@ const MediaMarquee = () => {
                   <img
                     src={item.src}
                     alt={item.alt || 'Nizhal Community Frame'}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 )}
 
                 {/* Subtle bottom edge scrim for text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
 
                 {/* Frame Label Badge */}
                 {item.label && (
@@ -194,7 +191,7 @@ const MediaMarquee = () => {
                     )}
                   </div>
                 )}
-              </a>
+              </div>
             );
           })}
         </div>
