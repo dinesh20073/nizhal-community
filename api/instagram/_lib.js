@@ -66,6 +66,15 @@ export async function fetchElfsightFeed(limit = 100) {
         thumbUrl = firstMedia.thumbnail?.url || '';
       }
 
+      const rawMediaList = (p.media || []).map((m) => {
+        const isMedVideo = m.type === 'video';
+        return {
+          type: isMedVideo ? 'video' : 'image',
+          url: isMedVideo ? (m.url || m.thumbnail?.url || '') : (m.thumbnail?.url || m.url || ''),
+          thumbnail: m.thumbnail?.url || m.cover?.thumbnail?.url || '',
+        };
+      });
+
       return {
         id: p.vendorId || p.link || `ig-${Math.random().toString(36).slice(2, 9)}`,
         caption: p.caption || '',
@@ -74,6 +83,16 @@ export async function fetchElfsightFeed(limit = 100) {
         thumbnail_url: thumbUrl || mediaUrl,
         permalink: p.link || 'https://www.instagram.com/nizhal.community/',
         timestamp: p.publishedAt || new Date().toISOString(),
+        likesCount: p.likesCount ?? 0,
+        commentsCount: p.commentsCount ?? 0,
+        author: {
+          username: p.author?.username || 'nizhal.community',
+          name: p.author?.name || 'Nizhal Community',
+          profilePictureUrl: p.author?.profilePictureUrl || '',
+        },
+        slides: rawMediaList.length > 0 ? rawMediaList : [
+          { type: isVideo ? 'video' : 'image', url: mediaUrl, thumbnail: thumbUrl }
+        ],
       };
     });
   } catch (err) {

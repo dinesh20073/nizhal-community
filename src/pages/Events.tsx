@@ -1,9 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Local Artwork Assets
 import bodyBgUrl from '../assets/body.png';
 import bodyMobileBgUrl from '../assets/body-mobile.png';
+
+export interface MediaSlide {
+  type: 'image' | 'video';
+  url: string;
+  thumbnail?: string;
+}
 
 export interface InstagramFeedItem {
   id: string;
@@ -13,7 +19,15 @@ export interface InstagramFeedItem {
   caption: string;
   permalink: string;
   timestamp: string;
-  // Aesthetic Polaroid frame attributes
+  likesCount?: number;
+  commentsCount?: number;
+  author?: {
+    username: string;
+    name: string;
+    profilePictureUrl: string;
+  };
+  slides?: MediaSlide[];
+  // Aesthetic Polaroid frame attributes (posts only)
   rotation?: string;
   widthClass?: string;
   tapePosition?: 'top' | 'top-right' | 'top-left';
@@ -26,7 +40,8 @@ const Events = () => {
   const [items, setItems] = useState<InstagramFeedItem[]>([]);
   const [visibleCount, setVisibleCount] = useState(12);
   const [loading, setLoading] = useState(true);
-  const [selectedItem, setSelectedItem] = useState<InstagramFeedItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
 
   // Fetch real-time Instagram posts & reels exclusively from the connected stream
@@ -36,7 +51,7 @@ const Events = () => {
     async function fetchInstagramRealtime() {
       try {
         setLoading(true);
-        const res = await fetch('/api/instagram/media?limit=60', {
+        const res = await fetch('/api/instagram/media?limit=100', {
           headers: { Accept: 'application/json' },
         });
 
@@ -52,6 +67,20 @@ const Events = () => {
             caption: raw.caption || 'moments together in our circle ♡',
             permalink: raw.permalink || 'https://www.instagram.com/nizhal.community/',
             timestamp: raw.timestamp || new Date().toISOString(),
+            likesCount: raw.likesCount ?? 0,
+            commentsCount: raw.commentsCount ?? 0,
+            author: raw.author || {
+              username: 'nizhal.community',
+              name: 'Nizhal Community',
+              profilePictureUrl: '',
+            },
+            slides: raw.slides && raw.slides.length > 0 ? raw.slides : [
+              {
+                type: raw.media_type === 'VIDEO' ? 'video' : 'image',
+                url: raw.media_url || raw.thumbnail_url || '',
+                thumbnail: raw.thumbnail_url || '',
+              },
+            ],
             rotation: ROTATIONS[idx % ROTATIONS.length],
             widthClass: 'w-full sm:w-80',
             tapePosition: TAPE_POSITIONS[idx % TAPE_POSITIONS.length],
@@ -78,6 +107,45 @@ const Events = () => {
   }, []);
 
   const visibleItems = items.slice(0, visibleCount);
+  const selectedItem = selectedIndex !== null ? items[selectedIndex] : null;
+
+  // Open modal for a specific item index
+  const openModal = (idx: number) => {
+    setSelectedIndex(idx);
+    setActiveSlideIndex(0);
+  };
+
+  const closeModal = useCallback(() => {
+    setSelectedIndex(null);
+    setActiveSlideIndex(0);
+  }, []);
+
+  const navigatePost = useCallback(
+    (direction: 'prev' | 'next') => {
+      if (selectedIndex === null || items.length === 0) return;
+      if (direction === 'prev') {
+        setSelectedIndex((selectedIndex - 1 + items.length) % items.length);
+      } else {
+        setSelectedIndex((selectedIndex + 1) % items.length);
+      }
+      setActiveSlideIndex(0);
+    },
+    [selectedIndex, items.length]
+  );
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') navigatePost('prev');
+      if (e.key === 'ArrowRight') navigatePost('next');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, closeModal, navigatePost]);
 
   return (
     <div className="relative bg-[#f7f3ee] text-[#2b2622] min-h-screen overflow-x-hidden selection:bg-[#8c3a3a]/20">
@@ -139,11 +207,100 @@ const Events = () => {
           </div>
         )}
 
-        {/* Gallery Collage Wall - All Items in the Signature Polaroid Frame Template */}
+        {/* Gallery Wall: Frame for Posts ONLY, Clean 9:16 for Reels */}
         <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-10 md:gap-12">
           {visibleItems.map((item, index) => {
             const isVideo = item.media_type === 'VIDEO';
 
+            // ========================================================
+            // REELS: NO POLAROID FRAME (Original clean 9:16 video card)
+            // ========================================================
+            if (isVideo) {
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  whileHover={{ scale: 1.03, y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => openModal(index)}
+                  className="w-full sm:w-72 aspect-[9/16] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl relative group bg-neutral-900 border border-[#2b2622]/15 cursor-pointer shrink-0 transition-all duration-300"
+                >
+                  {/* Background Video Player or Thumbnail */}
+                  <div className="absolute inset-0 w-full h-full">
+                    {item.media_url?.includes('.mp4') ? (
+                      <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
+                    ) : (
+                      <img
+                        src={item.thumbnail_url || item.media_url}
+                        alt="Instagram Reel"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+
+                  {/* Dark Vignette Gradients for Text Readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 pointer-events-none" />
+
+                  {/* Top Reel Badge */}
+                  <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-medium border border-white/10">
+                    <svg className="w-3 h-3 text-pink-400" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    <span>Reel ✦</span>
+                  </div>
+
+                  {/* Top-Right Instagram Logo Icon */}
+                  <a
+                    href={item.permalink}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
+                    title="Open on Instagram"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                    </svg>
+                  </a>
+
+                  {/* Floating Center Play Icon on Hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/30 scale-90 group-hover:scale-100 transition-transform">
+                      <svg className="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Bottom Caption & Audio Note */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 text-white">
+                    <p className="text-xs line-clamp-3 leading-relaxed text-white/90 font-light mb-2">
+                      {item.caption}
+                    </p>
+                    <div className="flex items-center justify-between text-[11px] text-white/60 pt-2 border-t border-white/10">
+                      <span className="flex items-center gap-1 text-white/80">
+                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M9 18V5l12-2v13" />
+                          <circle cx="6" cy="18" r="3" />
+                          <circle cx="18" cy="16" r="3" />
+                        </svg>
+                        <span>Original audio</span>
+                      </span>
+                      <span className="text-amber-300 font-medium group-hover:underline">Play Reel ▷</span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            }
+
+            // ========================================================
+            // POSTS: INSIDE THAT SIGNATURE POLAROID FRAME WITH TAPE
+            // ========================================================
             return (
               <motion.div
                 key={item.id}
@@ -152,7 +309,7 @@ const Events = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 whileHover={{ scale: 1.04, rotate: 0, zIndex: 30 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setSelectedItem(item)}
+                onClick={() => openModal(index)}
                 className={`relative group shrink-0 transition-all cursor-pointer ${item.rotation || '-rotate-1'} ${item.widthClass || 'w-full sm:w-80'}`}
               >
                 {/* Washi Paper Tape Accents */}
@@ -168,18 +325,14 @@ const Events = () => {
 
                 {/* Polaroid Frame Container */}
                 <div className="bg-[#ffffff] p-3.5 pb-5 rounded-md shadow-xl border border-[#2b2622]/10 transition-shadow duration-300 group-hover:shadow-2xl">
-                  {/* Photo / Video Frame */}
+                  {/* Photo Frame (4:5 Ratio) */}
                   <div className="relative w-full aspect-[4/5] bg-[#dfd3c3] overflow-hidden rounded-xs mb-3 shadow-inner">
-                    {isVideo ? (
-                      <AutoPlayVideo src={item.media_url} poster={item.thumbnail_url} />
-                    ) : (
-                      <img
-                        src={item.media_url}
-                        alt="Nizhal Community Post"
-                        className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
-                        loading="lazy"
-                      />
-                    )}
+                    <img
+                      src={item.media_url}
+                      alt="Nizhal Community Post"
+                      className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
+                      loading="lazy"
+                    />
 
                     {/* Carousel Indicator Badge */}
                     {item.media_type === 'CAROUSEL_ALBUM' && (
@@ -187,15 +340,6 @@ const Events = () => {
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                           <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
                           <line x1="9" x2="15" y1="3" y2="3" />
-                        </svg>
-                      </div>
-                    )}
-
-                    {/* Video Reel Play Badge Indicator */}
-                    {isVideo && (
-                      <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white p-1.5 rounded-full text-[10px]" title="Reel video">
-                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                          <polygon points="5 3 19 12 5 21 5 3" />
                         </svg>
                       </div>
                     )}
@@ -225,7 +369,7 @@ const Events = () => {
           })}
         </div>
 
-        {/* Display More Button - Loads more Polaroid cards onto the wall */}
+        {/* Display More Button - Progressively loads more moments onto the wall */}
         {visibleCount < items.length && (
           <div className="mt-14 sm:mt-16 text-center max-w-md mx-auto">
             <button
@@ -254,73 +398,234 @@ const Events = () => {
         </div>
       </div>
 
-      {/* Interactive Modal View: Plays directly inside the Instagram Embed view itself */}
+      {/* ========================================================
+          CLASSIC LIGHTBOX POPUP MODAL (Same effect as original feed)
+          Side-by-side media & details with carousel slides, sound & controls
+          ======================================================== */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedItem(null)}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+            onClick={closeModal}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
           >
+            {/* Modal Box */}
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.94, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.94, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[92vh] flex flex-col relative border border-[#2b2622]/15"
+              className="bg-[#1c1a18] text-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-5xl w-full h-[90vh] max-h-[850px] flex flex-col md:flex-row relative border border-white/10"
             >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-[#2b2622]/10 bg-[#fbf9f6]">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-[#8c3a3a] text-white flex items-center justify-center text-xs font-bold">
-                    NC
+              {/* Close Button (X) */}
+              <button
+                onClick={closeModal}
+                className="absolute top-3.5 right-3.5 z-30 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-colors border border-white/20 cursor-pointer"
+                aria-label="Close modal"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+
+              {/* Prev / Next Post Navigation Arrows */}
+              <button
+                onClick={() => navigatePost('prev')}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden sm:flex items-center justify-center transition-colors border border-white/20 cursor-pointer"
+                aria-label="Previous post"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button
+                onClick={() => navigatePost('next')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden sm:flex items-center justify-center transition-colors border border-white/20 cursor-pointer md:right-[390px] lg:right-[430px]"
+                aria-label="Next post"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+
+              {/* LEFT COLUMN: Media Viewport */}
+              <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden h-[45%] md:h-full select-none">
+                {(() => {
+                  const currentSlide = selectedItem.slides?.[activeSlideIndex] || {
+                    type: selectedItem.media_type === 'VIDEO' ? 'video' : 'image',
+                    url: selectedItem.media_url,
+                  };
+
+                  if (currentSlide.type === 'video' || currentSlide.url?.includes('.mp4')) {
+                    return (
+                      <video
+                        key={currentSlide.url}
+                        src={currentSlide.url}
+                        poster={currentSlide.thumbnail || selectedItem.thumbnail_url}
+                        controls
+                        autoPlay
+                        loop
+                        playsInline
+                        className="w-full h-full object-contain max-h-full"
+                      />
+                    );
+                  }
+
+                  return (
+                    <img
+                      key={currentSlide.url}
+                      src={currentSlide.url}
+                      alt="Nizhal Community Media"
+                      className="w-full h-full object-contain max-h-full"
+                    />
+                  );
+                })()}
+
+                {/* Carousel Navigation Arrows if multiple slides */}
+                {selectedItem.slides && selectedItem.slides.length > 1 && (
+                  <>
+                    {activeSlideIndex > 0 && (
+                      <button
+                        onClick={() => setActiveSlideIndex((prev) => prev - 1)}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors cursor-pointer"
+                        aria-label="Previous slide"
+                      >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                      </button>
+                    )}
+                    {activeSlideIndex < selectedItem.slides.length - 1 && (
+                      <button
+                        onClick={() => setActiveSlideIndex((prev) => prev + 1)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors cursor-pointer"
+                        aria-label="Next slide"
+                      >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                      </button>
+                    )}
+
+                    {/* Dot Indicators */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-xs">
+                      {selectedItem.slides.map((_, dotIdx) => (
+                        <button
+                          key={dotIdx}
+                          onClick={() => setActiveSlideIndex(dotIdx)}
+                          className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                            dotIdx === activeSlideIndex ? 'bg-white w-4' : 'bg-white/40'
+                          }`}
+                          aria-label={`Slide ${dotIdx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* RIGHT COLUMN: Post Details & Caption Sidebar */}
+              <div className="w-full md:w-[380px] lg:w-[420px] bg-[#221f1c] flex flex-col justify-between h-[55%] md:h-full border-t md:border-t-0 md:border-l border-white/10 shrink-0">
+                {/* Author Header */}
+                <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-[#272420]">
+                  <div className="flex items-center gap-3">
+                    {selectedItem.author?.profilePictureUrl ? (
+                      <img
+                        src={selectedItem.author.profilePictureUrl}
+                        alt="Nizhal Community"
+                        className="w-10 h-10 rounded-full object-cover border border-white/20"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-[#8c3a3a] text-white flex items-center justify-center text-sm font-bold shadow-xs">
+                        NC
+                      </div>
+                    )}
+                    <div>
+                      <a
+                        href={selectedItem.permalink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm font-semibold text-white hover:text-amber-200 transition-colors flex items-center gap-1"
+                      >
+                        <span>{selectedItem.author?.username || 'nizhal.community'}</span>
+                        <svg className="w-3.5 h-3.5 text-blue-400" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                      </a>
+                      <p className="text-[11px] text-white/50">{selectedItem.author?.name || 'Nizhal Community'}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-[#2b2622]">@nizhal.community</p>
-                    <p className="text-[10px] text-[#2b2622]/60">
+
+                  <a
+                    href="https://www.instagram.com/nizhal.community/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3.5 py-1.5 rounded-full bg-[#8c3a3a] hover:bg-[#732f2f] text-white text-xs font-semibold transition-colors"
+                  >
+                    Follow
+                  </a>
+                </div>
+
+                {/* Caption Body (Scrollable) */}
+                <div className="p-4 sm:p-5 flex-1 overflow-y-auto space-y-3 text-xs sm:text-sm text-white/90 leading-relaxed font-light select-text">
+                  <div className="flex items-start gap-2.5 mb-2">
+                    <span className="font-semibold text-white">@nizhal.community</span>
+                    <span className="text-[11px] text-white/40">
                       {new Date(selectedItem.timestamp).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric',
                       })}
-                    </p>
+                    </span>
                   </div>
+                  <p className="whitespace-pre-line text-white/85 leading-relaxed font-normal">
+                    {selectedItem.caption}
+                  </p>
                 </div>
 
-                <div className="flex items-center gap-2">
+                {/* Engagement Bar & Footer Link */}
+                <div className="p-4 sm:p-5 border-t border-white/10 bg-[#272420] space-y-3">
+                  <div className="flex items-center justify-between text-xs text-white/70">
+                    <div className="flex items-center gap-4">
+                      {selectedItem.likesCount !== undefined && selectedItem.likesCount > 0 && (
+                        <span className="flex items-center gap-1 text-white/90 font-medium">
+                          <span className="text-red-400">♥</span> {selectedItem.likesCount} likes
+                        </span>
+                      )}
+                      {selectedItem.commentsCount !== undefined && selectedItem.commentsCount > 0 && (
+                        <span className="flex items-center gap-1 text-white/70">
+                          💬 {selectedItem.commentsCount}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[11px] text-white/40">
+                      {new Date(selectedItem.timestamp).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </span>
+                  </div>
+
+                  {/* Open Post on Instagram Button */}
                   <a
                     href={selectedItem.permalink}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs text-[#8c3a3a] font-medium hover:underline px-2 py-1 rounded-md hover:bg-[#8c3a3a]/10 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold transition-colors border border-white/15"
                   >
-                    Open Instagram ↗
-                  </a>
-                  <button
-                    onClick={() => setSelectedItem(null)}
-                    className="w-8 h-8 rounded-full bg-[#2b2622]/5 hover:bg-[#2b2622]/10 text-[#2b2622] flex items-center justify-center transition-colors"
-                    aria-label="Close modal"
-                  >
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                     </svg>
-                  </button>
+                    <span>View on Instagram ↗</span>
+                  </a>
                 </div>
-              </div>
-
-              {/* Live Playable Instagram Embed Iframe */}
-              <div className="relative w-full flex-1 bg-[#f9f9f9] overflow-hidden">
-                <iframe
-                  src={`${selectedItem.permalink.replace(/\/+$/, '')}/embed/`}
-                  className="w-full h-full border-0 min-h-[500px]"
-                  allowFullScreen
-                  scrolling="no"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  title="Instagram Embed Player"
-                />
               </div>
             </motion.div>
           </motion.div>
