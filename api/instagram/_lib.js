@@ -50,6 +50,10 @@ export async function fetchElfsightFeed(limit = 100) {
 
     if (!Array.isArray(items) || items.length === 0) return null;
 
+    // Find the authentic Nizhal profile picture from the feed posts
+    const nizhalAuthor = items.find((p) => p.author?.username?.toLowerCase().includes('nizhal'));
+    const nizhalProfilePic = nizhalAuthor?.author?.profilePictureUrl || '';
+
     return items.map((p) => {
       const isVideo = p.type === 'reel';
       const firstMedia = p.media?.[0] || {};
@@ -85,10 +89,11 @@ export async function fetchElfsightFeed(limit = 100) {
         timestamp: p.publishedAt || new Date().toISOString(),
         likesCount: p.likesCount ?? 0,
         commentsCount: p.commentsCount ?? 0,
+        // Always strictly display Nizhal Community identity, never collaborator accounts (e.g. unbored.cafe)
         author: {
-          username: p.author?.username || 'nizhal.community',
-          name: p.author?.name || 'Nizhal Community',
-          profilePictureUrl: p.author?.profilePictureUrl || '',
+          username: 'nizhal.community',
+          name: 'Nizhal Community',
+          profilePictureUrl: nizhalProfilePic || p.author?.profilePictureUrl || '',
         },
         slides: rawMediaList.length > 0 ? rawMediaList : [
           { type: isVideo ? 'video' : 'image', url: mediaUrl, thumbnail: thumbUrl }
