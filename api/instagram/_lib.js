@@ -15,9 +15,10 @@ const ELFSIGHT_WIDGET_ID = '9582f15f-fa64-4a65-b20d-4533e7869f05';
 /**
  * Fetches real-time Instagram posts & reels directly from the Elfsight feed stream
  * for @nizhal.community (https://9582f15ffa644a65b20d4533e7869f05.elf.site/).
- * This retrieves the clean post media without any Elfsight watermarks or branding links.
+ * This retrieves all clean post media (photos, carousel albums, reels) without any
+ * third-party watermarks or branding links.
  */
-export async function fetchElfsightFeed(limit = 40) {
+export async function fetchElfsightFeed(limit = 100) {
   try {
     const bootUrl = `https://core.service.elfsight.com/p/boot/?w=${ELFSIGHT_WIDGET_ID}`;
     const bootRes = await fetch(bootUrl, {
@@ -133,12 +134,9 @@ export function getRedirectUri(req) {
 }
 
 /**
- * Fetches media from Instagram Graph API or connected real-time stream.
+ * Fetches media exclusively from https://9582f15ffa644a65b20d4533e7869f05.elf.site/
  */
-export async function fetchInstagramMedia(limit = 24) {
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN?.trim();
-  const userId = process.env.INSTAGRAM_USER_ID?.trim() || 'me';
-
+export async function fetchInstagramMedia(limit = 100) {
   // Check in-memory cache
   const now = Date.now();
   if (cache.data && now - cache.timestamp < cache.ttl) {
@@ -151,55 +149,7 @@ export async function fetchInstagramMedia(limit = 24) {
     };
   }
 
-  // 1. If Meta Graph API token is provided, attempt Graph API endpoints
-  if (token) {
-    const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
-    const candidateEndpoints = [];
-    if (userId && userId !== 'me') {
-      candidateEndpoints.push(`https://graph.instagram.com/v21.0/${userId}/media?fields=${fields}&access_token=${encodeURIComponent(token)}&limit=${limit}`);
-      candidateEndpoints.push(`https://graph.facebook.com/v21.0/${userId}/media?fields=${fields}&access_token=${encodeURIComponent(token)}&limit=${limit}`);
-    }
-    candidateEndpoints.push(`https://graph.instagram.com/me/media?fields=${fields}&access_token=${encodeURIComponent(token)}&limit=${limit}`);
-
-    for (const endpoint of candidateEndpoints) {
-      try {
-        const res = await fetch(endpoint, {
-          headers: { Accept: 'application/json' },
-        });
-
-        const data = await res.json();
-
-        if (res.ok && !data.error && Array.isArray(data.data) && data.data.length > 0) {
-          const items = data.data;
-
-          const normalized = items.map((item) => ({
-            id: item.id,
-            caption: item.caption || '',
-            media_type: item.media_type || 'IMAGE',
-            media_url: item.media_url || item.thumbnail_url || '',
-            thumbnail_url: item.thumbnail_url || item.media_url || '',
-            permalink: item.permalink || 'https://www.instagram.com/nizhal.community/',
-            timestamp: item.timestamp || new Date().toISOString(),
-          }));
-
-          cache.data = normalized;
-          cache.timestamp = now;
-
-          return {
-            success: true,
-            configured: true,
-            cached: false,
-            account: '@nizhal.community',
-            media: normalized.slice(0, limit),
-          };
-        }
-      } catch (err) {
-        console.warn('Meta Graph API endpoint check:', err.message);
-      }
-    }
-  }
-
-  // 2. Fetch from real-time Elfsight feed stream for @nizhal.community
+  // Fetch all posts from the live feed stream
   const elfsightItems = await fetchElfsightFeed(limit);
   if (elfsightItems && elfsightItems.length > 0) {
     cache.data = elfsightItems;
@@ -214,7 +164,7 @@ export async function fetchInstagramMedia(limit = 24) {
     };
   }
 
-  // 3. If stale cache exists, return it
+  // If stale cache exists, return it
   if (cache.data) {
     return {
       success: true,

@@ -1,12 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Local Video Assets (Preserved original community videos)
-import activeListeningVideoUrl from '../assets/active-listening.mp4';
-import safeSpacesVideoUrl from '../assets/safe-spaces.mp4';
-import sharedPresenceVideoUrl from '../assets/shared-presence.mp4';
-import aboutVideoUrl from '../assets/about-bg.mp4';
-
 // Local Artwork Assets
 import bodyBgUrl from '../assets/body.png';
 import bodyMobileBgUrl from '../assets/body-mobile.png';
@@ -28,117 +22,43 @@ export interface InstagramFeedItem {
 const ROTATIONS = ['-rotate-2', 'rotate-2', '-rotate-3', 'rotate-3', '-rotate-1', 'rotate-1'];
 const TAPE_POSITIONS: ('top' | 'top-right' | 'top-left')[] = ['top', 'top-right', 'top-left'];
 
-// Original community videos preserved as in the page template
-const COMMUNITY_VIDEOS: InstagramFeedItem[] = [
-  {
-    id: 'comm-vid-1',
-    media_type: 'VIDEO',
-    media_url: activeListeningVideoUrl,
-    caption: 'Human. Stories. Connection. — listening deeply, no rush, just warmth ♡',
-    permalink: 'https://www.instagram.com/p/DVl32cQgIUO/',
-    timestamp: '2026-11-20T14:30:00+0000',
-    rotation: '-rotate-2',
-    widthClass: 'w-full sm:w-80',
-    tapePosition: 'top',
-  },
-  {
-    id: 'comm-vid-2',
-    media_type: 'VIDEO',
-    media_url: sharedPresenceVideoUrl,
-    caption: 'Strokes and Chords — acoustic strings & watercolor shades under dusk sky 🎸',
-    permalink: 'https://www.instagram.com/reel/DXrp4wBAKt7/',
-    timestamp: '2026-11-18T16:00:00+0000',
-    rotation: 'rotate-2',
-    widthClass: 'w-full sm:w-80',
-    tapePosition: 'top-right',
-  },
-  {
-    id: 'comm-vid-3',
-    media_type: 'VIDEO',
-    media_url: aboutVideoUrl,
-    caption: 'Breathe with the Wave — early morning tide & deep breaths by the shoreline 🌊',
-    permalink: 'https://www.instagram.com/reel/DXo0AIezkxv/',
-    timestamp: '2026-11-12T06:30:00+0000',
-    rotation: '-rotate-3',
-    widthClass: 'w-full sm:w-80',
-    tapePosition: 'top',
-  },
-  {
-    id: 'comm-vid-4',
-    media_type: 'VIDEO',
-    media_url: safeSpacesVideoUrl,
-    caption: 'Safe Spaces & Open Hearts — unapologetically ourselves, held in trust ✨',
-    permalink: 'https://www.instagram.com/reel/DXXFrAdgPvE/',
-    timestamp: '2026-11-04T15:45:00+0000',
-    rotation: 'rotate-3',
-    widthClass: 'w-full sm:w-80',
-    tapePosition: 'top-left',
-  },
-];
-
 const Events = () => {
-  const [items, setItems] = useState<InstagramFeedItem[]>(COMMUNITY_VIDEOS);
+  const [items, setItems] = useState<InstagramFeedItem[]>([]);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<InstagramFeedItem | null>(null);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
-  const [showMore, setShowMore] = useState(false);
 
-  // Fetch real-time Instagram photos from the stream (only photos change)
+  // Fetch real-time Instagram posts & reels exclusively from the connected stream
   useEffect(() => {
     let isMounted = true;
 
     async function fetchInstagramRealtime() {
       try {
         setLoading(true);
-        const res = await fetch('/api/instagram/media?limit=40', {
+        const res = await fetch('/api/instagram/media?limit=60', {
           headers: { Accept: 'application/json' },
         });
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
-        if (isMounted && Array.isArray(data.media)) {
-          // Filter ONLY photos and carousel albums from the feed stream
-          const rawPhotos = data.media.filter(
-            (m: any) => m.media_type === 'IMAGE' || m.media_type === 'CAROUSEL_ALBUM'
-          );
-
-          const formattedPhotos: InstagramFeedItem[] = rawPhotos.map((raw: any, idx: number) => ({
-            id: raw.id || `ig-photo-${idx}`,
-            media_type: raw.media_type || 'IMAGE',
+        if (isMounted && Array.isArray(data.media) && data.media.length > 0) {
+          const formatted: InstagramFeedItem[] = data.media.map((raw: any, idx: number) => ({
+            id: raw.id || `ig-${idx}`,
+            media_type: raw.media_type || (raw.media_url?.includes('.mp4') ? 'VIDEO' : 'IMAGE'),
             media_url: raw.media_url || raw.thumbnail_url || '',
             thumbnail_url: raw.thumbnail_url || raw.media_url || '',
             caption: raw.caption || 'moments together in our circle ♡',
             permalink: raw.permalink || 'https://www.instagram.com/nizhal.community/',
             timestamp: raw.timestamp || new Date().toISOString(),
-            rotation: ROTATIONS[(idx + 1) % ROTATIONS.length],
+            rotation: ROTATIONS[idx % ROTATIONS.length],
             widthClass: 'w-full sm:w-80',
             tapePosition: TAPE_POSITIONS[idx % TAPE_POSITIONS.length],
           }));
 
-          // Interleave the preserved community videos with the dynamic live photos
-          const combined: InstagramFeedItem[] = [];
-          const vids = [...COMMUNITY_VIDEOS];
-          const photos = [...formattedPhotos];
-
-          let vIdx = 0;
-          let pIdx = 0;
-
-          // Seamless artistic collage layout (e.g. video, 2-3 photos, video, 2-3 photos...)
-          while (vIdx < vids.length || pIdx < photos.length) {
-            if (vIdx < vids.length) {
-              combined.push(vids[vIdx++]);
-            }
-            if (pIdx < photos.length) {
-              combined.push(photos[pIdx++]);
-            }
-            if (pIdx < photos.length) {
-              combined.push(photos[pIdx++]);
-            }
-          }
-
-          setItems(combined.length > 0 ? combined : COMMUNITY_VIDEOS);
-          setIsLiveFeed(Boolean(data.configured && !data.isFallback));
+          setItems(formatted);
+          setIsLiveFeed(true);
         }
       } catch (err) {
         console.warn('Could not fetch real-time Instagram feed:', err);
@@ -156,6 +76,8 @@ const Events = () => {
       clearInterval(interval);
     };
   }, []);
+
+  const visibleItems = items.slice(0, visibleCount);
 
   return (
     <div className="relative bg-[#f7f3ee] text-[#2b2622] min-h-screen overflow-x-hidden selection:bg-[#8c3a3a]/20">
@@ -219,7 +141,7 @@ const Events = () => {
 
         {/* Gallery Collage Wall - All Items in the Signature Polaroid Frame Template */}
         <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-10 md:gap-12">
-          {items.map((item, index) => {
+          {visibleItems.map((item, index) => {
             const isVideo = item.media_type === 'VIDEO';
 
             return (
@@ -268,6 +190,15 @@ const Events = () => {
                         </svg>
                       </div>
                     )}
+
+                    {/* Video Reel Play Badge Indicator */}
+                    {isVideo && (
+                      <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white p-1.5 rounded-full text-[10px]" title="Reel video">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                          <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                      </div>
+                    )}
                   </div>
 
                   {/* Handwritten Polaroid Caption */}
@@ -294,16 +225,11 @@ const Events = () => {
           })}
         </div>
 
-        {/* Display More Button & Elfsight Instagram Feed */}
-        <div className="mt-14 sm:mt-16 text-center max-w-6xl mx-auto">
-          {!showMore ? (
+        {/* Display More Button - Loads more Polaroid cards onto the wall */}
+        {visibleCount < items.length && (
+          <div className="mt-14 sm:mt-16 text-center max-w-md mx-auto">
             <button
-              onClick={() => {
-                setShowMore(true);
-                setTimeout(() => {
-                  window.dispatchEvent(new Event('resize'));
-                }, 100);
-              }}
+              onClick={() => setVisibleCount((prev) => Math.min(prev + 12, items.length))}
               className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#8c3a3a] hover:bg-[#732f2f] text-white text-sm sm:text-base font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 group cursor-pointer"
             >
               <span>Display More Moments ♡</span>
@@ -311,31 +237,14 @@ const Events = () => {
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </button>
-          ) : (
-            <div className="w-full">
-              <div className="flex items-center justify-between mb-6 px-2">
-                <p className="font-['Caveat'] text-[#8c3a3a] text-2xl sm:text-3xl font-bold">
-                  all community moments & reels ♡
-                </p>
-                <button
-                  onClick={() => setShowMore(false)}
-                  className="text-xs text-[#2b2622]/60 hover:text-[#8c3a3a] underline cursor-pointer"
-                >
-                  collapse
-                </button>
-              </div>
-
-              {/* Elfsight Instagram Feed | Untitled Instagram Feed */}
-              <div
-                className="elfsight-app-9582f15f-fa64-4a65-b20d-4533e7869f05"
-                data-elfsight-app-lazy
-              />
-            </div>
-          )}
-        </div>
+            <p className="mt-2.5 text-xs text-[#2b2622]/55 font-medium">
+              Showing {Math.min(visibleCount, items.length)} of {items.length} community memories
+            </p>
+          </div>
+        )}
 
         {/* Soulful Bottom Footer */}
-        <div className="mt-28 text-center max-w-lg mx-auto">
+        <div className="mt-24 sm:mt-28 text-center max-w-lg mx-auto">
           <p className="font-['Caveat'] text-[#8c3a3a] text-3xl sm:text-4xl font-bold mb-2">
             more memories in the making... ♡
           </p>

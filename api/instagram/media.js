@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const limit = Math.min(parseInt(req.query.limit, 10) || 12, 50);
+    const limit = Math.min(parseInt(req.query.limit, 10) || 60, 100);
     const result = await fetchInstagramMedia(limit);
     res.setHeader('Cache-Control', 'public, s-maxage=900, stale-while-revalidate=3600');
     return res.status(200).json(result);
