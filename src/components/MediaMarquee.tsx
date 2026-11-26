@@ -100,22 +100,23 @@ const MediaMarquee = () => {
               : p.media_url || p.thumbnail_url;
             const posterSrc = p.thumbnail_url || p.media_url;
 
-            // Extract a clean, brief snippet from caption for the label
-            const firstLine = (p.caption || '')
+            // Extract a clean, brief snippet from caption for the label (never display @nizhal.community)
+            const cleanSnippet = (p.caption || '')
               .split('\n')[0]
-              .replace(/^[#\s]+/, '')
+              .replace(/@?nizhal(\.community)?/gi, '')
+              .replace(/^[#\s\-–—:]+/, '')
               .trim();
             const labelText =
-              firstLine && firstLine.length > 0 && firstLine.length <= 26
-                ? firstLine
-                : '@nizhal.community';
+              cleanSnippet && cleanSnippet.length > 0 && cleanSnippet.length <= 26 && !cleanSnippet.toLowerCase().includes('nizhal')
+                ? cleanSnippet
+                : '';
 
             return {
               id: p.id || `feed-${idx}`,
               type: isVideo && mediaSrc?.includes('.mp4') ? 'video' : 'image',
               src: mediaSrc,
               poster: posterSrc,
-              alt: p.caption || 'Nizhal Community Memory',
+              alt: p.caption || 'Community Memory',
               label: labelText,
               tilt: TILTS[idx % TILTS.length],
               permalink: p.permalink || 'https://www.instagram.com/nizhal.community/',
@@ -174,7 +175,9 @@ const MediaMarquee = () => {
                 )}
 
                 {/* Subtle bottom edge scrim for text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
+                {item.label && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
+                )}
 
                 {/* Frame Label Badge */}
                 {item.label && (
