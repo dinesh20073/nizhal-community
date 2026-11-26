@@ -525,19 +525,36 @@ const Events = () => {
                       </button>
                     )}
 
-                    {/* Dot Indicators */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-xs">
-                      {selectedItem.slides.map((_, dotIdx) => (
-                        <button
-                          key={dotIdx}
-                          onClick={() => setActiveSlideIndex(dotIdx)}
-                          className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                            dotIdx === activeSlideIndex ? 'bg-white w-4' : 'bg-white/40'
-                          }`}
-                          aria-label={`Slide ${dotIdx + 1}`}
-                        />
-                      ))}
-                    </div>
+                    {/* Dot Indicators - Always shows exactly 3 dots if more than 3 */}
+                    {(() => {
+                      const totalSlides = selectedItem.slides.length;
+                      let visibleDotIndices: number[] = [];
+
+                      if (totalSlides <= 3) {
+                        visibleDotIndices = selectedItem.slides.map((_, i) => i);
+                      } else if (activeSlideIndex === 0) {
+                        visibleDotIndices = [0, 1, 2];
+                      } else if (activeSlideIndex >= totalSlides - 1) {
+                        visibleDotIndices = [totalSlides - 3, totalSlides - 2, totalSlides - 1];
+                      } else {
+                        visibleDotIndices = [activeSlideIndex - 1, activeSlideIndex, activeSlideIndex + 1];
+                      }
+
+                      return (
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-xs">
+                          {visibleDotIndices.map((dotIdx) => (
+                            <button
+                              key={dotIdx}
+                              onClick={() => setActiveSlideIndex(dotIdx)}
+                              className={`h-2 rounded-full transition-all cursor-pointer ${
+                                dotIdx === activeSlideIndex ? 'bg-white w-4' : 'bg-white/40 w-2 hover:bg-white/70'
+                              }`}
+                              aria-label={`Slide ${dotIdx + 1}`}
+                            />
+                          ))}
+                        </div>
+                      );
+                    })()}
                   </>
                 )}
               </div>
