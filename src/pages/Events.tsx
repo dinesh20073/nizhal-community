@@ -81,6 +81,7 @@ const Events = () => {
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<InstagramFeedItem | null>(null);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   // Fetch real-time Instagram photos from the stream (only photos change)
   useEffect(() => {
@@ -291,6 +292,46 @@ const Events = () => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Display More Button & Elfsight Instagram Feed */}
+        <div className="mt-14 sm:mt-16 text-center max-w-6xl mx-auto">
+          {!showMore ? (
+            <button
+              onClick={() => {
+                setShowMore(true);
+                setTimeout(() => {
+                  window.dispatchEvent(new Event('resize'));
+                }, 100);
+              }}
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#8c3a3a] hover:bg-[#732f2f] text-white text-sm sm:text-base font-semibold transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 group cursor-pointer"
+            >
+              <span>Display More Moments ♡</span>
+              <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+          ) : (
+            <div className="w-full">
+              <div className="flex items-center justify-between mb-6 px-2">
+                <p className="font-['Caveat'] text-[#8c3a3a] text-2xl sm:text-3xl font-bold">
+                  all community moments & reels ♡
+                </p>
+                <button
+                  onClick={() => setShowMore(false)}
+                  className="text-xs text-[#2b2622]/60 hover:text-[#8c3a3a] underline cursor-pointer"
+                >
+                  collapse
+                </button>
+              </div>
+
+              {/* Elfsight Instagram Feed | Untitled Instagram Feed */}
+              <div
+                className="elfsight-app-9582f15f-fa64-4a65-b20d-4533e7869f05"
+                data-elfsight-app-lazy
+              />
+            </div>
+          )}
         </div>
 
         {/* Soulful Bottom Footer */}

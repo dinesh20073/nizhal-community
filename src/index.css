@@ -66,3 +66,19 @@ video {
   user-select: none;
 }
 
+/* Eradicate any Elfsight watermark or promotional link */
+a[href*="elfsight.com"],
+a[href*="elf.site"],
+[class*="elfsight"] a[href*="elfsight.com"],
+[class*="Badge"],
+[class*="branding"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
