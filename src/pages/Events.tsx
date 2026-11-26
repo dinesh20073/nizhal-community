@@ -292,7 +292,7 @@ const Events = () => {
                     <img
                       src={item.media_url}
                       alt="Nizhal Community Post"
-                      className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                     />
 
