@@ -20,135 +20,36 @@ const UpcomingTickets: React.FC = () => {
       </div>
 
       <div className="container">
-        <div className="ticket-grid">
-          {/* Ticket 1 */}
+        <div className="ticket-single-wrap">
+          {/* Single Event Ticket - Will Be Announced Soon */}
           <div className="item">
             <div className="item-right">
-              <h2 className="num">23</h2>
-              <p className="day">Feb</p>
+              <h2 className="num">--</h2>
+              <p className="day">SOON</p>
               <span className="up-border"></span>
               <span className="down-border"></span>
             </div>
             
             <div className="item-left">
               <div>
-                <p className="event">Music Event</p>
-                <h2 className="title">Live In Sydney</h2>
+                <p className="event">Community Gathering</p>
+                <h2 className="title">Will Be Announced Soon</h2>
                 
                 <div className="sce">
                   <span className="icon">
-                    <i className="fa fa-table"></i>
+                    <i className="fa fa-calendar"></i>
                   </span>
-                  <p>Monday 15th 2026 <br /> 15:20Pm & 11:00Am</p>
+                  <p>Date & time will be announced soon <br /> Upcoming community circles & experiences</p>
                 </div>
                 <div className="loc">
                   <span className="icon">
                     <i className="fa fa-map-marker"></i>
                   </span>
-                  <p>North,Soth, United State , Amre <br /> Party Number 16,20</p>
+                  <p>Chennai, Tamil Nadu <br /> Gathering venue revealed soon</p>
                 </div>
               </div>
               <div className="btn-wrap">
-                <button className="booked" onClick={handleBookingClick}>Bookings</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Ticket 2 */}
-          <div className="item">
-            <div className="item-right">
-              <h2 className="num">23</h2>
-              <p className="day">Feb</p>
-              <span className="up-border"></span>
-              <span className="down-border"></span>
-            </div>
-            
-            <div className="item-left">
-              <div>
-                <p className="event">Music Event</p>
-                <h2 className="title">Live Been Corrage</h2>
-                
-                <div className="sce">
-                  <span className="icon">
-                    <i className="fa fa-table"></i>
-                  </span>
-                  <p>Monday 15th 2026 <br /> 15:20Pm & 11:00Am</p>
-                </div>
-                <div className="loc">
-                  <span className="icon">
-                    <i className="fa fa-map-marker"></i>
-                  </span>
-                  <p>North,Soth, United State , Amre <br /> Party Number 16,20</p>
-                </div>
-              </div>
-              <div className="btn-wrap">
-                <button className="booked" onClick={handleBookingClick}>Bookings</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Ticket 3 */}
-          <div className="item">
-            <div className="item-right">
-              <h2 className="num">23</h2>
-              <p className="day">Feb</p>
-              <span className="up-border"></span>
-              <span className="down-border"></span>
-            </div>
-            
-            <div className="item-left">
-              <div>
-                <p className="event">Music Kaboom</p>
-                <h2 className="title">Music Party</h2>
-                
-                <div className="sce">
-                  <span className="icon">
-                    <i className="fa fa-table"></i>
-                  </span>
-                  <p>Monday 15th 2026 <br /> 15:20Pm & 11:00Am</p>
-                </div>
-                <div className="loc">
-                  <span className="icon">
-                    <i className="fa fa-map-marker"></i>
-                  </span>
-                  <p>North,Soth, United State , Amre <br /> Party Number 16,20</p>
-                </div>
-              </div>
-              <div className="btn-wrap">
-                <button className="booked" onClick={handleBookingClick}>Bookings</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Ticket 4 */}
-          <div className="item">
-            <div className="item-right">
-              <h2 className="num">23</h2>
-              <p className="day">Feb</p>
-              <span className="up-border"></span>
-              <span className="down-border"></span>
-            </div>
-            
-            <div className="item-left">
-              <div>
-                <p className="event">Music Event</p>
-                <h2 className="title">Hello Dubail Visivle</h2>
-                
-                <div className="sce">
-                  <span className="icon">
-                    <i className="fa fa-table"></i>
-                  </span>
-                  <p>Monday 15th 2026 <br /> 15:20Pm & 11:00Am</p>
-                </div>
-                <div className="loc">
-                  <span className="icon">
-                    <i className="fa fa-map-marker"></i>
-                  </span>
-                  <p>North,Soth, United State , Amre <br /> Party Number 16,20</p>
-                </div>
-              </div>
-              <div className="btn-wrap">
-                <button className="booked" onClick={handleBookingClick}>Bookings</button>
+                <button className="booked" onClick={handleBookingClick}>Notify Me</button>
               </div>
             </div>
           </div>

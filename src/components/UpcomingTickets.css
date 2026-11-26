@@ -51,6 +51,13 @@
   z-index: 10;
 }
 
+/* Single centered ticket container */
+.upcoming-events-section .ticket-single-wrap {
+  max-width: 660px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* Grid for tickets: 2 columns on desktop, 1 on mobile */
 .upcoming-events-section .ticket-grid {
   display: grid;
