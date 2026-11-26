@@ -43,6 +43,17 @@ const Events = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  // Check mobile viewport for optimized fullscreen modal & video loop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileView(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Fetch real-time Instagram posts & reels exclusively from the connected stream
   useEffect(() => {
@@ -380,7 +391,7 @@ const Events = () => {
               exit={{ scale: 0.94, opacity: 0, y: 15 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#1c1a18] text-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-5xl w-full h-[90vh] max-h-[850px] flex flex-col md:flex-row relative border border-white/10"
+              className="bg-black md:bg-[#1c1a18] text-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl w-auto max-w-[92vw] sm:max-w-md md:max-w-5xl h-[80vh] md:h-[90vh] max-h-[850px] flex flex-col md:flex-row relative border border-white/10"
             >
               {/* Close Button (X) */}
               <button
@@ -397,7 +408,7 @@ const Events = () => {
               {/* Prev / Next Post Navigation Arrows */}
               <button
                 onClick={() => navigatePost('prev')}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden sm:flex items-center justify-center transition-colors border border-white/20 cursor-pointer"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden md:flex items-center justify-center transition-colors border border-white/20 cursor-pointer"
                 aria-label="Previous post"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -406,7 +417,7 @@ const Events = () => {
               </button>
               <button
                 onClick={() => navigatePost('next')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden sm:flex items-center justify-center transition-colors border border-white/20 cursor-pointer md:right-[390px] lg:right-[430px]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white hidden md:flex items-center justify-center transition-colors border border-white/20 cursor-pointer md:right-[390px] lg:right-[430px]"
                 aria-label="Next post"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -415,7 +426,7 @@ const Events = () => {
               </button>
 
               {/* LEFT COLUMN: Media Viewport */}
-              <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden h-[45%] md:h-full select-none">
+              <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden h-full md:h-full select-none">
                 {(() => {
                   const currentSlide = selectedItem.slides?.[activeSlideIndex] || {
                     type: selectedItem.media_type === 'VIDEO' ? 'video' : 'image',
@@ -428,11 +439,14 @@ const Events = () => {
                         key={currentSlide.url}
                         src={currentSlide.url}
                         poster={currentSlide.thumbnail || selectedItem.thumbnail_url}
-                        controls
+                        controls={!isMobileView}
                         autoPlay
                         loop
+                        muted={isMobileView}
                         playsInline
-                        className="w-full h-full object-contain max-h-full"
+                        disablePictureInPicture
+                        disableRemotePlayback
+                        className={`w-full h-full object-contain max-h-full ${isMobileView ? 'pointer-events-none' : ''}`}
                       />
                     );
                   }
@@ -446,6 +460,11 @@ const Events = () => {
                     />
                   );
                 })()}
+
+                {/* Mobile subtle author watermark overlay */}
+                <div className="md:hidden absolute bottom-3.5 left-4 z-20 text-white/90 text-xs font-semibold tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] pointer-events-none">
+                  @nizhal.community
+                </div>
 
                 {/* Carousel Navigation Arrows if multiple slides */}
                 {selectedItem.slides && selectedItem.slides.length > 1 && (
@@ -491,7 +510,7 @@ const Events = () => {
               </div>
 
               {/* RIGHT COLUMN: Post Details & Caption Sidebar */}
-              <div className="w-full md:w-[380px] lg:w-[420px] bg-[#221f1c] flex flex-col justify-between h-[55%] md:h-full border-t md:border-t-0 md:border-l border-white/10 shrink-0">
+              <div className="hidden md:flex w-full md:w-[380px] lg:w-[420px] bg-[#221f1c] flex-col justify-between h-full border-l border-white/10 shrink-0">
                 {/* Author Header */}
                 <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-[#272420]">
                   <div className="flex items-center gap-3">
